@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar-color) var(--scroll-bar-bg-color);
+}
+
+.App {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.App ::-webkit-scrollbar {
+  width: 12px;
+  /* visibility: hidden; */
+}
+
+.App ::-webkit-scrollbar-track {
+  width: 12px;
+}
+
+/* .App ::-webkit-scrollbar:hover { */
+/* visibility: visible; */
+/* } */
+
+/* .App ::-webkit-scrollbar-track {
+  background: var(--scroll-bar-bg-color);
+  visibility: hidden;
+} */
+
+/* .App ::-webkit-scrollbar-track:hover {
+  visibility: visible;
+}
+
+.App ::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-bar-color);
+  border-radius: 20px;
+  border: 3px solid var(--scroll-bar-bg-color);
+  visibility: hidden;
+} */
+
+/* .App ::-webkit-scrollbar-thumb:hover {
+  visibility: visible;
+} */
+@layer utilities {
+  .h-webkitavailable {
+    height: -webkit-fill-available;
+    height: -moz-available;
+  }
+}

@@ -1,0 +1,7 @@
+.venv/
+.env
+*.pyc
+*.zip
+build
+curl.sh
+ui/node_modules/
