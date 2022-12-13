@@ -1,0 +1,33 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+      nodejs: 16
+    commands:
+      - echo Installing dependencies
+      - yum update -y
+      - pip3 install --upgrade pip && pip3 install -r requirements.txt
+      # - echo $REACT_APP_API_BASE_URL
+      # - mkdir app && mkdir app/static
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - cd ./ui && CI=false && npm ci
+      # - npx cross-env REACT_APP_API_BASE_URL=$REACT_APP_API_BASE_URL npm run build:prod && cd ../ && ls
+      - npm run build:prod && cd ../ && ls
+
+artifacts:
+  files:
+    - application.py
+    - buildspec.yml
+    - wsgi.py
+    - requirements.txt
+    - api/*.py
+    - config/*.py
+    - build/**/*
+    - .ebextensions/*.conf
+    - .platform/nginx/nginx.conf
+  name: demo-app-artifacts
