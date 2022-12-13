@@ -17,6 +17,8 @@ artifacts:
     - buildspec.yml
     - wsgi.py
     - requirements.txt
+    - api/*.py
+    - config/*.py
     - .ebextensions/*.conf
     - .platform/nginx/nginx.conf
   name: demo-app-artifacts
