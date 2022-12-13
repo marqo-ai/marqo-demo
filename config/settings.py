@@ -6,10 +6,10 @@ load_dotenv()
 
 
 # Marqo
-MARQO_API_ENDPOINT = os.environ["MARQO_API_ENDPOINT"]
-MARQO_API_KEY = os.environ["MARQO_API_KEY"]
-SIMPLE_WIKI_INDEX_NAME = os.environ["SIMPLE_WIKI_INDEX_NAME"]
-BORED_APES_INDEX_NAME = os.environ["BORED_APES_INDEX_NAME"]
+MARQO_API_ENDPOINT = os.environ.get("MARQO_API_ENDPOINT", "")
+MARQO_API_KEY = os.environ.get("MARQO_API_KEY", "")
+SIMPLE_WIKI_INDEX_NAME = os.environ.get("SIMPLE_WIKI_INDEX_NAME", "")
+BORED_APES_INDEX_NAME = os.environ.get("BORED_APES_INDEX_NAME", "")
 SIMPLE_WIKI_SEARCHABLE_ATTRS = ["title", "content"]
 SIMPLE_WIKI_NON_TENSOR_FIELDS = ["url", "domain", "docDate"]
 SIMPLE_WIKI_TENSOR_FIELDS = ["title", "content"]
