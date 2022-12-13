@@ -19,6 +19,7 @@ artifacts:
     - requirements.txt
     - api/*.py
     - config/*.py
+    - build/**/*
     - .ebextensions/*.conf
     - .platform/nginx/nginx.conf
   name: demo-app-artifacts
