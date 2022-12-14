@@ -1,8 +1,10 @@
 import marqo
 import json
 
+from flask import request
 from flask_restful import Resource
 # local
+from api.constants import HTTP_500_MISSING_Q
 from config.settings import (
     IPFS_BASE,
     MARQO_API_ENDPOINT,
@@ -36,13 +38,20 @@ class MarqoBase:
 
 
 class CoreAPIResource(Resource, MarqoBase):
+    core_index_choices = ["boredapes", "simplewiki"]
+
     def get(self):
         return {"message": "success"}
 
     def post(self):
-        # WARNING - TODO: pass search str from post data
-        return {
-            "message": "success",
-            "results": self.search_bored_apes(),
-            # "results": json.self.search_bored_apes()
-        }
+        data = request.get_json()
+        q = data.get("q", None)
+        index = data.get("index", None)
+        
+        if q and index in self.core_index_choices:
+            return {
+                "message": "success",
+                "results": self.search_bored_apes(q) if index == "boredapes" else self.search_simple_wiki(q),
+            }
+        else:
+            return HTTP_500_MISSING_Q
