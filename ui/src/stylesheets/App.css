@@ -1,0 +1,22 @@
+@import url("./constants.css");
+
+.marqoLogo path {
+  fill: var(--primary);
+}
+
+.searchBar {
+  box-shadow: 2px 3px 10px 3px lightgray;
+}
+
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
