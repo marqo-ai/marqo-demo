@@ -11,15 +11,16 @@ const navLinks = [
 ];
 
 export default function Header() {
-    return <header className="navbar">
+    return <header className="navbar bg-[#0C0F37] container-fluid w-screen pl-12 pr-16">
         <div className="flex-1">
             <MarqoLogo />
         </div>
-        <nav className="flex-none">
+        {/* TODO: hamburger on xs to md, show on lg up */}
+        <nav className="flex-none xs:invisible lg:block">
             <ul className="flex">
                 {navLinks.map(({ key, title, href }) => {
                     return <li key={key} className="pl-12">
-                        <a href={href}>{title}</a>
+                        <a href={href} className="text-white">{title}</a>
                     </li>
                 })}
                 {/* <li className="">

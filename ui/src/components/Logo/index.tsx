@@ -22,5 +22,5 @@ const getSize = (size: number | string): number => {
 
 export const MarqoLogo: React.FC<LogoProps> = (props) => {
     const { size = "xl" } = props;
-    return <Logo className="marqoLogo" style={{ width: getSize(size), height: getSize(size) }} />;
+    return <Logo className="marqoLogo" style={{ width: getSize(size), maxHeight: getSize(size) }} />;
 };
