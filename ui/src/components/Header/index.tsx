@@ -18,14 +18,15 @@ export default function Header() {
         <nav className="flex-none">
             <ul className="flex">
                 {navLinks.map(({ key, title, href }) => {
-                    return <li key={key} className="px-4">
+                    return <li key={key} className="pl-12">
                         <a href={href}>{title}</a>
                     </li>
                 })}
-                <li className="">
-                    <OutlineSunIcon className="h-6 w-6" />
-                    {/* <Button><SunIcon /></Button> */}
-                </li>
+                {/* <li className="">
+                    <Button className="transparent">
+                        <OutlineSunIcon className="h-6 w-6" />
+                    </Button>
+                </li> */}
             </ul>
         </nav>
     </header>
