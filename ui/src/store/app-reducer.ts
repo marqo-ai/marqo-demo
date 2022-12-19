@@ -1,24 +1,22 @@
 import React from "react";
+import { actions } from "./actions";
 import { AppStateProps } from ".";
 
-const SET_THEME = "SET_THEME";
-const SET_DATASET = "SET_DATASET";
-const SET_CORE_API_RESULTS = "SET_CORE_API_RESULTS";
 
 const appReducer = (state: AppStateProps, action: any) => {
     switch (action.type) {
-        case SET_THEME:
+        case actions.SET_THEME:
             return {
                 ...state,
                 theme: action.payload,
             }
-        case SET_DATASET:
+        case actions.SET_DATASET:
             console.log(action)
             return {
                 ...state,
                 dataset: action.payload,
             }
-        case SET_CORE_API_RESULTS:
+        case actions.SET_CORE_API_RESULTS:
             return {
                 ...state,
                 coreAPIResults: action.payload
@@ -40,7 +38,3 @@ const appReducer = (state: AppStateProps, action: any) => {
 //     );
 // }
 export default appReducer;
-export {
-    SET_THEME,
-    SET_DATASET,
-}

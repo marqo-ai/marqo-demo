@@ -1,0 +1,5 @@
+export const actions = {
+    SET_THEME: "SET_THEME",
+    SET_DATASET: "SET_DATASET",
+    SET_CORE_API_RESULTS: "SET_CORE_API_RESULTS",
+}

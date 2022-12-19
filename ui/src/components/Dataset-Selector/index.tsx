@@ -1,11 +1,11 @@
-import { useEffect, useReducer, useState } from "react"
+import { useContext, useEffect, useReducer, useState } from "react"
 import { Button } from "react-daisyui"
 // 
 import { BaycLogo } from "../Logo/Bayc-Logo"
 import { CaretDown } from "../Shapes"
 import { SimpleWikiLogo } from "../Logo/Simple-Wiki-Logo"
-import appReducer, { SET_DATASET } from "../../store/app-reducer"
-import { initialState } from "../../store"
+import appReducer from "../../store/app-reducer"
+import AppContext, { initialState } from "../../store"
 
 
 const datasetOptions = [
@@ -14,17 +14,15 @@ const datasetOptions = [
 ]
 
 export const DatasetSelector = () => {
-    const [state, dispatch] = useReducer(appReducer, initialState);
-    const { dataset } = state;
+    // const [state, dispatch] = useReducer(appReducer, initialState);
+    const { dataset, setDataset } = useContext(AppContext);
+    // const { dataset } = state;
     // useState
     const [openDropdown, setOpenDropdown] = useState(false);
 
     const handleOnSelect = (value: string) => {
         setOpenDropdown(false)
-        dispatch({
-            type: SET_DATASET,
-            payload: value
-        });
+        setDataset(value)
     };
 
     return <div className="flex flex-col">

@@ -5,15 +5,16 @@ import App from './App';
 import './stylesheets/index.css';
 import './stylesheets/App.css';
 import AppContext, { initialState } from "./store";
+import { AppProvider } from "./store/app-provider";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <AppContext.Provider value={initialState}>
+    <AppProvider>
       <App />
-    </AppContext.Provider>
+    </AppProvider>
   </React.StrictMode>
 );
 
