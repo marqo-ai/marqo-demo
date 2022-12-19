@@ -4,14 +4,16 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 import './stylesheets/index.css';
 import './stylesheets/App.css';
-import AppContext, { InitialStateProps } from "./store";
+import AppContext, { initialState } from "./store";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <AppContext.Provider value={initialState}>
+      <App />
+    </AppContext.Provider>
   </React.StrictMode>
 );
 
