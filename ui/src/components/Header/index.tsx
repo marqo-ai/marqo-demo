@@ -11,7 +11,7 @@ const navLinks = [
 ];
 
 export default function Header() {
-    return <header className="navbar bg-[#0C0F37] container-fluid w-screen pl-12 pr-16">
+    return <header className="navbar bg-primary container-fluid w-screen pl-12 pr-16">
         <div className="flex-1">
             <MarqoLogo />
         </div>

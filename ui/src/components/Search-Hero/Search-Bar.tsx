@@ -9,6 +9,6 @@ export const SearchBar = () => {
             <input placeholder="smiling with glasses" className="bg-transparent ml-2 px-4 w-full text-xl focus:outline-none" />
         </div>
         <DatasetSelector />
-        <Button color="primary" className="h-full rounded-r-full rounded-l-none">Search</Button>
+        <Button color="primary" className="h-full rounded-r-full rounded-l-none text-white">Search</Button>
     </div>
 }

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
 import './stylesheets/index.css';
 import './stylesheets/App.css';
+import AppContext, { InitialStateProps } from "./store";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
