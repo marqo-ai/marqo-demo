@@ -10,6 +10,11 @@ import { useScreen } from "../../hooks/useScreen";
 import { ShareResults } from "../ShareResults";
 import { ResultsLoader } from "../Loaders";
 import RawLogo from "../../assets/simplewiki.png"
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import { PlaceholderComponent, Spinner } from "../Loaders/Spinner";
+
+const placeholderSrc = "sample-bored-ape.png"
+const simpleWikiPlaceholderSrc = "simplewiki.png"
 
 export const ImageResults: React.FC = () => {
     const dispatch = useDispatch();
@@ -41,7 +46,14 @@ export const ImageResults: React.FC = () => {
 
                 {results?.results?.hits.map(({ image, _id, _highlights, _score }, key, hitsArray) => {
                     return <div key={_id} className={`cursor-pointer relative flex min-w-full min-h-full ${getTileStyles(key, hitsArray.length)}`}>
-                        <LazyLoadImage effect="opacity" src={image} alt={`q${key}-${_score}`} className={`hover:opacity-[0.2]`} />
+                        <LazyLoadImage
+                            effect="opacity"
+                            src={image}
+                            width={"100%"}
+                            height={"100%"}
+                            placeholder={<PlaceholderComponent />}
+                            alt={`q${key}-${_score}`}
+                            className={`hover:opacity-[0.2]`} />
                         <div className={`rounded-[4%] absolute top-0 w-full h-full flex items-center px-5 bg-transparent opacity-0 hover:opacity-100 hover:bg-white/[.7] text-slate-700 text-lg md:text-xs lg:text-lg`}>
                             <b>Score:</b> <span className={`w-full text-nowrap overflow-hidden text-ellipsis`}>{_score}</span>
                         </div>
@@ -115,7 +127,14 @@ export const ListResults: React.FC = () => {
 
                                 <div className={`basis-1/4 flex justify-center self-start ${theme === "dark" ? "bg-white" : ""} `}>
                                     {/* <img src={`${ typeof wikiImgs[key] === "string" ? wikiImgs[key] : RawLogo } `} alt={title} className={`${ seeMore[key] ? "h-[100px] md:h-[150px] lg:h-[200px]" : "max-h-[400px]" } `} /> */}
-                                    <LazyLoadImage effect="opacity" src={`${typeof wikiImgs[key] === "string" ? wikiImgs[key] : RawLogo} `} alt={title} className={`h-auto w-full`} />
+                                    <LazyLoadImage
+                                        width={"100%"}
+                                        height={"100%"}
+                                        effect="opacity"
+                                        placeholder={<PlaceholderComponent />}
+                                        src={`${typeof wikiImgs[key] === "string" ? wikiImgs[key] : RawLogo} `}
+                                        alt={title}
+                                        className={`h-auto w-full`} />
                                 </div>
                             </div>
                         </div>
