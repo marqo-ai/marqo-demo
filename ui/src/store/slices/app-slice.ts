@@ -11,6 +11,7 @@ type Props = {
     isSearchingCoreAPI: boolean;
     wikiImgs: string[];
     imgFile: null | string;
+    takeScreenshot: boolean;
 };
 
 const initialState: Props = {
@@ -21,6 +22,7 @@ const initialState: Props = {
     isSearchingCoreAPI: false,
     wikiImgs: [],
     imgFile: null,
+    takeScreenshot: false
 };
 
 const slice = createSlice({
@@ -54,7 +56,10 @@ const slice = createSlice({
         },
         setImgFile: (state, { payload }) => {
             state.imgFile = payload;
-        }
+        },
+        setTakeScreenshot: (state, { payload }) => {
+            state.takeScreenshot = payload;
+        },
     },
 });
 
@@ -65,6 +70,7 @@ export const {
     setDataset,
     setWikiImgs,
     updateWikiImg,
+    setTakeScreenshot,
     setCoreAPIResults,
     setIsSearchingCoreAPI,
 } = slice.actions;

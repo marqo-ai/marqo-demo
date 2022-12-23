@@ -7,7 +7,7 @@ import { getWikiImgThunk, postSearchDataset } from "../../store/thunks";
 import { setWikiImgs } from "../../store/slices/app-slice";
 import { useScreen } from "../../hooks/useScreen";
 // components
-import { ShareResults } from "../ShareResults";
+import { ShareResults } from "../Share-Results";
 import { ResultsLoader } from "../Loaders";
 import RawLogo from "../../assets/simplewiki.png"
 import 'react-lazy-load-image-component/src/effects/blur.css';
@@ -47,6 +47,7 @@ export const ImageResults: React.FC = () => {
                 {results?.results?.hits.map(({ image, _id, _highlights, _score }, key, hitsArray) => {
                     return <div key={_id} className={`cursor-pointer relative flex min-w-full min-h-full ${getTileStyles(key, hitsArray.length)}`}>
                         <LazyLoadImage
+                            crossOrigin="anonymous"
                             effect="opacity"
                             src={image}
                             width={"100%"}
