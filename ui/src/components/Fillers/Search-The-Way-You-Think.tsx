@@ -13,13 +13,19 @@ export const SearchTheWayYouThink = () => {
             <div className={`flex flex-col sm:flex-row justify-start items-center space-y-3 sm:space-y-0 sm:space-x-4 mt-10 md:mt-0 w-full h-full`}>
                 {/* Get started */}
 
-                <Link target={"_blank"} className={`${theme === "dark" ? "text-primary bg-secondary hover:bg-primary hover:text-white" : "text-slate-100 bg-primary"} flex rounded-full py-2 sm:py-1 px-8 sm:px-4 font-medium hover:no-underline text-center text-lg`} href={GET_STARTED_URL}>
+                <Link
+                    target={"_blank"}
+                    className={`${theme === "dark" ? "text-primary bg-secondary border-secondary hover:border-primary hover:bg-primary hover:text-white" : "text-slate-100 bg-primary border-primary"} border-solid border-2 flex rounded-full py-2 sm:py-1 px-8 sm:px-4 2xl:px-8 2xl:py-4 font-medium hover:no-underline text-center text-lg lg:text-xl`}
+                    href={GET_STARTED_URL}>
                     Get Started
                 </Link>
 
                 {/* Read the docs */}
 
-                <Link target={"_blank"} className={`${theme === "dark" ? "text-primary bg-secondary hover:bg-primary hover:text-white" : "text-slate-100 bg-primary"} flex rounded-full py-2 sm:py-1 px-8 sm:px-4 font-medium hover:no-underline text-center text-lg`} href={READ_THE_DOCS_URL}>
+                <Link
+                    target={"_blank"}
+                    className={`${theme === "dark" ? "text-white hover:bg-primary hover:text-secondary" : "text-primary border-slate-700"} flex rounded-full bg-transparent border-solid border-2 py-2 sm:py-1 px-8 sm:px-4 2xl:px-8 2xl:py-4 font-medium hover:no-underline text-center text-lg lg:text-xl`}
+                    href={READ_THE_DOCS_URL}>
                     Read the docs
                 </Link>
             </div>
