@@ -113,13 +113,13 @@ export const ListResults: React.FC = () => {
         {!isSearchingCoreAPI && (
             <div className="flex flex-wrap">
                 {results && results?.results?.hits.map(({ content, docDate, domain, title, url, _id, _highlights, _score }, key) => {
-                    return <div key={key} className={`p-2 basis-2/2 md:basis-1/2 text-primary w-full overflow-hidden ${theme === "dark" ? "text-slate-700" : ""}`}>
-                        <div className={`bg-slate-100 h-full p-6 rounded-lg `}>
+                    return <div key={key} className={`p-2 basis-2/2 md:basis-1/2 text-primary w-full overflow-hidden ${theme === "dark" ? "text-primary" : ""}`}>
+                        <div className={`${theme === "dark" ? "bg-slate-300" : "bg-slate-100"} h-full p-6 rounded-lg `}>
                             <div className="mb-6 font-bold text-lg">{title}</div>
                             <div className={`flex flex-row overflow-hidden ${seeMore[key] ? "max-h-[200px]" : "max-h-[400px]"} `}>
                                 <div className={`basis-3/4 flex flex-col justify-between relative pr-2`}>
                                     <p className={`pb-2`}>Highlights</p>
-                                    <p className={`text-sm h-full overflow-y-scroll break-all ${theme === "dark" ? "text-slate-600" : "text-slate-800"}`}>{Object.values(_highlights).flat().join("")}</p>
+                                    <p className={`text-sm h-full overflow-y-scroll break-all ${theme === "dark" ? "text-slate-700" : "text-slate-800"}`}>{Object.values(_highlights).flat().join("")}</p>
                                     <div className={`flex space-x-6 pt-2 text-sm`}>
                                         <p className={`italic`}>Score: {_score}</p>
                                         <Link className={`underline`} target="_blank" href={`https://wikipedia.org/wiki/${title}`}>Read article</Link>
@@ -128,7 +128,7 @@ export const ListResults: React.FC = () => {
                                     {/* <Button onClick={() => handleSeeMore(key)} className={`bg-transparent z-10 capitalize text-primary border-none hover:bg-transparent hover:border-none hover:text-accent ${theme === "dark" && "text-secondary"}`}>{seeMore[key] ? "Read more" : "Hide"}</Button> */}
                                 </div>
 
-                                <div className={`basis-1/4 flex justify-center self-start ${theme === "dark" ? "bg-white" : ""} `}>
+                                <div className={`basis-1/4 flex justify-center self-start ${theme === "dark" ? "bg-white" : ""}`}>
                                     {/* <img src={`${ typeof wikiImgs[key] === "string" ? wikiImgs[key] : RawLogo } `} alt={title} className={`${ seeMore[key] ? "h-[100px] md:h-[150px] lg:h-[200px]" : "max-h-[400px]" } `} /> */}
                                     <LazyLoadImage
                                         width={"100%"}
