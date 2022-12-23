@@ -12,6 +12,7 @@ import { ResultsLoader } from "../Loaders";
 import RawLogo from "../../assets/simplewiki.png"
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { PlaceholderComponent, Spinner } from "../Loaders/Spinner";
+import { SearchTheWayYouThink } from "../Fillers/Search-The-Way-You-Think";
 
 const placeholderSrc = "sample-bored-ape.png"
 const simpleWikiPlaceholderSrc = "simplewiki.png"
@@ -47,7 +48,7 @@ export const ImageResults: React.FC = () => {
                 {results?.results?.hits.map(({ image, _id, _highlights, _score }, key, hitsArray) => {
                     return <div key={_id} className={`cursor-pointer relative flex min-w-full min-h-full ${getTileStyles(key, hitsArray.length)}`}>
                         <LazyLoadImage
-                            crossOrigin="anonymous"
+                            // crossOrigin="anonymous"
                             effect="opacity"
                             src={image}
                             width={"100%"}
@@ -61,7 +62,8 @@ export const ImageResults: React.FC = () => {
                     </div>
                 })}
 
-                <ShareResults />
+                <SearchTheWayYouThink />
+
             </div>
         )}
     </div>
