@@ -94,7 +94,7 @@ export const ListResults: React.FC = () => {
                 const hitTitle = hit["title"];
 
                 if (hitTitle) {
-                    dispatch(getWikiImgThunk({ title: hitTitle, hitIndex }))
+                    dispatch(getWikiImgThunk({ title: cleanWikiTitle(hitTitle), hitIndex }))
                 }
             })
         }
@@ -105,6 +105,14 @@ export const ListResults: React.FC = () => {
         let _seeMore = [...seeMore];
         _seeMore[key] = !seeMore[key];
         setSeeMore(_seeMore);
+    }
+
+    const cleanWikiSrc = (src: string) => {
+        return src.replace("http://s.wikipedia.org/wiki", "https://wikipedia.org/wiki")
+    }
+
+    const cleanWikiTitle = (wikiTitle: string) => {
+        return wikiTitle.replace(" - Wikipedia", "")
     }
 
     return <div className="results px-2">
@@ -122,7 +130,7 @@ export const ListResults: React.FC = () => {
                                     <p className={`text-sm h-full overflow-y-scroll break-all ${theme === "dark" ? "text-slate-700" : "text-slate-800"}`}>{Object.values(_highlights).flat().join("")}</p>
                                     <div className={`flex space-x-6 pt-2 text-sm`}>
                                         <p className={`italic`}>Score: {_score}</p>
-                                        <Link className={`underline`} target="_blank" href={`https://wikipedia.org/wiki/${title}`}>Read article</Link>
+                                        <Link className={`underline`} target="_blank" href={cleanWikiSrc(url)}>Read article</Link>
                                     </div>
                                     {/* {seeMore[key] && <div className={`absolute z-1 bg-gradient-to-b from-transparent to-base-100 h-full basis-3/4 w-full ${theme === "dark" && "to-primary"} `} />} */}
                                     {/* <Button onClick={() => handleSeeMore(key)} className={`bg-transparent z-10 capitalize text-primary border-none hover:bg-transparent hover:border-none hover:text-accent ${theme === "dark" && "text-secondary"}`}>{seeMore[key] ? "Read more" : "Hide"}</Button> */}
