@@ -5,3 +5,5 @@
 build
 curl.sh
 ui/node_modules/
+wiki_index.py
+simplewiki.json
