@@ -123,7 +123,7 @@ export const ListResults: React.FC = () => {
                 {results && results?.results?.hits.map(({ content, docDate, domain, title, url, _id, _highlights, _score }, key) => {
                     return <div key={key} className={`p-2 basis-2/2 md:basis-1/2 text-primary w-full overflow-hidden ${theme === "dark" ? "text-primary" : ""}`}>
                         <div className={`${theme === "dark" ? "bg-slate-300" : "bg-slate-100"} h-full p-6 rounded-lg `}>
-                            <div className="mb-6 font-bold text-lg">{title}</div>
+                            <div className="mb-6 font-bold text-lg">{cleanWikiTitle(title)}</div>
                             <div className={`flex flex-row overflow-hidden ${seeMore[key] ? "max-h-[200px]" : "max-h-[400px]"} `}>
                                 <div className={`basis-3/4 flex flex-col justify-between relative pr-2`}>
                                     <p className={`pb-2`}>Highlights</p>
