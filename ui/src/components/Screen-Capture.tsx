@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from "react";
-import { toPng } from "html-to-image";
+// import { toPng } from "html-to-image";
 
 export const ScreenCapture: React.FC = () => {
     const ref = useRef<HTMLDivElement>(null)
@@ -9,16 +9,16 @@ export const ScreenCapture: React.FC = () => {
             return
         }
 
-        toPng(ref.current, { cacheBust: true, })
-            .then((dataUrl) => {
-                const link = document.createElement("a")
-                link.download = "my-image-name.png"
-                link.href = dataUrl
-                link.click()
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        // toPng(ref.current, { cacheBust: true, })
+        //     .then((dataUrl) => {
+        //         const link = document.createElement("a")
+        //         link.download = "my-image-name.png"
+        //         link.href = dataUrl
+        //         link.click()
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //     })
     }, [ref])
 
     return (

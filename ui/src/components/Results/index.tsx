@@ -66,7 +66,7 @@ export const ImageResults: React.FC = () => {
 
         <Modal open={openImgModal} onClickBackdrop={() => setOpenImgModal(false)}>
             <LazyLoadImage
-                effect="opacity"
+                effect="blur"
                 src={modalImg}
                 width={"100%"}
                 height={"100%"}
@@ -80,7 +80,7 @@ export const ImageResults: React.FC = () => {
                 {results?.results?.hits.map(({ image, _id, _score }, key, hitsArray) => {
                     return <div key={_id} onClick={() => handleOnClickImg(image)} className={`cursor-pointer relative flex min-w-full min-h-full hover:scale-[.95] hover:duration-150 ${getTileStyles(key, hitsArray.length)}`}>
                         <LazyLoadImage
-                            effect="opacity"
+                            effect="blur"
                             src={image}
                             width={"100%"}
                             height={"100%"}
@@ -167,7 +167,6 @@ export const ListResults: React.FC = () => {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 })}
             </div>

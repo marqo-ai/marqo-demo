@@ -17,7 +17,6 @@
 		"axios": "^1.2.1",
 		"cross-env": "^7.0.3",
 		"helmet": "^6.0.1",
-		"html-to-image": "^1.11.3",
 		"html2canvas": "^1.4.1",
 		"moment": "^2.29.4",
 		"moment-timezone": "^0.5.40",
