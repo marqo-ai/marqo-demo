@@ -1,5 +1,5 @@
-from flask import Flask, Blueprint, render_template
-from flask_restful import reqparse, Api, Resource
+from flask import Flask
+from flask_restful import reqparse, Api
 from flask_cors import CORS
 # apis
 from api.core import CoreAPIResource

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, Modal } from "react-daisyui";
+import { useSearchParams } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 // store, thunks, slices, hook
 import { useDispatch, useSelector } from "../../store";
@@ -7,16 +8,11 @@ import { getWikiImgThunk, postSearchDataset } from "../../store/thunks";
 import { setDataset, setQ, setWikiImgs } from "../../store/slices/app-slice";
 import { useScreen } from "../../hooks/useScreen";
 // components
-import { ShareResults } from "../Share-Results";
 import { ResultsLoader } from "../Loaders";
+import { PlaceholderComponent } from "../Loaders/Spinner";
+import { SearchTheWayYouThink } from "../Fillers/Search-The-Way-You-Think";
 import RawLogo from "../../assets/simplewiki.png"
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import { PlaceholderComponent, Spinner } from "../Loaders/Spinner";
-import { SearchTheWayYouThink } from "../Fillers/Search-The-Way-You-Think";
-import { useSearchParams } from "react-router-dom";
-
-const placeholderSrc = "sample-bored-ape.png"
-const simpleWikiPlaceholderSrc = "simplewiki.png"
 
 export const ImageResults: React.FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();

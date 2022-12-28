@@ -34,6 +34,7 @@ class MarqoBase:
             q=search_str.strip(),
             searchable_attributes=BORED_APES_SEARCHABLE_ATTRS,
             limit=30,
+            reranker="owl/ViT-B/32",
         )
 
 
@@ -45,9 +46,9 @@ class CoreAPIResource(Resource, MarqoBase):
 
     def post(self):
         data = request.get_json()
-        q = data.get("q", "")
+        q =  data.get("q", "")
         index = data.get("index", None)
-        
+
         if q and index in self.core_index_choices:
             return {
                 "message": "success",

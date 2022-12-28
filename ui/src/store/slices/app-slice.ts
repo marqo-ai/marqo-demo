@@ -56,6 +56,7 @@ const slice = createSlice({
         },
         setImgFile: (state, { payload }) => {
             state.imgFile = payload;
+            state.q = "";
         },
         setTakeScreenshot: (state, { payload }) => {
             state.takeScreenshot = payload;
