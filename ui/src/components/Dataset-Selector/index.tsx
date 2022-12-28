@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useSearchParams } from "react-router-dom";
 import { Button } from "react-daisyui"
 // store
 import { useDispatch, useSelector } from "../../store";
@@ -14,12 +15,17 @@ const datasetOptions = [
 ]
 
 export const DatasetSelector = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
     const dispatch = useDispatch();
     const { dataset, q, theme } = useSelector(({ app }) => app);
     // useState
     const [openDropdown, setOpenDropdown] = useState(false);
 
     const handleOnSelect = (value: string) => {
+        setSearchParams({
+            q: q || DEFAULT_Q,
+            index: value
+        })
         dispatch(postSearchDataset({
             q: q || DEFAULT_Q,
             index: value

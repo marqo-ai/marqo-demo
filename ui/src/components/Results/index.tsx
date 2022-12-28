@@ -4,7 +4,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 // store, thunks, slices, hook
 import { useDispatch, useSelector } from "../../store";
 import { getWikiImgThunk, postSearchDataset } from "../../store/thunks";
-import { setWikiImgs } from "../../store/slices/app-slice";
+import { setDataset, setQ, setWikiImgs } from "../../store/slices/app-slice";
 import { useScreen } from "../../hooks/useScreen";
 // components
 import { ShareResults } from "../Share-Results";
@@ -13,11 +13,13 @@ import RawLogo from "../../assets/simplewiki.png"
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { PlaceholderComponent, Spinner } from "../Loaders/Spinner";
 import { SearchTheWayYouThink } from "../Fillers/Search-The-Way-You-Think";
+import { useSearchParams } from "react-router-dom";
 
 const placeholderSrc = "sample-bored-ape.png"
 const simpleWikiPlaceholderSrc = "simplewiki.png"
 
 export const ImageResults: React.FC = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
     const dispatch = useDispatch();
     const { q, results, isSearchingCoreAPI } = useSelector(({ app }) => app);
     const { screen } = useScreen();
@@ -25,9 +27,22 @@ export const ImageResults: React.FC = () => {
     const [modalImg, setModalImg] = useState("");
 
     useEffect(() => {
-        if (results === null) {
+        const qParam = searchParams.get("q");
+        const indexParam = searchParams.get("index");
+        if (qParam) {
+            dispatch(setQ(qParam))
+            dispatch(setDataset(indexParam))
             dispatch(postSearchDataset({
-                q: q,
+                q: qParam,
+                index: indexParam || "boredapes"
+            }))
+        } else if (results === null) {
+            setSearchParams({
+                q,
+                index: "boredapes"
+            })
+            dispatch(postSearchDataset({
+                q,
                 index: "boredapes"
             }))
         }

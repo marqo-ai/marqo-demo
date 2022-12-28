@@ -5,8 +5,10 @@ import { postSearchDataset } from "../../store/thunks";
 import { setQ } from "../../store/slices/app-slice";
 // data
 import surpriseMe from "../../data/surpriseMe.json";
+import { useSearchParams } from "react-router-dom";
 
 export const SurpriseMe = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
     const { theme } = useTheme();
     const dispatch = useDispatch();
     const { dataset, q } = useSelector(({ app }) => app);
@@ -15,6 +17,10 @@ export const SurpriseMe = () => {
         let randomSet = dataset === "boredapes" ? surpriseMe["randomBoredApesQs"] : surpriseMe["randomSimpleWikiQs"];
         const randomQ = randomSet[Math.floor(Math.random() * randomSet.length)];
         dispatch(setQ(randomQ))
+        setSearchParams({
+            q: randomQ,
+            index: dataset
+        })
         dispatch(postSearchDataset({
             q: randomQ,
             index: dataset

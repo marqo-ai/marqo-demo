@@ -6,14 +6,22 @@ import { postSearchDataset } from "../../store/thunks";
 import { DEFAULT_Q, setQ } from "../../store/slices/app-slice";
 // components
 import { DatasetSelector } from "../Dataset-Selector"
+import { useSearchParams } from "react-router-dom";
 
 export const SearchBar = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
+
     const { dataset, theme, q } = useSelector(({ app }) => app);
     const dispatch = useDispatch();
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleOnSearch = () => {
         const value = inputRef.current?.value;
+
+        setSearchParams({
+            q: value ? value : DEFAULT_Q,
+            index: dataset
+        })
         dispatch(postSearchDataset({
             q: value ? value : DEFAULT_Q,
             index: dataset
