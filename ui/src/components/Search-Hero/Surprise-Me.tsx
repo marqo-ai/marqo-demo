@@ -29,15 +29,10 @@ export const SurpriseMe = () => {
         }))
     }
 
-    console.log(window.location.href)
-
     return <div className={`relative w-full`}>
         <div className={`absolute pl-4 top-0 mt-[-110px] flex justify-start items-center text-sm`}>
             <span className={`${theme === "dark" ? "text-slate-300" : "text-slate-600"}`}>Ask abstract questions</span>
             <Button onClick={handleOnSurprise} className={`${theme === "dark" ? "bg-slate-700 text-slate-100 hover:bg-slate-600" : "bg-slate-100 text-slate-700 hover:bg-slate-200"} font-medium border-none px-2 btn-sm ml-4 text-xs capitalize`}>Surprise me</Button>
-            {/* <Button className={`${theme === "dark" ? "text-slate-100 border-slate-200 hover:bg-slate-600" : "border-slate-500 text-slate-700 hover:bg-slate-200"} border-2 bg-transparent font-medium px-2 btn-sm ml-4 text-xs capitalize`}>
-                Share
-            </Button> */}
         </div>
 
         <div className={`absolute pl-4 top-0 right-0 flex justify-start items-center text-2xl mt-[0px]`}>

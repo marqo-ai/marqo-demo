@@ -17,6 +17,7 @@ export const SearchHero = () => {
 
     return <Hero className={`${results !== null && results?.results ? "pt-56 md:pt-72 pb-10" : "pt-[40vh] md:[50vh] lg:pt-[calc(40%_-_70px)]"}`}>
         <SurpriseMe />
+
         <SearchBar />
         {/* <div className="contents">
             <div className="flex items-center justify-center w-full">

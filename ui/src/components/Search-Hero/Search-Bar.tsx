@@ -50,7 +50,7 @@ export const SearchBar = () => {
                 className={`bg-primary h-full rounded-r-lg rounded-l-none text-white hidden sm:block hover:border-none hover:bg-secondary hover:text-primary ${theme === "dark" && "bg-secondary text-primary border-none"}`}>
                 Search
             </Button>
-            <div className="sm:hidden absolute w-full mt-[100px] flex justify-center">
+            <div className="sm:hidden absolute w-full mt-[110px] flex justify-center">
                 <Button onClick={handleOnSearch}
                     color="primary"
                     disabled={!q}
