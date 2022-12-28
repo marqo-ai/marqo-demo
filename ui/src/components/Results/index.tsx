@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-daisyui";
+import { Link, Modal } from "react-daisyui";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 // store, thunks, slices, hook
 import { useDispatch, useSelector } from "../../store";
@@ -21,6 +21,8 @@ export const ImageResults: React.FC = () => {
     const dispatch = useDispatch();
     const { q, results, isSearchingCoreAPI } = useSelector(({ app }) => app);
     const { screen } = useScreen();
+    const [openImgModal, setOpenImgModal] = useState(false);
+    const [modalImg, setModalImg] = useState("");
 
     useEffect(() => {
         if (results === null) {
@@ -39,14 +41,29 @@ export const ImageResults: React.FC = () => {
         }
     }
 
+    const handleOnClickImg = (image: string) => {
+        setModalImg(image);
+        setOpenImgModal(!openImgModal)
+    }
+
     return <div className="results">
         {isSearchingCoreAPI && <ResultsLoader />}
+
+        <Modal open={openImgModal} onClickBackdrop={() => setOpenImgModal(false)}>
+            <LazyLoadImage
+                effect="opacity"
+                src={modalImg}
+                width={"100%"}
+                height={"100%"}
+                placeholder={<PlaceholderComponent />}
+                alt={`ape-modal`} />
+        </Modal>
 
         {!isSearchingCoreAPI && results?.results && results?.results?.hits && (
             <div className={`imgResultsWrapper grid gap-[4px] ${["2xl", "xl", "lg", "md"].includes(screen) ? "grid-cols-5" : "grid-cols-2"}`}>
 
                 {results?.results?.hits.map(({ image, _id, _highlights, _score }, key, hitsArray) => {
-                    return <div key={_id} className={`cursor-pointer relative flex min-w-full min-h-full ${getTileStyles(key, hitsArray.length)}`}>
+                    return <div key={_id} onClick={() => handleOnClickImg(image)} className={`cursor-pointer relative flex min-w-full min-h-full hover:scale-[.95] hover:duration-150 ${getTileStyles(key, hitsArray.length)}`}>
                         <LazyLoadImage
                             // crossOrigin="anonymous"
                             effect="opacity"
@@ -54,11 +71,12 @@ export const ImageResults: React.FC = () => {
                             width={"100%"}
                             height={"100%"}
                             placeholder={<PlaceholderComponent />}
-                            alt={`q${key}-${_score}`}
-                            className={`hover:opacity-[0.2]`} />
-                        <div className={`rounded-[4%] absolute top-0 w-full h-full flex items-center px-5 bg-transparent opacity-0 hover:opacity-100 hover:bg-white/[.7] text-slate-700 text-lg md:text-xs lg:text-lg`}>
-                            <b>Score:</b> <span className={`w-full text-nowrap overflow-hidden text-ellipsis`}>{_score}</span>
-                        </div>
+                            alt={`ape-${key}-${_score}`}
+                        // className={`hover:scale-110 hover:z-20`}
+                        />
+                        {/* <div className={`rounded-[4%] absolute top-0 w-full h-full flex items-center px-5 bg-transparent opacity-0 hover:opacity-100 hover:bg-white/[.7] text-slate-700 text-lg md:text-xs lg:text-lg`}> */}
+                        {/* <b>Score:</b> <span className={`w-full text-nowrap overflow-hidden text-ellipsis`}>{_score}</span> */}
+                        {/* </div> */}
                     </div>
                 })}
 
@@ -129,7 +147,7 @@ export const ListResults: React.FC = () => {
                                     <p className={`pb-2`}>Highlights</p>
                                     <p className={`text-sm h-full overflow-y-scroll break-all ${theme === "dark" ? "text-slate-700" : "text-slate-800"}`}>{Object.values(_highlights).flat().join("")}</p>
                                     <div className={`flex space-x-6 pt-2 text-sm`}>
-                                        <p className={`italic`}>Score: {_score}</p>
+                                        {/* <p className={`italic`}>Score: {_score}</p> */}
                                         <Link className={`underline`} target="_blank" href={cleanWikiSrc(url)}>Read article</Link>
                                     </div>
                                     {/* {seeMore[key] && <div className={`absolute z-1 bg-gradient-to-b from-transparent to-base-100 h-full basis-3/4 w-full ${theme === "dark" && "to-primary"} `} />} */}
