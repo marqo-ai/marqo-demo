@@ -62,21 +62,16 @@ export const ImageResults: React.FC = () => {
         {!isSearchingCoreAPI && results?.results && results?.results?.hits && (
             <div className={`imgResultsWrapper grid gap-[4px] ${["2xl", "xl", "lg", "md"].includes(screen) ? "grid-cols-5" : "grid-cols-2"}`}>
 
-                {results?.results?.hits.map(({ image, _id, _highlights, _score }, key, hitsArray) => {
+                {results?.results?.hits.map(({ image, _id, _score }, key, hitsArray) => {
                     return <div key={_id} onClick={() => handleOnClickImg(image)} className={`cursor-pointer relative flex min-w-full min-h-full hover:scale-[.95] hover:duration-150 ${getTileStyles(key, hitsArray.length)}`}>
                         <LazyLoadImage
-                            // crossOrigin="anonymous"
                             effect="opacity"
                             src={image}
                             width={"100%"}
                             height={"100%"}
                             placeholder={<PlaceholderComponent />}
                             alt={`ape-${key}-${_score}`}
-                        // className={`hover:scale-110 hover:z-20`}
                         />
-                        {/* <div className={`rounded-[4%] absolute top-0 w-full h-full flex items-center px-5 bg-transparent opacity-0 hover:opacity-100 hover:bg-white/[.7] text-slate-700 text-lg md:text-xs lg:text-lg`}> */}
-                        {/* <b>Score:</b> <span className={`w-full text-nowrap overflow-hidden text-ellipsis`}>{_score}</span> */}
-                        {/* </div> */}
                     </div>
                 })}
 
@@ -119,12 +114,6 @@ export const ListResults: React.FC = () => {
 
     }, [results])
 
-    const handleSeeMore = (key: number) => {
-        let _seeMore = [...seeMore];
-        _seeMore[key] = !seeMore[key];
-        setSeeMore(_seeMore);
-    }
-
     const cleanWikiSrc = (src: string) => {
         return src.replace("http://s.wikipedia.org/wiki", "https://wikipedia.org/wiki")
     }
@@ -147,15 +136,11 @@ export const ListResults: React.FC = () => {
                                     <p className={`pb-2`}>Highlights</p>
                                     <p className={`text-sm h-full overflow-y-scroll break-all ${theme === "dark" ? "text-slate-700" : "text-slate-800"}`}>{Object.values(_highlights).flat().join("")}</p>
                                     <div className={`flex space-x-6 pt-2 text-sm`}>
-                                        {/* <p className={`italic`}>Score: {_score}</p> */}
                                         <Link className={`underline`} target="_blank" href={cleanWikiSrc(url)}>Read article</Link>
                                     </div>
-                                    {/* {seeMore[key] && <div className={`absolute z-1 bg-gradient-to-b from-transparent to-base-100 h-full basis-3/4 w-full ${theme === "dark" && "to-primary"} `} />} */}
-                                    {/* <Button onClick={() => handleSeeMore(key)} className={`bg-transparent z-10 capitalize text-primary border-none hover:bg-transparent hover:border-none hover:text-accent ${theme === "dark" && "text-secondary"}`}>{seeMore[key] ? "Read more" : "Hide"}</Button> */}
                                 </div>
 
                                 <div className={`basis-1/4 flex justify-center self-start ${theme === "dark" ? "bg-white" : ""}`}>
-                                    {/* <img src={`${ typeof wikiImgs[key] === "string" ? wikiImgs[key] : RawLogo } `} alt={title} className={`${ seeMore[key] ? "h-[100px] md:h-[150px] lg:h-[200px]" : "max-h-[400px]" } `} /> */}
                                     <LazyLoadImage
                                         width={"100%"}
                                         height={"100%"}
