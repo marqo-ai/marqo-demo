@@ -21,6 +21,7 @@ export const ImageResults: React.FC = () => {
     const { screen } = useScreen();
     const [openImgModal, setOpenImgModal] = useState(false);
     const [modalImg, setModalImg] = useState("");
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         const qParam = searchParams.get("q");
@@ -57,6 +58,13 @@ export const ImageResults: React.FC = () => {
         setOpenImgModal(!openImgModal)
     }
 
+    const handleOnLoad = (key: number) => {
+        if (key === 29) {
+            console.log("loaded!")
+            setIsLoaded(true)
+        }
+    }
+
     return <div className="results">
         {isSearchingCoreAPI && <ResultsLoader />}
 
@@ -80,14 +88,17 @@ export const ImageResults: React.FC = () => {
                             src={image}
                             width={"100%"}
                             height={"100%"}
+                            // visibleByDefault={true}
+                            afterLoad={() => handleOnLoad(key)}
+                            // onLoad={() => { handleOnLoad(key) }}
                             placeholder={<PlaceholderComponent />}
+                            className={`min-h-full min-w-full`}
                             alt={`ape-${key}`}
                         />
                     </div>
                 })}
 
-                <SearchTheWayYouThink />
-
+                {isLoaded && <SearchTheWayYouThink />}
             </div>
         )}
     </div>
