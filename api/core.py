@@ -34,7 +34,6 @@ class MarqoBase:
             q=search_str.strip(),
             searchable_attributes=BORED_APES_SEARCHABLE_ATTRS,
             limit=30,
-            reranker="owl/ViT-B/32",
         )
 
 
