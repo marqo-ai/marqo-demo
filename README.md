@@ -1,14 +1,14 @@
-# [aws-flask-app](https://github.com/marqo-ai/aws-flask-app)
+# [marqo-demo](https://github.com/marqo-ai/marqo-demo)
 
 ## Setting up the app for the first time
 
 1. Duplicate contents of `.env.template` to a new `.env` file and replace the values accordingly.
 
-2. Simply run `./setup.sh`
+2. Run `./setup.sh`
 
 ## Running the app in development
 
-1. Simply run `./run.sh`
+1. Run `./run.sh`
 
 ## Sample `curl` requests
 
