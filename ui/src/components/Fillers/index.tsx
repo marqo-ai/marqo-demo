@@ -10,7 +10,7 @@ export const TryMarqo = () => {
             <MarqoWLink />
         </div>
         <div className={`flex justify-center items-center w-full py-12 lg:py-0`}>
-            <Link target={"_blank"} className={`${theme === "dark" ? "text-primary bg-secondary hover:bg-primary hover:text-white" : "text-slate-100 bg-primary"} flex rounded-full py-1 px-4 font-medium hover:no-underline text-center text-lg`} href={JOIN_CLOUD_BETA_TYPEFORM}>Join the <span className="ml-1"><b>Marqo Cloud</b></span></Link>
+            <Link target={"_blank"} className={`${theme === "dark" ? "text-primary bg-secondary hover:bg-primary hover:text-white" : "text-slate-100 bg-primary"} flex rounded-full py-1 px-4 font-medium hover:no-underline text-center text-lg`} href={JOIN_CLOUD_BETA_TYPEFORM}>Join <span className="ml-1"><b>Marqo Cloud</b></span></Link>
         </div>
     </div>
 }

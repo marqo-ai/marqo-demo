@@ -3,7 +3,8 @@ import { Helmet } from "react-helmet-async"
 // store
 import { useSelector } from "../store"
 // components
-import { ImageResults, ListResults } from "../components/Results"
+import BoredApesResults from "../components/Results/Bored-Apes"
+import SimplewikiResults from "../components/Results/Simple-Wiki"
 import { SearchHero } from "../components/Search-Hero"
 
 export const Home = () => {
@@ -25,8 +26,8 @@ export const Home = () => {
             <SearchHero />
 
             <div className={`mt-0`}>
-                {dataset === "boredapes" && <ImageResults />}
-                {dataset === "simplewiki" && <ListResults />}
+                {dataset === "boredapes" && <BoredApesResults />}
+                {dataset === "simplewiki" && <SimplewikiResults />}
             </div>
             {/* TODO: scroll to top */}
             {/* <FloatingControls /> */}

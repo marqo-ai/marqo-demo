@@ -41,4 +41,21 @@ module.exports = {
 			lineClamp: ['responsive', 'hover'],
 		},
 	},
+	theme: {
+		extend: {
+			keyframes: {
+				smoothSlideUp: {
+					'0%': {
+						transform: 'translateY(1%)',
+					},
+					'100%': {
+						transform: 'translateY(0px)',
+					},
+				},
+			},
+			animation: {
+				smoothSlideUp: 'smoothSlideUp 1s linear',
+			},
+		},
+	},
 };
