@@ -26,14 +26,15 @@ class MarqoBase:
         return mq.index(SIMPLE_WIKI_INDEX_NAME).search(
             q=search_str.strip(),
             searchable_attributes=SIMPLE_WIKI_SEARCHABLE_ATTRS,
-            limit=30,
+            limit=20,
         )
 
     def search_bored_apes(self, search_str=""):
         return mq.index(BORED_APES_INDEX_NAME).search(
             q=search_str.strip(),
             searchable_attributes=BORED_APES_SEARCHABLE_ATTRS,
-            limit=30,
+            show_highlights=False,
+            limit=20,
         )
 
 
