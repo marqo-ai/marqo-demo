@@ -148,9 +148,9 @@ export const ListResults: React.FC = () => {
         {isSearchingCoreAPI && <ResultsLoader />}
 
         {!isSearchingCoreAPI && (
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap lg:justify-center">
                 {results && results?.results?.hits.map(({ title, url, _highlights }, key) => {
-                    return <div key={key} className={`p-2 basis-2 /2 md:basis-1/2 text-primary w-full overflow-hidden ${theme === "dark" ? "text-primary" : ""}`}>
+                    return <div key={key} className={`p-2 basis-2/2 md:basis-1/2 lg:basis-1/3 text-primary w-full overflow-hidden ${theme === "dark" ? "text-primary" : ""}`}>
                         <div className={`${theme === "dark" ? "bg-slate-300" : "bg-slate-100"} h-full p-6 rounded-lg `}>
                             <div className="mb-6 font-bold text-lg">{cleanWikiTitle(title)}</div>
                             <div className={`flex flex-row overflow-hidden ${seeMore[key] ? "max-h-[200px]" : "max-h-[400px]"} `}>
