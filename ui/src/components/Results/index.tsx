@@ -60,7 +60,6 @@ export const ImageResults: React.FC = () => {
 
     const handleOnLoad = (key: number) => {
         if (key === 29) {
-            console.log("loaded!")
             setIsLoaded(true)
         }
     }
