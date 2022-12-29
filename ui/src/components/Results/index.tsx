@@ -73,15 +73,15 @@ export const ImageResults: React.FC = () => {
         {!isSearchingCoreAPI && results?.results && results?.results?.hits && (
             <div className={`imgResultsWrapper grid gap-[4px] ${["2xl", "xl", "lg", "md"].includes(screen) ? "grid-cols-5" : "grid-cols-2"}`}>
 
-                {results?.results?.hits.map(({ image, _id, _score }, key, hitsArray) => {
-                    return <div key={_id} onClick={() => handleOnClickImg(image)} className={`cursor-pointer relative flex min-w-full min-h-full hover:scale-[.95] hover:duration-150 ${getTileStyles(key, hitsArray.length)}`}>
+                {results?.results?.hits.map(({ image }, key, hitsArray) => {
+                    return <div key={`ape-${key}`} onClick={() => handleOnClickImg(image)} className={`cursor-pointer relative flex min-w-full min-h-full hover:scale-[.95] hover:duration-150 ${getTileStyles(key, hitsArray.length)}`}>
                         <LazyLoadImage
                             effect="blur"
                             src={image}
                             width={"100%"}
                             height={"100%"}
                             placeholder={<PlaceholderComponent />}
-                            alt={`ape-${key}-${_score}`}
+                            alt={`ape-${key}`}
                         />
                     </div>
                 })}
@@ -138,7 +138,7 @@ export const ListResults: React.FC = () => {
 
         {!isSearchingCoreAPI && (
             <div className="flex flex-wrap">
-                {results && results?.results?.hits.map(({ content, docDate, domain, title, url, _id, _highlights, _score }, key) => {
+                {results && results?.results?.hits.map(({ title, url, _highlights }, key) => {
                     return <div key={key} className={`p-2 basis-2/2 md:basis-1/2 text-primary w-full overflow-hidden ${theme === "dark" ? "text-primary" : ""}`}>
                         <div className={`${theme === "dark" ? "bg-slate-300" : "bg-slate-100"} h-full p-6 rounded-lg `}>
                             <div className="mb-6 font-bold text-lg">{cleanWikiTitle(title)}</div>
@@ -155,7 +155,7 @@ export const ListResults: React.FC = () => {
                                     <LazyLoadImage
                                         width={"100%"}
                                         height={"100%"}
-                                        effect="opacity"
+                                        effect="blur"
                                         placeholder={<PlaceholderComponent />}
                                         src={`${typeof wikiImgs[key] === "string" ? wikiImgs[key] : RawLogo} `}
                                         alt={title}
