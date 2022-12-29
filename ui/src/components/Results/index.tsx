@@ -74,6 +74,7 @@ export const ImageResults: React.FC = () => {
                 src={modalImg}
                 width={"100%"}
                 height={"100%"}
+                className={`min-h-full min-w-full`}
                 placeholder={<PlaceholderComponent />}
                 alt={`ape-modal`} />
         </Modal>
@@ -90,9 +91,8 @@ export const ImageResults: React.FC = () => {
                             height={"100%"}
                             // visibleByDefault={true}
                             afterLoad={() => handleOnLoad(key)}
-                            // onLoad={() => { handleOnLoad(key) }}
                             placeholder={<PlaceholderComponent />}
-                            className={`min-h-full min-w-full`}
+                            className={`min-h-[10em] min-w-[10em]`}
                             alt={`ape-${key}`}
                         />
                     </div>
@@ -150,7 +150,7 @@ export const ListResults: React.FC = () => {
         {!isSearchingCoreAPI && (
             <div className="flex flex-wrap">
                 {results && results?.results?.hits.map(({ title, url, _highlights }, key) => {
-                    return <div key={key} className={`p-2 basis-2/2 md:basis-1/2 text-primary w-full overflow-hidden ${theme === "dark" ? "text-primary" : ""}`}>
+                    return <div key={key} className={`p-2 basis-2 /2 md:basis-1/2 text-primary w-full overflow-hidden ${theme === "dark" ? "text-primary" : ""}`}>
                         <div className={`${theme === "dark" ? "bg-slate-300" : "bg-slate-100"} h-full p-6 rounded-lg `}>
                             <div className="mb-6 font-bold text-lg">{cleanWikiTitle(title)}</div>
                             <div className={`flex flex-row overflow-hidden ${seeMore[key] ? "max-h-[200px]" : "max-h-[400px]"} `}>

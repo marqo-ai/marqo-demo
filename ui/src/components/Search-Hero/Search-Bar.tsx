@@ -13,7 +13,7 @@ export const SearchBar = () => {
     const { dataset, theme, q, imgFile } = useSelector(({ app }) => app);
     const dispatch = useDispatch();
     const inputRef = useRef<HTMLInputElement>(null);
-    const disableClasses = imgFile ? "disabled:border-2 disabled:border-slate-400 md:disabled:border-none disabled:bg-transparent disabled:text-slate-400" : "";
+    const disableClasses = "disabled:border-2 disabled:border-slate-100 md:disabled:border-none disabled:bg-transparent disabled:text-slate-400";
 
     const handleOnSearch = () => {
         const value = inputRef.current?.value;
