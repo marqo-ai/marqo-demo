@@ -26,7 +26,7 @@ class MarqoBase:
         return mq.index(SIMPLE_WIKI_INDEX_NAME).search(
             q=search_str.strip(),
             searchable_attributes=SIMPLE_WIKI_SEARCHABLE_ATTRS,
-            limit=10,
+            limit=30,
         )
 
     def search_bored_apes(self, search_str=""):
@@ -34,7 +34,7 @@ class MarqoBase:
             q=search_str.strip(),
             searchable_attributes=BORED_APES_SEARCHABLE_ATTRS,
             show_highlights=False,
-            limit=15,
+            limit=30,
         )
 
 
