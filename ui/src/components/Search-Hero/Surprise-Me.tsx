@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { Button, useTheme } from "react-daisyui"
+import { Button, Tooltip, useTheme } from "react-daisyui"
 import { FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton } from "react-share";
 // store
 import { useDispatch, useSelector } from "../../store";
@@ -42,12 +42,12 @@ export const SurpriseMe = () => {
     return <div className={`relative w-full`}>
         <div className={`absolute pl-0 top-0 mt-[-110px] w-full flex flex-wrap flex-row-reverse gap-[10px] justify-end items-center md:flex-row md:flex-nowrap md:justify-between md:items-center text-sm`}>
             <div className={`flex gap-[10px] w-[fit-content]`}>
-                <p className={`${theme === "dark" ? "text-slate-300" : "text-slate-600"} whitespace-nowrap hidden md:block`}>Try abstract or detailed descriptions.</p>
+                <p className={`${theme === "dark" ? "text-slate-300" : "text-slate-600"} flex self-center whitespace-nowrap hidden md:block`}>Try abstract or detailed descriptions.</p>
+                <Button
+                    onClick={handleOnSurprise}
+                    className={`${theme === "dark" ? "bg-slate-700 text-slate-100 hover:bg-slate-600" : "bg-slate-100 text-slate-700 hover:bg-slate-200"} w-[fit-content] md:w-auto font-medium border-none border-2 border-slate-700 px-2 btn-sm text-xs capitalize`}>Surprise me</Button>
                 {/* {dataset !== SIMPLEWIKI && <UploadImg />} */}
             </div>
-            <Button
-                onClick={handleOnSurprise}
-                className={`${theme === "dark" ? "bg-slate-700 text-slate-100 hover:bg-slate-600" : "bg-slate-100 text-slate-700 hover:bg-slate-200"} w-[fit-content] md:w-auto font-medium border-none border-2 border-slate-700 px-2 btn-sm text-xs capitalize`}>Surprise me</Button>
         </div>
 
         <div className={`absolute pl-4 top-0 right-0 w-[fit-content] flex flex-col flex-wrap md:flex-nowrap space-y-2 md:space-y-0 justify-end items-end text-2xl mt-[0px]`}>
@@ -56,13 +56,17 @@ export const SurpriseMe = () => {
                 onClick={handleOnSurprise}
                 className={`${theme === "dark" ? "bg-slate-700 text-slate-100 hover:bg-slate-600" : "bg-slate-100 text-slate-700 hover:bg-slate-200"} block md:hidden font-medium border-none px-2 btn-sm text-xs capitalize`}>Surprise me</Button> */}
             <div className={`${theme === "dark" ? "text-slate-100" : "text-slate-700"} flex gap-[10px] border-none bg-transparent font-medium p-0 btn-sm justify-end h-[fit-content]`}>
-                <span className={`flex self-center hidden md:block`}>Share this awesomeness!</span>
-                <LinkedinShareButton url={window.location.href}>
-                    <LinkedinIcon className={`w-8 md:w-6 h-8 md:h-6 rounded-sm`} />
-                </LinkedinShareButton>
-                <FacebookShareButton url={window.location.href}>
-                    <FacebookIcon className={`w-8 md:w-6 h-8 md:h-6 rounded-sm`} />
-                </FacebookShareButton>
+                {/* <span className={`flex self-center hidden md:block`}>Share this awesomeness!</span> */}
+                <Tooltip message={"Share this awesomeness!"} color="primary">
+                    <LinkedinShareButton url={window.location.href}>
+                        <LinkedinIcon className={`w-8 md:w-6 h-8 md:h-6 rounded-sm`} />
+                    </LinkedinShareButton>
+                </Tooltip>
+                <Tooltip message={"Share this awesomeness!"} color="primary">
+                    <FacebookShareButton url={window.location.href}>
+                        <FacebookIcon className={`w-8 md:w-6 h-8 md:h-6 rounded-sm`} />
+                    </FacebookShareButton>
+                </Tooltip>
             </div>
         </div>
     </div>

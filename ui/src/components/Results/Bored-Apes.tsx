@@ -43,6 +43,7 @@ const BoredApesResults: React.FC = () => {
                 index: BOREDAPES
             }))
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const getTileStyles = (key: number, hitsArrayLength: number) => {
@@ -63,6 +64,7 @@ const BoredApesResults: React.FC = () => {
             setIsLoaded(true)
         }
     }
+    console.log(screen)
 
     return <div className="results">
         {isSearchingCoreAPI && <ResultsLoader />}
@@ -91,7 +93,7 @@ const BoredApesResults: React.FC = () => {
                             // visibleByDefault={true}
                             afterLoad={() => handleOnLoad(key)}
                             placeholder={<PlaceholderComponent />}
-                            className={`min-h-[10em] min-w-[10em]`}
+                            className={`min-h-[8em] min-w-[8em] lg:min-h-[10em] lg:min-w-[10em]`}
                             alt={`ape-${key}`}
                         />
                     </div>

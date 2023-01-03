@@ -33,11 +33,17 @@ const SimpleWikiResults: React.FC = () => {
     }, [results])
 
     const cleanWikiSrc = (src: string) => {
-        return src.replace("http://s.wikipedia.org/wiki", "https://wikipedia.org/wiki")
+        if (src) {
+            return src.replace("http://s.wikipedia.org/wiki", "https://wikipedia.org/wiki")
+        }
+        return src
     }
 
     const cleanWikiTitle = (wikiTitle: string) => {
-        return wikiTitle.replace(" - Wikipedia", "")
+        if (wikiTitle) {
+            return wikiTitle.replace(" - Wikipedia", "")
+        }
+        return wikiTitle
     }
 
     return <div className="results px-2">
