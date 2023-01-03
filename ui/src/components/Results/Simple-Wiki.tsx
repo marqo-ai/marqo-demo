@@ -1,22 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-daisyui";
 import { LazyLoadImage, trackWindowScroll } from "react-lazy-load-image-component";
 // store, thunks, slices, hook
 import { useDispatch, useSelector } from "../../store";
-import { getRawWikiImgThunk, getWikiImgThunk } from "../../store/thunks";
+import { getWikiImgThunk } from "../../store/thunks";
 import { setWikiImgs } from "../../store/slices/app-slice";
 // components
 import { ResultsLoader } from "../Loaders";
 import { PlaceholderComponent } from "../Loaders/Spinner";
 import RawLogo from "../../assets/simplewiki.png"
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 
 const SimpleWikiResults: React.FC = () => {
-    const { results, isSearchingCoreAPI, theme, wikiImgs } = useSelector(({ app }) => app);
+    const { q, dataset, results, isSearchingCoreAPI, theme, wikiImgs } = useSelector(({ app }) => app);
     const dispatch = useDispatch();
 
     useEffect(() => {
+        console.log(results)
         if (results && results?.results?.hits) {
             let _imgs: string[] = new Array(results?.results.hits.length).fill("");
             dispatch(setWikiImgs(_imgs))
@@ -31,6 +32,10 @@ const SimpleWikiResults: React.FC = () => {
         }
 
     }, [results])
+
+    useEffect(() => {
+        console.log("wiki[]", q, dataset, results, isSearchingCoreAPI)
+    }, [])
 
     const cleanWikiSrc = (src: string) => {
         if (src) {
@@ -52,9 +57,6 @@ const SimpleWikiResults: React.FC = () => {
         {!isSearchingCoreAPI && (
             <div className="flex flex-wrap lg:justify-center animate-smoothSlideUp">
                 {results && results?.results?.hits.map(({ title, url, _highlights }, key) => {
-                    // const _wikiImg = async () => { return await dispatch(getRawWikiImgThunk(title)) };
-                    // dispatch(getWikiImgThunk({ title: cleanWikiTitle(title), hitIndex: key }))
-                    // console.log(_wikiImg)
                     return <div key={key} className={`p-2 basis-2/2 md:basis-1/2 lg:basis-1/3 text-primary w-full h-full overflow-hidden ${theme === "dark" ? "text-primary" : ""}`}>
                         <div className={`${theme === "dark" ? "bg-slate-300" : "bg-slate-100"} h-full p-6 rounded-lg `}>
                             <div className="mb-6 font-bold text-lg">{cleanWikiTitle(title)}</div>

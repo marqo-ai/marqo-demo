@@ -23,28 +23,32 @@ const BoredApesResults: React.FC = () => {
     const [modalImg, setModalImg] = useState("");
     const [isLoaded, setIsLoaded] = useState(false);
 
-    useEffect(() => {
-        const qParam = searchParams.get("q");
-        const indexParam = searchParams.get("index");
-        if (qParam) {
-            dispatch(setQ(qParam))
-            dispatch(setDataset(indexParam))
-            dispatch(postSearchDataset({
-                q: qParam,
-                index: indexParam || BOREDAPES
-            }))
-        } else if (results === null) {
-            setSearchParams({
-                q,
-                index: BOREDAPES
-            })
-            dispatch(postSearchDataset({
-                q,
-                index: BOREDAPES
-            }))
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    // useEffect(() => {
+    //     const qParam = searchParams.get("q");
+    //     const indexParam = searchParams.get("index");
+    //     if (qParam) {
+    //         console.log("executing")
+    //         dispatch(postSearchDataset({
+    //             q: qParam,
+    //             index: indexParam || BOREDAPES
+    //         }))
+    //         dispatch(setQ(qParam))
+    //         dispatch(setDataset(indexParam))
+    //     } else if (results === null) {
+    //         setSearchParams({
+    //             q,
+    //             index: BOREDAPES
+    //         })
+    //         console.log("apes[null[")
+    //         dispatch(postSearchDataset({
+    //             q,
+    //             index: BOREDAPES
+    //         }))
+    //     } else {
+    //         console.log("all else fails")
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [])
 
     const getTileStyles = (key: number, hitsArrayLength: number) => {
         if (["2xl", "xl", "lg", "md"].includes(screen)) {
@@ -64,7 +68,6 @@ const BoredApesResults: React.FC = () => {
             setIsLoaded(true)
         }
     }
-    console.log(screen)
 
     return <div className="results">
         {isSearchingCoreAPI && <ResultsLoader />}
@@ -90,7 +93,6 @@ const BoredApesResults: React.FC = () => {
                             src={image}
                             width={"100%"}
                             height={"100%"}
-                            // visibleByDefault={true}
                             afterLoad={() => handleOnLoad(key)}
                             placeholder={<PlaceholderComponent />}
                             className={`min-h-[8em] min-w-[8em] lg:min-h-[10em] lg:min-w-[10em]`}

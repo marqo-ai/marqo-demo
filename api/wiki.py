@@ -51,6 +51,7 @@ class WikiAPIResource(Resource):
     def post(self):
         data = request.get_json()
         title = data.get("title", "")
+        print('img')
         
         if title:
             return {
