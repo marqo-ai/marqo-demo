@@ -40,7 +40,6 @@ export const SearchBar = () => {
 
     return <Fragment>
         <div className={`flex w-full h-[50px] mb-20 rounded-lg ${theme === "dark" ? "bg-slate-700" : "searchBar"}`}>
-            {/* <div className={`flex w-full h-[50px] mb-20 rounded-lg ${theme === "dark" ? "darkSearchBar" : "searchBar"}`}> */}
             <div className="searchInputWrapper border-[#00FFAA] flex h-full w-full justify-left self-center rounded-sm py-0 pr-0 pl-2">
                 <input value={q} onChange={handleOnChange} onKeyDown={handleOnKeyDown} placeholder="smiling with glasses" className={`bg-transparent ml-2 px-0 w-full text-sm md:text-md focus:outline-none ${theme === "dark" ? "" : "text-primary"}`} ref={inputRef} />
             </div>
