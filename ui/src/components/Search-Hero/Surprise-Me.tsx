@@ -46,28 +46,24 @@ export const SurpriseMe = () => {
                 <Button
                     onClick={handleOnSurprise}
                     className={`${theme === "dark" ? "bg-slate-700 text-slate-100 hover:bg-slate-600" : "bg-slate-100 text-slate-700 hover:bg-slate-200"} w-[fit-content] md:w-auto font-medium border-none border-2 border-slate-700 px-2 btn-sm text-xs capitalize`}>Surprise me</Button>
-                {/* {dataset !== SIMPLEWIKI && <UploadImg />} */}
+                <div className={`${theme === "dark" ? "text-slate-100" : "text-slate-700"} flex items-center gap-[10px] border-none bg-transparent font-medium p-0 btn-sm justify-end h-[fit-content]`}>
+                    {/* <span className={`flex self-center hidden md:block`}>Share this awesomeness!</span> */}
+                    <Tooltip message={"Share this awesomeness!"} color="primary" className={`flex self-center`}>
+                        <LinkedinShareButton url={window.location.href}>
+                            <LinkedinIcon className={`w-8 md:w-6 h-8 md:h-6 rounded-sm`} />
+                        </LinkedinShareButton>
+                    </Tooltip>
+                    <Tooltip message={"Share this awesomeness!"} color="primary" className={`flex self-center`}>
+                        <FacebookShareButton url={window.location.href}>
+                            <FacebookIcon className={`w-8 md:w-6 h-8 md:h-6 rounded-sm`} />
+                        </FacebookShareButton>
+                    </Tooltip>
+                </div>
             </div>
         </div>
 
-        <div className={`absolute pl-4 top-0 right-0 w-[fit-content] flex flex-col flex-wrap md:flex-nowrap space-y-2 md:space-y-0 justify-end items-end text-2xl mt-[0px]`}>
-
-            {/* <Button
-                onClick={handleOnSurprise}
-                className={`${theme === "dark" ? "bg-slate-700 text-slate-100 hover:bg-slate-600" : "bg-slate-100 text-slate-700 hover:bg-slate-200"} block md:hidden font-medium border-none px-2 btn-sm text-xs capitalize`}>Surprise me</Button> */}
-            <div className={`${theme === "dark" ? "text-slate-100" : "text-slate-700"} flex gap-[10px] border-none bg-transparent font-medium p-0 btn-sm justify-end h-[fit-content]`}>
-                {/* <span className={`flex self-center hidden md:block`}>Share this awesomeness!</span> */}
-                <Tooltip message={"Share this awesomeness!"} color="primary">
-                    <LinkedinShareButton url={window.location.href}>
-                        <LinkedinIcon className={`w-8 md:w-6 h-8 md:h-6 rounded-sm`} />
-                    </LinkedinShareButton>
-                </Tooltip>
-                <Tooltip message={"Share this awesomeness!"} color="primary">
-                    <FacebookShareButton url={window.location.href}>
-                        <FacebookIcon className={`w-8 md:w-6 h-8 md:h-6 rounded-sm`} />
-                    </FacebookShareButton>
-                </Tooltip>
-            </div>
+        <div className={`absolute pl-4 top-0 w-full flex flex-col flex-wrap md:flex-nowrap space-y-2 md:space-y-0 text-2xl mt-[0px]`}>
+            {dataset !== SIMPLEWIKI && <UploadImg />}
         </div>
     </div>
 }
