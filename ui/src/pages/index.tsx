@@ -19,8 +19,8 @@ export const Home = () => {
     useEffect(() => {
         const qParam = searchParams.get("q");
         const indexParam = searchParams.get("index");
-        if (qParam) {
-            console.log("executing")
+        if (qParam && (qParam !== q || indexParam !== dataset)) {
+            // console.log("executing", qParam, q, isSearchingCoreAPI, results)
             dispatch(postSearchDataset({
                 q: qParam,
                 index: indexParam || BOREDAPES
@@ -30,15 +30,15 @@ export const Home = () => {
         } else if (results === null) {
             setSearchParams({
                 q,
-                index: BOREDAPES
+                index: indexParam || BOREDAPES
             })
-            console.log("apes[null[")
+            // console.log("apes[null[")
             dispatch(postSearchDataset({
                 q,
-                index: BOREDAPES
+                index: indexParam || BOREDAPES
             }))
         } else {
-            console.log("all else fails")
+            // console.log("all else fails", qParam, q, indexParam, dataset)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])

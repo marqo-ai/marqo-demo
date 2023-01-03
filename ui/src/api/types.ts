@@ -10,11 +10,19 @@ export type CoreResponse = {
         hits: any[];
     };
 };
-export type GetWikiImgThunkRequest = {
+// export type GetWikiImgThunkRequest = {
+//     title: string;
+//     hitIndex: number;
+// }
+// export type GetWikiImgResponse = {
+//     message: string;
+//     img: string;
+// }
+export type WikiImageItem = {
+    url: string;
     title: string;
-    hitIndex: number;
 }
-export type GetWikiImgResponse = {
+export type GetWikiImagesResponse = {
     message: string;
-    img: string;
+    imgs: WikiImageItem[];
 }

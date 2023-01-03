@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CoreResponse } from "../../api/types";
+import { CoreResponse, WikiImageItem } from "../../api/types";
 import { BOREDAPES, SIMPLEWIKI } from "../../commons/constants";
 
 export const DEFAULT_Q = "smiling with glasses";
@@ -15,6 +15,7 @@ type Props = {
     wikiImgs: string[];
     imgFile: null | string;
     apiCallCount: number;
+    wikiImages: WikiImageItem[];
 };
 
 const initialState: Props = {
@@ -26,6 +27,7 @@ const initialState: Props = {
     wikiImgs: [],
     imgFile: null,
     apiCallCount: 0,
+    wikiImages: [],
 };
 
 const slice = createSlice({
@@ -50,11 +52,10 @@ const slice = createSlice({
         setIsSearchingCoreAPI: (state, { payload }) => {
             state.isSearchingCoreAPI = true;
             state.dataset = payload;
-            console.log(state.dataset, state.q)
             state.apiCallCount += 1
         },
-        setWikiImgs: (state, { payload }) => {
-            state.wikiImgs = payload;
+        setWikiImages: (state, { payload }) => {
+            state.wikiImages = payload;
         },
         updateWikiImg: (state, { payload }) => {
             let _wikiImgs = [...state.wikiImgs];
@@ -76,7 +77,7 @@ export const {
     setTheme,
     setImgFile,
     setDataset,
-    setWikiImgs,
+    setWikiImages,
     updateWikiImg,
     setCoreAPIResults,
     setIsSearchingCoreAPI,

@@ -23,33 +23,6 @@ const BoredApesResults: React.FC = () => {
     const [modalImg, setModalImg] = useState("");
     const [isLoaded, setIsLoaded] = useState(false);
 
-    // useEffect(() => {
-    //     const qParam = searchParams.get("q");
-    //     const indexParam = searchParams.get("index");
-    //     if (qParam) {
-    //         console.log("executing")
-    //         dispatch(postSearchDataset({
-    //             q: qParam,
-    //             index: indexParam || BOREDAPES
-    //         }))
-    //         dispatch(setQ(qParam))
-    //         dispatch(setDataset(indexParam))
-    //     } else if (results === null) {
-    //         setSearchParams({
-    //             q,
-    //             index: BOREDAPES
-    //         })
-    //         console.log("apes[null[")
-    //         dispatch(postSearchDataset({
-    //             q,
-    //             index: BOREDAPES
-    //         }))
-    //     } else {
-    //         console.log("all else fails")
-    //     }
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [])
-
     const getTileStyles = (key: number, hitsArrayLength: number) => {
         if (["2xl", "xl", "lg", "md"].includes(screen)) {
             return `${((key % 7 == 0 && key % 2 == 0) || (key % 7 == 3 && key % 2 == 0)) && key <= hitsArrayLength - 3 ? "large-tile" : "tile"}`

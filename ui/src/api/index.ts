@@ -1,10 +1,8 @@
-import axios, { AxiosPromise, AxiosResponse } from "axios";
-import { appAxios } from "../plugins/axios";
-import { CoreRequest, CoreResponse, GetWikiImgResponse } from "./types";
+import axios, { AxiosPromise } from "axios";
+import { CoreRequest, CoreResponse, GetWikiImagesResponse } from "./types";
 
 
 export const searchAPI = (reqData: CoreRequest): AxiosPromise<CoreResponse> => {
-    // return appAxios.post("/core", reqData);
     return axios({
         method: "POST",
         baseURL: process.env.REACT_APP_BASE_URL,
@@ -16,12 +14,12 @@ export const searchAPI = (reqData: CoreRequest): AxiosPromise<CoreResponse> => {
     });
 }
 
-export const getWikiImg = (title: string): AxiosPromise<GetWikiImgResponse> => {
+export const getWikiImages = (titles: string): AxiosPromise<GetWikiImagesResponse> => {
     return axios({
         method: "POST",
         baseURL: process.env.REACT_APP_BASE_URL,
-        url: "/api/wiki-img",
-        data: { title },
+        url: "/api/wiki-images",
+        data: { titles },
         headers: {
             "Access-Control-Allow-Origin": "*"
         }

@@ -4,7 +4,7 @@ from flask_cors import CORS
 # apis
 from api.core import CoreAPIResource
 from api.index import HealthResource
-from api.wiki import WikiAPIResource
+from api.wiki import WikiAPIResource, WikiImgsAPIResource
 
 
 application = Flask(__name__, static_folder="build", static_url_path="/")
@@ -17,6 +17,7 @@ parser.add_argument("task")
 api.add_resource(HealthResource, "/api/health")
 api.add_resource(CoreAPIResource, "/api/core")
 api.add_resource(WikiAPIResource, "/api/wiki-img")
+api.add_resource(WikiImgsAPIResource, "/api/wiki-images")
 
 
 @application.route("/")

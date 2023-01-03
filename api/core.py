@@ -51,16 +51,12 @@ class MarqoBase:
         
 
     def search_simple_wiki(self, search_str=""):
-        print(search_str)
-        res = mq.index(SIMPLE_WIKI_INDEX_NAME).search(
+        return mq.index(SIMPLE_WIKI_INDEX_NAME).search(
             q=search_str.strip(),
             searchable_attributes=SIMPLE_WIKI_SEARCHABLE_ATTRS,
             attributes_to_retrieve=["title", "url"],
             limit=10,
         )
-
-        print(res)
-        return res
 
     def search_bored_apes(self, search_str=""):
         return mq.index(BORED_APES_INDEX_NAME).search(

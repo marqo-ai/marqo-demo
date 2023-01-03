@@ -35,7 +35,6 @@ export const DatasetSelector = () => {
         }
         setSearchParams(params)
         dispatch(setQ(_defaultQ));
-        console.log(params)
         dispatch(postSearchDataset(params))
         dispatch(setDataset(value));
         setOpenDropdown(false);
