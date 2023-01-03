@@ -28,6 +28,7 @@
 		"react-router-dom": "^6.5.0",
 		"react-scripts": "5.0.1",
 		"react-share": "^4.4.1",
+		"react-singleton-hook": "^4.0.1",
 		"react-test-renderer": "^18.2.0",
 		"typescript": "^4.9.4",
 		"web-vitals": "^2.1.4"

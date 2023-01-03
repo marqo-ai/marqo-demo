@@ -15,6 +15,7 @@ type Props = {
     wikiImgs: string[];
     imgFile: null | string;
     takeScreenshot: boolean;
+    apiCallCount: number;
 };
 
 const initialState: Props = {
@@ -25,7 +26,8 @@ const initialState: Props = {
     isSearchingCoreAPI: false,
     wikiImgs: [],
     imgFile: null,
-    takeScreenshot: false
+    takeScreenshot: false,
+    apiCallCount: 0,
 };
 
 const slice = createSlice({
@@ -44,10 +46,12 @@ const slice = createSlice({
         setCoreAPIResults: (state, { payload }) => {
             state.results = payload;
             state.isSearchingCoreAPI = false;
+            state.apiCallCount = 0
         },
         setIsSearchingCoreAPI: (state, { payload }) => {
             state.isSearchingCoreAPI = true;
             state.dataset = payload;
+            state.apiCallCount += 1
         },
         setWikiImgs: (state, { payload }) => {
             state.wikiImgs = payload;
@@ -64,6 +68,9 @@ const slice = createSlice({
         setTakeScreenshot: (state, { payload }) => {
             state.takeScreenshot = payload;
         },
+        resetAPICallCount: (state) => {
+            state.apiCallCount = 0;
+        }
     },
 });
 
@@ -77,6 +84,7 @@ export const {
     setTakeScreenshot,
     setCoreAPIResults,
     setIsSearchingCoreAPI,
+    resetAPICallCount,
 } = slice.actions;
 export default slice.reducer;
 
