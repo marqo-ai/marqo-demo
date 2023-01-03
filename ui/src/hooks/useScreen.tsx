@@ -36,7 +36,7 @@ export const useScreen = () => {
     function handleResize() {
         let w = window.innerWidth;
         const newScreen = getSize(w);
-        if (screen != newScreen) {
+        if (screen !== newScreen) {
             setScreen(newScreen)
         }
     }

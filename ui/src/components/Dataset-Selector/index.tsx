@@ -3,10 +3,11 @@ import { useSearchParams } from "react-router-dom";
 import { Button } from "react-daisyui"
 // store
 import { useDispatch, useSelector } from "../../store";
-import { DEFAULT_Q, setDataset } from "../../store/slices/app-slice";
+import { DEFAULT_Q, DatasetTypes, setDataset } from "../../store/slices/app-slice";
 import { postSearchDataset } from "../../store/thunks";
 // components
 import { CaretDown } from "../Shapes"
+import { getRandomQ } from "../Search-Hero/Surprise-Me";
 
 
 const datasetOptions = [
@@ -21,7 +22,9 @@ export const DatasetSelector = () => {
     // useState
     const [openDropdown, setOpenDropdown] = useState(false);
 
-    const handleOnSelect = (value: string) => {
+    const handleOnSelect = (value: DatasetTypes) => {
+        console.log()
+        const _defaultQ = getRandomQ(value);
         setSearchParams({
             q: q || DEFAULT_Q,
             index: value
@@ -50,7 +53,7 @@ export const DatasetSelector = () => {
             <ul className="w-full divide-y divide-gray-100">
                 {datasetOptions.map(({ index, value, title }) => (
                     <li key={index} className={``}>
-                        <Button onClick={() => handleOnSelect(value)}
+                        <Button onClick={() => handleOnSelect(value as DatasetTypes)}
                             className={`${theme === "dark" ? "text-white hover:text-secondary bg-slate-700 hover:bg-slate-800" : "text-primary bg-white hover:bg-slate-100"} flex justify-start w-full border-none rounded-none`}>
                             {title}
                         </Button>

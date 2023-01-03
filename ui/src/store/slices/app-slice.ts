@@ -1,11 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { CoreResponse } from "../../api/types";
+import { BOREDAPES, SIMPLEWIKI } from "../../commons/constants";
 
 export const DEFAULT_Q = "smiling with glasses";
 
+export type DatasetTypes = typeof BOREDAPES | typeof SIMPLEWIKI;
+
 type Props = {
     theme: string;
-    dataset: "boredapes" | "simplewiki";
+    dataset: DatasetTypes;
     results: CoreResponse | null;
     q: string;
     isSearchingCoreAPI: boolean;

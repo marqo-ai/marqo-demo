@@ -23,3 +23,13 @@ export const getWikiImgThunk = createAsyncThunk("getWikiImg", async (params: Get
         return Promise.reject(err);
     }
 },);
+
+export const getRawWikiImgThunk = createAsyncThunk("getWikiImg", async (title: string, { dispatch }) => {
+    try {
+        const { data } = await getWikiImg(title);
+        // console.log(data)
+        return data?.img;
+    } catch (err) {
+        return Promise.reject(err);
+    }
+},);

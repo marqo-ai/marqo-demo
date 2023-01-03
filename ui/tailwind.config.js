@@ -5,11 +5,7 @@ module.exports = {
 		'./src/**/*.{js,ts,jsx,tsx}',
 		'./public/index.html',
 	],
-	plugins: [
-		require('daisyui'),
-		require('@tailwindcss/line-clamp'),
-		require('tailwind-scrollbar')({ nocompatible: true }),
-	],
+	plugins: [require('daisyui')],
 	daisyui: {
 		themes: [
 			{

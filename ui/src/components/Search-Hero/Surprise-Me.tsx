@@ -4,10 +4,15 @@ import { FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton } 
 // store
 import { useDispatch, useSelector } from "../../store";
 import { postSearchDataset } from "../../store/thunks";
-import { setQ } from "../../store/slices/app-slice";
+import { DatasetTypes, setQ } from "../../store/slices/app-slice";
 // data
 import surpriseMe from "../../data/surpriseMe.json";
 import { UploadImg } from "./Upload-Img";
+
+export const getRandomQ = (dataset: DatasetTypes) => {
+    let randomSet = dataset === "boredapes" ? surpriseMe["randomBoredApesQs"] : surpriseMe["randomSimpleWikiQs"];
+    return randomSet[Math.floor(Math.random() * randomSet.length)];
+}
 
 export const SurpriseMe = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -16,11 +21,10 @@ export const SurpriseMe = () => {
     const { dataset, q } = useSelector(({ app }) => app);
 
     const handleOnSurprise = () => {
-        let randomSet = dataset === "boredapes" ? surpriseMe["randomBoredApesQs"] : surpriseMe["randomSimpleWikiQs"];
-        let randomQ = randomSet[Math.floor(Math.random() * randomSet.length)];
+        let randomQ = getRandomQ(dataset)
 
         while (randomQ === q) {
-            randomQ = randomSet[Math.floor(Math.random() * randomSet.length)];
+            randomQ = getRandomQ(dataset)
         }
 
         dispatch(setQ(randomQ))

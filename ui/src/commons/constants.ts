@@ -4,3 +4,6 @@ export const READ_THE_DOCS_URL = "https://docs.marqo.ai";
 
 const BORED_APES_IMG_PLACEHOLDER = "sample-bored-ape.png"
 const SIMPLE_WIKI_IMG_PLACEHOLDER = "simplewiki.png"
+
+export const BOREDAPES = "boredapes";
+export const SIMPLEWIKI = "simplewiki";
