@@ -13,11 +13,16 @@ export const SurpriseMe = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const { theme } = useTheme();
     const dispatch = useDispatch();
-    const { dataset } = useSelector(({ app }) => app);
+    const { dataset, q } = useSelector(({ app }) => app);
 
     const handleOnSurprise = () => {
         let randomSet = dataset === "boredapes" ? surpriseMe["randomBoredApesQs"] : surpriseMe["randomSimpleWikiQs"];
-        const randomQ = randomSet[Math.floor(Math.random() * randomSet.length)];
+        let randomQ = randomSet[Math.floor(Math.random() * randomSet.length)];
+
+        while (randomQ === q) {
+            randomQ = randomSet[Math.floor(Math.random() * randomSet.length)];
+        }
+
         dispatch(setQ(randomQ))
         setSearchParams({
             q: randomQ,
