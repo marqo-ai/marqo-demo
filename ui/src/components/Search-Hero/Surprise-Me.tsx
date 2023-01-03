@@ -8,14 +8,15 @@ import { DatasetTypes, setQ } from "../../store/slices/app-slice";
 // data
 import surpriseMe from "../../data/surpriseMe.json";
 import { UploadImg } from "./Upload-Img";
+import { BOREDAPES, SIMPLEWIKI } from "../../commons/constants";
 
 export const getRandomQ = (dataset: DatasetTypes) => {
-    let randomSet = dataset === "boredapes" ? surpriseMe["randomBoredApesQs"] : surpriseMe["randomSimpleWikiQs"];
+    let randomSet = dataset === BOREDAPES ? surpriseMe["randomBoredApesQs"] : surpriseMe["randomSimpleWikiQs"];
     return randomSet[Math.floor(Math.random() * randomSet.length)];
 }
 
 export const SurpriseMe = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [, setSearchParams] = useSearchParams();
     const { theme } = useTheme();
     const dispatch = useDispatch();
     const { dataset, q } = useSelector(({ app }) => app);
@@ -42,7 +43,7 @@ export const SurpriseMe = () => {
         <div className={`absolute pl-0 top-0 mt-[-110px] w-full flex flex-wrap flex-row-reverse gap-[10px] justify-end items-center md:flex-row md:flex-nowrap md:justify-between md:items-center text-sm`}>
             <div className={`flex gap-[10px] w-[fit-content]`}>
                 <p className={`${theme === "dark" ? "text-slate-300" : "text-slate-600"} whitespace-nowrap hidden md:block`}>Try abstract or detailed descriptions.</p>
-                {dataset !== "simplewiki" && <UploadImg />}
+                {dataset !== SIMPLEWIKI && <UploadImg />}
             </div>
             <Button
                 onClick={handleOnSurprise}

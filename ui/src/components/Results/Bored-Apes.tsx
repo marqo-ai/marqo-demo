@@ -12,6 +12,7 @@ import { ResultsLoader } from "../Loaders";
 import { PlaceholderComponent } from "../Loaders/Spinner";
 import { SearchTheWayYouThink } from "../Fillers/Search-The-Way-You-Think";
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { BOREDAPES } from "../../commons/constants";
 
 const BoredApesResults: React.FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -30,16 +31,16 @@ const BoredApesResults: React.FC = () => {
             dispatch(setDataset(indexParam))
             dispatch(postSearchDataset({
                 q: qParam,
-                index: indexParam || "boredapes"
+                index: indexParam || BOREDAPES
             }))
         } else if (results === null) {
             setSearchParams({
                 q,
-                index: "boredapes"
+                index: BOREDAPES
             })
             dispatch(postSearchDataset({
                 q,
-                index: "boredapes"
+                index: BOREDAPES
             }))
         }
     }, [])

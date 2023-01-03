@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react"
+import { Fragment } from "react"
 import { Helmet } from "react-helmet-async"
 // store
 import { useSelector } from "../store"
@@ -6,6 +6,7 @@ import { useSelector } from "../store"
 import BoredApesResults from "../components/Results/Bored-Apes"
 import SimplewikiResults from "../components/Results/Simple-Wiki"
 import { SearchHero } from "../components/Search-Hero"
+import { BOREDAPES, SIMPLEWIKI } from "../commons/constants"
 
 export const Home = () => {
     const { dataset, theme } = useSelector((state) => state.app)
@@ -26,8 +27,8 @@ export const Home = () => {
             <SearchHero />
 
             <div className={`mt-0`}>
-                {dataset === "boredapes" && <BoredApesResults />}
-                {dataset === "simplewiki" && <SimplewikiResults />}
+                {dataset === BOREDAPES && <BoredApesResults />}
+                {dataset === SIMPLEWIKI && <SimplewikiResults />}
             </div>
             {/* TODO: scroll to top */}
             {/* <FloatingControls /> */}

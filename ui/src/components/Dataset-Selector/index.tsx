@@ -8,11 +8,12 @@ import { postSearchDataset } from "../../store/thunks";
 // components
 import { CaretDown } from "../Shapes"
 import { getRandomQ } from "../Search-Hero/Surprise-Me";
+import { BOREDAPES, SIMPLEWIKI } from "../../commons/constants";
 
 
 const datasetOptions = [
-    { index: 0, value: "boredapes", title: "Bored Apes" },
-    { index: 1, value: "simplewiki", title: "Simple Wiki" },
+    { index: 0, value: BOREDAPES, title: "Bored Apes" },
+    { index: 1, value: SIMPLEWIKI, title: "Simple Wiki" },
 ]
 
 export const DatasetSelector = () => {
@@ -41,8 +42,8 @@ export const DatasetSelector = () => {
         <Button onClick={() => setOpenDropdown(!openDropdown)}
             className={`flex flex-row h-full justify-start w-[150px] text-sm p-[1em] sm:rounded-none rounded-r-lg rounded-l-none bg-transparent border-none ${theme === "dark" ? "border-y-[#00ffaa] border-r-white focus:bg-primary hover:bg-slate-800 text-white" : "focus:bg-transparent hover:bg-slate-100"}`}>
             <span className={`${theme === "dark" ? "text-white" : "text-primary"} mr-4`}>
-                {dataset === "boredapes" && "Bored Apes"}
-                {dataset === "simplewiki" && "Simple Wiki"}
+                {dataset === BOREDAPES && "Bored Apes"}
+                {dataset === SIMPLEWIKI && "Simple Wiki"}
             </span>
             <CaretDown fill={`${theme === "dark" ? "white" : "primary"}`} />
         </Button>

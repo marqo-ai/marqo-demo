@@ -19,7 +19,7 @@ type Props = {
 
 const initialState: Props = {
     theme: "light",
-    dataset: "boredapes",
+    dataset: BOREDAPES,
     results: null,
     q: DEFAULT_Q,
     isSearchingCoreAPI: false,
