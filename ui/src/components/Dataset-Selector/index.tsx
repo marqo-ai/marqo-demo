@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Button } from "react-daisyui"
 // store
 import { useDispatch, useSelector } from "../../store";
-import { DEFAULT_Q, DatasetTypes, setDataset } from "../../store/slices/app-slice";
+import { DEFAULT_Q, DatasetTypes, setDataset, setQ } from "../../store/slices/app-slice";
 import { postSearchDataset } from "../../store/thunks";
 // components
 import { CaretDown } from "../Shapes"
@@ -24,16 +24,18 @@ export const DatasetSelector = () => {
     const [openDropdown, setOpenDropdown] = useState(false);
 
     const handleOnSelect = (value: DatasetTypes) => {
-        console.log()
-        const _defaultQ = getRandomQ(value);
-        setSearchParams({
-            q: q || DEFAULT_Q,
+        let _defaultQ = getRandomQ(value);
+
+        while (_defaultQ === q) {
+            _defaultQ = getRandomQ(value);
+        }
+        const params = {
+            q: _defaultQ,
             index: value
-        })
-        dispatch(postSearchDataset({
-            q: q || DEFAULT_Q,
-            index: value
-        }));
+        }
+        setSearchParams(params)
+        dispatch(setQ(_defaultQ));
+        dispatch(postSearchDataset(params));
         dispatch(setDataset(value));
         setOpenDropdown(false);
     };

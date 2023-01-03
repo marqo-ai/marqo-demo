@@ -43,7 +43,7 @@ export const SurpriseMe = () => {
         <div className={`absolute pl-0 top-0 mt-[-110px] w-full flex flex-wrap flex-row-reverse gap-[10px] justify-end items-center md:flex-row md:flex-nowrap md:justify-between md:items-center text-sm`}>
             <div className={`flex gap-[10px] w-[fit-content]`}>
                 <p className={`${theme === "dark" ? "text-slate-300" : "text-slate-600"} whitespace-nowrap hidden md:block`}>Try abstract or detailed descriptions.</p>
-                {dataset !== SIMPLEWIKI && <UploadImg />}
+                {/* {dataset !== SIMPLEWIKI && <UploadImg />} */}
             </div>
             <Button
                 onClick={handleOnSurprise}
