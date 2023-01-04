@@ -7,7 +7,7 @@ from queue import Queue
 
 class CPUTaskSupports:
     # multithreading
-    queue = Queue(maxsize=0)
+    queue = Queue()
     thread_local = local()
     thread_num = 10
 

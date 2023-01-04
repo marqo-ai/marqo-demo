@@ -116,7 +116,7 @@ class WikiImgsAPIResource(Resource, CPUTaskSupports):
         raw_titles = data.get("titles", "")
         titles = []
         self.wiki_imgs = []
-        self.queue = Queue(maxsize=0)
+        self.queue = Queue()
 
         if raw_titles:
             titles = [_title.rstrip() for _title in raw_titles.split(",")]
@@ -124,8 +124,8 @@ class WikiImgsAPIResource(Resource, CPUTaskSupports):
         if titles:
             self.get_wiki_images(titles)
             
-            # while len(self.wiki_imgs) < 10:
-            #     pass
+            while len(self.wiki_imgs) < 10:
+                pass
 
             return {
                 "message": "success",
