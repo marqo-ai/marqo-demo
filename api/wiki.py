@@ -64,12 +64,11 @@ class WikiAPIResource(Resource):
 
 
 class WikiImgsAPIResource(Resource, CPUTaskSupports):
-    wiki_imgs = []
 
     def get(self):
         return {"message": "success"}
 
-    def get_wiki_image(self):
+    def get_wiki_image(self, img_list):
         while True:
             title = self.queue.get()
             print(title)
@@ -87,51 +86,52 @@ class WikiImgsAPIResource(Resource, CPUTaskSupports):
                 
                 if next(iter(json_data["query"]["pages"])) == "-1":
                     # Page/Article no longer exists.
-                    self.wiki_imgs.append({"url": -2, "title": title})
+                    img_list.append({"url": -2, "title": title})
                 
                 page = next(iter(json_data["query"]["pages"].values()))
                 
                 if "original" in page:
                     image_url = page["original"]["source"]
-                    self.wiki_imgs.append({"url": image_url, "title": title})
+                    img_list.append({"url": image_url, "title": title})
                 else:
                     # Page has no image
-                    self.wiki_imgs.append({"url": -2, "title": title})
+                    img_list.append({"url": -2, "title": title})
 
 
             except Exception as err:
-                self.wiki_imgs.append({"url": -2, "title": title})
+                img_list.append({"url": -2, "title": title})
             
             self.queue.task_done()
             
 
-    def get_wiki_images(self, titles):
+    def get_wiki_images(self, titles, img_list):
         self.multithread_process(
             items=titles,
-            target_function=self.get_wiki_image
+            target_function=self.get_wiki_image,
+            img_list=img_list,
         )
 
     def post(self):
         data = request.get_json()
         raw_titles = data.get("titles", "")
         titles = []
-        self.wiki_imgs = []
+        img_list = []
         self.queue = Queue()
 
         if raw_titles:
             titles = [_title.rstrip() for _title in raw_titles.split(",")]
         
         if titles:
-            self.get_wiki_images(titles)
+            self.get_wiki_images(titles, img_list)
             
-            while len(self.wiki_imgs) < 10:
+            while len(img_list) < 10:
                 pass
 
-            print(self.wiki_imgs)
+            print(img_list)
 
             return {
                 "message": "success",
-                "imgs": self.wiki_imgs,
+                "imgs": img_list,
             }
         else:
             return HTTP_500_MISSING_Q
