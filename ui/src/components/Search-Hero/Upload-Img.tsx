@@ -1,17 +1,24 @@
-import { FormEvent, Fragment, useRef } from "react"
+import { ChangeEvent, Fragment } from "react"
 import { Input } from "react-daisyui";
+// store, constants
 import { setImgFile } from "../../store/slices/app-slice";
 import { useDispatch, useSelector } from "../../store";
+import { postSearchDataset } from "../../store/thunks";
+import { BOREDAPES } from "../../commons/constants";
 
 export const UploadImg = () => {
     const { theme } = useSelector(({ app }) => app);
     const dispatch = useDispatch();
-    const inputRef = useRef<HTMLInputElement | null>(null);
 
-    const handleOnChange = (e: FormEvent<HTMLInputElement>) => {
+    const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
-        if (inputRef?.current) {
-            dispatch(setImgFile(inputRef.current.value))
+        if (e?.target?.files) {
+            dispatch(setImgFile(e.target.files[0]))
+            dispatch(postSearchDataset({
+                q: "",
+                index: BOREDAPES,
+                img: e.target.files[0],
+            }))
         }
     }
 
@@ -24,7 +31,7 @@ export const UploadImg = () => {
                             or upload an image
                         </p>
                     </div>
-                    <Input onInput={(e) => handleOnChange(e)} type={"file"} id="img-file" className={`hidden`} ref={inputRef} />
+                    <Input onChange={(e) => handleOnChange(e)} type={"file"} id="img-file" className={`hidden`} />
                 </label>
             </div>
         </div>
