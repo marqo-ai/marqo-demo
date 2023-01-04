@@ -24,5 +24,4 @@ s3 = boto3.client(
    aws_secret_access_key = os.environ.get("S3_SECRET", "")
 )
 S3_BUCKET = os.environ.get("S3_BUCKET", "")
-S3_BUCKET_ACL = "public-read"
 S3_LOCATION = f"https://{S3_BUCKET}.s3.amazonaws.com/"

@@ -5,6 +5,7 @@ from flask import request
 from flask_restful import Resource
 # local
 from api.constants import HTTP_500_MISSING_Q
+from api.helpers import BotoCoreBase, generate_key_prefix
 from config.settings import (
     IPFS_BASE,
     MARQO_API_ENDPOINT,
@@ -16,7 +17,6 @@ from config.settings import (
     BORED_APES_SEARCHABLE_ATTRS,
     # s3
     s3,
-    S3_BUCKET_ACL,
     S3_LOCATION
 )
 
@@ -45,9 +45,13 @@ class MarqoBase:
     #     else:
     #         return redirect("/")
 
-    # def upload_img_to_s3(self, img):
-    #     try:
-    #         s3.
+    def upload_img_to_s3(self, img):       
+        b = BotoCoreBase()
+        key = f"{generate_key_prefix()}-{img}"
+        print(f"uploading... {key}")
+        print(b.upload_to_bucket(key=key, filename=img))
+        print("deleting...")
+        print(b.delete_from_bucket(key=key))
         
 
     def search_simple_wiki(self, search_str=""):
