@@ -127,6 +127,8 @@ class WikiImgsAPIResource(Resource, CPUTaskSupports):
             while len(self.wiki_imgs) < 10:
                 pass
 
+            print(self.wiki_imgs)
+
             return {
                 "message": "success",
                 "imgs": self.wiki_imgs,
