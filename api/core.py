@@ -54,13 +54,29 @@ class MarqoBase:
         print(b.delete_from_bucket(key=key))
         
 
-    def search_simple_wiki(self, search_str=""):
-        return mq.index(SIMPLE_WIKI_INDEX_NAME).search(
-            q=search_str.strip(),
+    def search_simple_wiki(self, search_str="", is_img=False):
+        img_url = ""
+
+        # if is_img:
+            # b = BotoCoreBase()
+            # key = f"{generate_key_prefix()}-{img}"
+            # print(f"uploading... {key}")
+            # is_uploaded = b.upload_to_bucket(key=key, filename=img)
+            # print(is_uploaded)
+        
+        hits = mq.index(SIMPLE_WIKI_INDEX_NAME).search(
+            q=search_str.strip() if not is_img and img_url == "" else img_url,
             searchable_attributes=SIMPLE_WIKI_SEARCHABLE_ATTRS,
             attributes_to_retrieve=["title", "url"],
             limit=10,
         )
+
+        # if is_img and is_uploaded:
+
+            # print("deleting...")
+            # print(b.delete_from_bucket(key=key))
+
+        return hits
 
     def search_bored_apes(self, search_str=""):
         return mq.index(BORED_APES_INDEX_NAME).search(

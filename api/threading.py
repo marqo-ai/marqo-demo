@@ -11,7 +11,7 @@ class CPUTaskSupports:
     thread_local = local()
     thread_num = 10
 
-    def multithread_process(self, items: list[Any], target_function: Any) -> None:
+    def multithread_process(self, items, target_function) -> None:
         for item in items:
             self.queue.put(item)
 
