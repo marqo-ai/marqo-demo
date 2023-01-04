@@ -20,7 +20,7 @@ const SimpleWikiResults: React.FC = () => {
 
     useEffect(() => {
         if (results && results?.results?.hits && results?.results?.hits.length < 11) {
-            let _titles = results?.results.hits.map(({ title }) => title).join(",").trim()
+            let _titles = results?.results.hits.map(({ title }) => cleanWikiTitle(title)).join(",").trim()
 
             if (_titles !== cachedJoinedTitles && dataset === SIMPLEWIKI) {
                 // prevent re-dispatch same getWikiImgThunk data if NOT EQ
@@ -50,7 +50,7 @@ const SimpleWikiResults: React.FC = () => {
 
         if (wikiImages.length > 0) {
             let _match = wikiImages.find((item) => {
-                return item.title == title.trim()
+                return item.title === title.trim()
             })
 
             if (_match) {
