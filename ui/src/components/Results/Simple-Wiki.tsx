@@ -50,7 +50,7 @@ const SimpleWikiResults: React.FC = () => {
 
         if (wikiImages.length > 0) {
             let _match = wikiImages.find((item) => {
-                return item.title === title.trim()
+                return item.title === cleanWikiTitle(title.trim())
             })
 
             if (_match) {
