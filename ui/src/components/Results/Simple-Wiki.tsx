@@ -71,7 +71,7 @@ const SimpleWikiResults: React.FC = () => {
 
                     return <div key={key} className={`p-2 basis-2/2 md:basis-1/2 lg:basis-1/3 text-primary w-full h-full overflow-hidden ${theme === "dark" ? "text-primary" : ""}`}>
                         <div className={`${theme === "dark" ? "bg-slate-300" : "bg-slate-100"} h-full p-6 rounded-lg `}>
-                            <div className="mb-6 font-bold text-lg">{cleanWikiTitle(title)}</div>
+                            <div className="mb-6 font-bold text-lg truncate block">{cleanWikiTitle(title)}</div>
                             <div className={`flex flex-row overflow-hidden max-h-[200px] min-h-[200px]`}>
                                 <div className={`basis-3/4 flex flex-col justify-between relative pr-2`}>
                                     <p className={`pb-2`}>Highlights</p>

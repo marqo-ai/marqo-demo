@@ -46,7 +46,7 @@ const slice = createSlice({
         setCoreAPIResults: (state, { payload }) => {
             state.results = payload;
             state.isSearchingCoreAPI = false;
-            // console.log(payload.results.results.hits)
+            state.imgFile = null;
             state.apiCallCount = 0
         },
         setIsSearchingCoreAPI: (state, { payload }) => {

@@ -2,6 +2,7 @@
 export type CoreRequest = {
     q: string;
     index: string;
+    img?: File;
 };
 
 export type CoreResponse = {

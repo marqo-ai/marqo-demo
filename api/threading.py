@@ -13,7 +13,6 @@ class CPUTaskSupports:
 
     def multithread_process(self, items, target_function, img_list) -> None:
         for item in items:
-            print(item)
             self.queue.put(item)
 
         for _ in range(self.thread_num):

@@ -63,7 +63,7 @@ export const SurpriseMe = () => {
         </div>
 
         <div className={`absolute pl-4 top-0 w-full flex flex-col flex-wrap md:flex-nowrap space-y-2 md:space-y-0 text-2xl mt-[0px]`}>
-            {/* {dataset !== SIMPLEWIKI && <UploadImg />} */}
+            {dataset !== SIMPLEWIKI && <UploadImg />}
         </div>
     </div>
 }

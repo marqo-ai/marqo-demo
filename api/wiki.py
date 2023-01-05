@@ -71,7 +71,6 @@ class WikiImgsAPIResource(Resource, CPUTaskSupports):
     def get_wiki_image(self, img_list):
         while True:
             title = self.queue.get()
-            print(title)
             params = {
                 "action": "query",
                 "format": "json",
@@ -126,8 +125,6 @@ class WikiImgsAPIResource(Resource, CPUTaskSupports):
             
             while len(img_list) < 10:
                 pass
-
-            print(img_list)
 
             return {
                 "message": "success",
