@@ -59,6 +59,7 @@ const SimpleWikiResults: React.FC = () => {
             <div className="flex flex-wrap lg:justify-center animate-smoothSlideUp">
                 {results && results?.results?.hits.map(({ title, url, _highlights }, key) => {
                     const _src = getWikiSrc(title);
+                    const highlightText = Object.values(_highlights).flat().join("") || title;
 
                     return <div key={key} className={`p-2 basis-2/2 md:basis-1/2 lg:basis-1/3 text-primary w-full h-full overflow-hidden ${theme === "dark" ? "text-primary" : ""}`}>
                         <div className={`${theme === "dark" ? "bg-slate-300" : "bg-slate-100"} h-full p-6 rounded-lg `}>
@@ -66,7 +67,7 @@ const SimpleWikiResults: React.FC = () => {
                             <div className={`flex flex-row overflow-hidden max-h-[200px] min-h-[200px]`}>
                                 <div className={`basis-3/4 flex flex-col justify-between relative pr-2`}>
                                     <p className={`pb-2`}>Highlights</p>
-                                    <p className={`text-sm h-full overflow-y-scroll whitespace-normal ${theme === "dark" ? "text-slate-700" : "text-slate-800"}`}>{Object.values(_highlights).flat().join("")}</p>
+                                    <p className={`text-sm h-full overflow-y-scroll whitespace-normal ${theme === "dark" ? "text-slate-700" : "text-slate-800"}`}>{highlightText}</p>
                                     <div className={`flex space-x-6 pt-2 text-sm`}>
                                         <Link className={`underline`} target="_blank" href={cleanWikiSrc(url)}>Read article</Link>
                                     </div>

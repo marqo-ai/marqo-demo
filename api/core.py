@@ -27,47 +27,31 @@ mq = marqo.Client(api_key=MARQO_API_KEY, url=MARQO_API_ENDPOINT)
 
 class MarqoBase:
     def get_ipfs_img(self, img_id: str):
-        return f"{IPFS_BASE}/{img_id}"
-
-    
-    # def upload_file(self):
-    #     if "user_file" not in request.files:
-    #         return "No user_file key in request.files"
-
-    #     file = request.files["user_file"]
-
-    #     if file.filename == "":
-    #         return "Please select a file"
-
-    #     if file:
-    #         file.filename = secure_filename(file.filename)
-    #         output = send_to_s3(file, S3_BUCKET)
-    #         return str(output)
-
-    #     else:
-    #         return redirect("/")
-
-    def upload_img_to_s3(self, img):       
-        b = BotoCoreBase()
-        key = f"{generate_key_prefix()}-{img}"
-        print(f"uploading... {key}")
-        print(b.upload_to_bucket(key=key, filename=img))
-        print("deleting...")
-        print(b.delete_from_bucket(key=key))
-        
+        return f"{IPFS_BASE}/{img_id}"  
 
     def search_simple_wiki(self, search_str=""):
         _split_len = len(search_str.split(" "))
         _method = "TENSOR" if _split_len > 1 else "LEXICAL"
         _search_attrs = SIMPLE_WIKI_SEARCHABLE_ATTRS if _split_len > 1 else SIMPLE_WIKI_TENSOR_FIELDS
         
-        return mq.index(SIMPLE_WIKI_INDEX_NAME).search(
+        response = mq.index(SIMPLE_WIKI_INDEX_NAME).search(
             q=search_str.strip(),
             searchable_attributes=_search_attrs,
             attributes_to_retrieve=["title", "url"],
             limit=10,
             search_method=_method,
         )
+
+        if len(response["hits"]) == 0:
+            # defaults to TENSOR
+            response = mq.index(SIMPLE_WIKI_INDEX_NAME).search(
+            q=search_str.strip(),
+            searchable_attributes=_search_attrs,
+            attributes_to_retrieve=["title", "url"],
+            limit=10,
+        )
+
+        return response
 
     def search_bored_apes(self, search_str="", img=None):
         img_url = ""
