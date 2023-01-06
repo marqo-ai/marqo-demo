@@ -5,7 +5,7 @@ module.exports = {
 		'./src/**/*.{js,ts,jsx,tsx}',
 		'./public/index.html',
 	],
-	plugins: [require('daisyui')],
+	plugins: [require('daisyui'), require('@tailwindcss/line-clamp')],
 	daisyui: {
 		themes: [
 			{
@@ -51,6 +51,10 @@ module.exports = {
 			},
 			animation: {
 				smoothSlideUp: 'smoothSlideUp 1s linear',
+			},
+			lineClamp: {
+				6: '6',
+				7: '7',
 			},
 		},
 	},

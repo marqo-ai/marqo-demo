@@ -67,7 +67,8 @@ const SimpleWikiResults: React.FC = () => {
                             <div className={`flex flex-row overflow-hidden max-h-[200px] min-h-[200px]`}>
                                 <div className={`basis-3/4 flex flex-col justify-between relative pr-2`}>
                                     <p className={`pb-2`}>Highlights</p>
-                                    <p className={`text-sm h-full overflow-y-scroll whitespace-normal ${theme === "dark" ? "text-slate-700" : "text-slate-800"}`}>{highlightText}</p>
+                                    {/* text-ellipsis overflow-hidden inline-block hover:text-clip hover:whitespace-normal hover:overflow-y-scroll */}
+                                    <p className={`text-sm h-full line-clamp-[7] overflow-hidden hover:overflow-y-scroll hover:line-clamp-none ${theme === "dark" ? "text-slate-700" : "text-slate-800"}`}>{highlightText}</p>
                                     <div className={`flex space-x-6 pt-2 text-sm`}>
                                         <Link className={`underline`} target="_blank" href={cleanWikiSrc(url)}>Read article</Link>
                                     </div>
