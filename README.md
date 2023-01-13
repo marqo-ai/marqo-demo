@@ -1,5 +1,9 @@
 # [marqo-demo](https://github.com/marqo-ai/marqo-demo)
 
+<p align="center">
+    <a href="https://demo.marqo.ai/?q=smiling+with+glasses&index=boredapes"><img src="https://github.com/marqo-ai/marqo/raw/mainline/assets/demo-short.gif"></a>
+</p>
+
 ## Setting up the app for the first time
 
 1. Duplicate contents of `.env.template` to a new `.env` file and replace the values accordingly.
