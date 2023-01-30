@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { CoreResponse, WikiImageItem } from "../../api/types";
 import { BOREDAPES, SIMPLEWIKI } from "../../commons/constants";
 
-export const DEFAULT_Q = "smiling with glasses";
+export const DEFAULT_Q = "ape that just watched a terrible IMAX movie";
 
 export type DatasetTypes = typeof BOREDAPES | typeof SIMPLEWIKI;
 
