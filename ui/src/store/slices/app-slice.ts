@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { CoreResponse, WikiImageItem } from "../../api/types";
-import { BOREDAPES, SIMPLEWIKI } from "../../commons/constants";
+import { BOREDAPES, SIMPLEWIKI, ECOMMERCE } from "../../commons/constants";
 
-export const DEFAULT_Q = "smiling with glasses";
+export const DEFAULT_Q = "Some shoes that I can run in";
 
-export type DatasetTypes = typeof BOREDAPES | typeof SIMPLEWIKI;
+export type DatasetTypes = typeof BOREDAPES | typeof SIMPLEWIKI | typeof ECOMMERCE;
 
 type Props = {
     theme: string;
@@ -20,7 +20,7 @@ type Props = {
 
 const initialState: Props = {
     theme: "light",
-    dataset: BOREDAPES,
+    dataset: ECOMMERCE,
     results: null,
     q: DEFAULT_Q,
     isSearchingCoreAPI: false,

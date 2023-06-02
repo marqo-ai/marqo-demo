@@ -12,9 +12,9 @@ import { ResultsLoader } from "../Loaders";
 import { PlaceholderComponent } from "../Loaders/Spinner";
 import { SearchTheWayYouThink } from "../Fillers/Search-The-Way-You-Think";
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import { BOREDAPES } from "../../commons/constants";
+import { ECOMMERCE } from "../../commons/constants";
 
-const BoredApesResults: React.FC = () => {
+const ECommerceResults: React.FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const dispatch = useDispatch();
     const { q, results, isSearchingCoreAPI } = useSelector(({ app }) => app);
@@ -22,7 +22,7 @@ const BoredApesResults: React.FC = () => {
     const [openImgModal, setOpenImgModal] = useState(false);
     const [modalImg, setModalImg] = useState("");
     const [isLoaded, setIsLoaded] = useState(false);
-
+    
     const getTileStyles = (key: number, hitsArrayLength: number) => {
         if (["2xl", "xl", "lg", "md"].includes(screen)) {
             return `${((key % 7 == 0 && key % 2 == 0) || (key % 7 == 3 && key % 2 == 0)) && key <= hitsArrayLength - 3 ? "large-tile" : "tile"}`
@@ -53,25 +53,26 @@ const BoredApesResults: React.FC = () => {
                 height={"100%"}
                 className={`min-h-full min-w-full`}
                 placeholder={<PlaceholderComponent />}
-                alt={`ape-modal`} />
+                alt={`ecommerce-modal`} />
         </Modal>
 
         {!isSearchingCoreAPI && results?.results && results?.results?.hits && (
             <div className={`animate-smoothSlideUp imgResultsWrapper grid gap-[4px] ${["2xl", "xl", "lg", "md"].includes(screen) ? "grid-cols-5" : "grid-cols-2"}`}>
-
                 {results?.results?.hits.map(({ image }: any, key: number, hitsArray: any[]) => {
-                    return <div key={`ape-${key}`} onClick={() => handleOnClickImg(image)} className={`cursor-pointer relative flex min-w-full min-h-full hover:scale-[.95] transition ease-in-out ${getTileStyles(key, hitsArray.length)}`}>
-                        <LazyLoadImage
-                            effect="blur"
-                            src={image}
-                            width={"100%"}
-                            height={"100%"}
-                            afterLoad={() => handleOnLoad(key)}
-                            placeholder={<PlaceholderComponent />}
-                            className={`min-h-[8em] min-w-[8em] lg:min-h-[10em] lg:min-w-[10em]`}
-                            alt={`ape-${key}`}
-                        />
-                    </div>
+                    return (
+                        <div key={`ecommerce-${key}`} onClick={() => handleOnClickImg(image)} className={`cursor-pointer relative flex min-w-full min-h-full hover:scale-[.95] transition ease-in-out ${getTileStyles(key, hitsArray.length)}`}>
+                            <LazyLoadImage
+                                effect="blur"
+                                src={image}
+                                width={"100%"}
+                                height={"100%"}
+                                afterLoad={() => handleOnLoad(key)}
+                                placeholder={<PlaceholderComponent />}
+                                className={`rounded-lg min-h-[8em] min-w-[8em] lg:min-h-[10em] lg:min-w-[10em]`}
+                                alt={`ecommerce-${key}`}
+                            />
+                        </div>
+                    );
                 })}
 
                 {isLoaded && <SearchTheWayYouThink />}
@@ -80,4 +81,4 @@ const BoredApesResults: React.FC = () => {
     </div>
 }
 
-export default trackWindowScroll(BoredApesResults);
+export default trackWindowScroll(ECommerceResults);
