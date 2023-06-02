@@ -11,7 +11,7 @@ function getSizeInMegabytes(raw: number) {
 }
 
 export const UploadImg = () => {
-    const { theme } = useSelector(({ app }) => app);
+    const { theme, dataset } = useSelector(({ app }) => app);
     const dispatch = useDispatch();
 
     const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +21,7 @@ export const UploadImg = () => {
                 dispatch(setImgFile(true))
                 dispatch(postSearchDataset({
                     q: "",
-                    index: BOREDAPES,
+                    index: dataset,
                     img: e.target.files[0],
                 }))
             } else if (!ACCEPTED_FILE_TYPES.includes(e?.target?.files[0].type)) {

@@ -1,7 +1,7 @@
 import React from "react"
 import { getRandomQ } from "./Surprise-Me";
 import surpriseMe from "../../data/surpriseMe.json";
-import { BOREDAPES, SIMPLEWIKI } from "../../commons/constants";
+import { BOREDAPES, SIMPLEWIKI, ECOMMERCE } from "../../commons/constants";
 
 
 describe("Surprise-Me", () => {
@@ -11,5 +11,8 @@ describe("Surprise-Me", () => {
 
         q = getRandomQ(SIMPLEWIKI);
         expect(surpriseMe["randomSimpleWikiQs"].includes(q)).toBe(true)
+        
+        q = getRandomQ(ECOMMERCE);
+        expect(surpriseMe["randomECommerceQs"].includes(q)).toBe(true)
     })
 });

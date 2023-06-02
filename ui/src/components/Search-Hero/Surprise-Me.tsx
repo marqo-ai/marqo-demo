@@ -8,10 +8,21 @@ import { DatasetTypes, setQ } from "../../store/slices/app-slice";
 // data
 import surpriseMe from "../../data/surpriseMe.json";
 import { UploadImg } from "./Upload-Img";
-import { BOREDAPES, SIMPLEWIKI } from "../../commons/constants";
+import { BOREDAPES, SIMPLEWIKI, ECOMMERCE } from "../../commons/constants";
 
 export const getRandomQ = (dataset: DatasetTypes) => {
-    let randomSet = dataset === BOREDAPES ? surpriseMe["randomBoredApesQs"] : surpriseMe["randomSimpleWikiQs"];
+    let randomSet: string[] = [];
+    switch (dataset)  {
+        case BOREDAPES:
+            randomSet = surpriseMe["randomBoredApesQs"];
+            break;
+        case SIMPLEWIKI:
+            randomSet = surpriseMe["randomSimpleWikiQs"];
+            break;
+        case ECOMMERCE:
+            randomSet = surpriseMe["randomECommerceQs"];
+            break;
+    }
     return randomSet[Math.floor(Math.random() * randomSet.length)];
 }
 

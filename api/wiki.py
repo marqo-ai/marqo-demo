@@ -4,6 +4,7 @@ import requests
 from flask import request
 from flask_restful import Resource
 from queue import Queue
+
 # local
 from api.threading import CPUTaskSupports
 from api.constants import HTTP_500_MISSING_Q
@@ -25,18 +26,18 @@ class WikiAPIResource(Resource):
             "format": "json",
             "titles": title,
             "prop": "pageimages",
-            "piprop": "original"
+            "piprop": "original",
         }
- 
+
         response = requests.get("https://wikipedia.org/w/api.php", params=params)
         json_data = response.json()
-        
+
         if next(iter(json_data["query"]["pages"])) == "-1":
             # Page/Article no longer exists.
             return -1
-        
+
         page = next(iter(json_data["query"]["pages"].values()))
-        
+
         if "original" in page:
             image_url = page["original"]["source"]
             return image_url
@@ -47,7 +48,7 @@ class WikiAPIResource(Resource):
     def post(self):
         data = request.get_json()
         title = data.get("title", "")
-        
+
         if title:
             return {
                 "message": "success",
@@ -58,7 +59,6 @@ class WikiAPIResource(Resource):
 
 
 class WikiImgsAPIResource(Resource, CPUTaskSupports):
-
     def get(self):
         return {"message": "success"}
 
@@ -70,19 +70,21 @@ class WikiImgsAPIResource(Resource, CPUTaskSupports):
                 "format": "json",
                 "titles": title,
                 "prop": "pageimages",
-                "piprop": "original"
+                "piprop": "original",
             }
 
             try:
-                response = requests.get("https://wikipedia.org/w/api.php", params=params)
+                response = requests.get(
+                    "https://wikipedia.org/w/api.php", params=params
+                )
                 json_data = response.json()
-                
+
                 if next(iter(json_data["query"]["pages"])) == "-1":
                     # Page/Article no longer exists.
                     img_list.append({"url": -2, "title": title})
-                
+
                 page = next(iter(json_data["query"]["pages"].values()))
-                
+
                 if "original" in page:
                     image_url = page["original"]["source"]
                     img_list.append({"url": image_url, "title": title})
@@ -90,18 +92,14 @@ class WikiImgsAPIResource(Resource, CPUTaskSupports):
                     # Page has no image
                     img_list.append({"url": -2, "title": title})
 
-
             except Exception as err:
                 img_list.append({"url": -2, "title": title})
-            
+
             self.queue.task_done()
-            
 
     def get_wiki_images(self, titles, img_list):
         self.multithread_process(
-            items=titles,
-            target_function=self.get_wiki_image,
-            img_list=img_list,
+            items=titles, target_function=self.get_wiki_image, img_list=img_list,
         )
 
     def post(self):
@@ -113,7 +111,7 @@ class WikiImgsAPIResource(Resource, CPUTaskSupports):
 
         if raw_titles:
             titles = [_title.rstrip() for _title in raw_titles.split(",")]
-        
+
         if titles:
             self.get_wiki_images(titles, img_list)
 

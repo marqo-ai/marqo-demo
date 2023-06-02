@@ -1,4 +1,5 @@
 from typing import Any
+
 # multithreading
 from threading import Thread, local
 from requests.sessions import Session
@@ -16,7 +17,7 @@ class CPUTaskSupports:
             self.queue.put(item)
 
         for _ in range(self.thread_num):
-            t_worker = Thread(target=target_function, args=(img_list, ))
+            t_worker = Thread(target=target_function, args=(img_list,))
             t_worker.daemon = True
             t_worker.start()
 

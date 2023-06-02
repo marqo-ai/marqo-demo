@@ -7,6 +7,9 @@ const SIMPLE_WIKI_IMG_PLACEHOLDER = "simplewiki.png"
 
 export const BOREDAPES = "boredapes";
 export const SIMPLEWIKI = "simplewiki";
+export const ECOMMERCE = "ecommerce";
+
+export const AVAILABLE_INDEXES = [ECOMMERCE, BOREDAPES, SIMPLEWIKI]
 
 export const ACCEPTED_FILE_TYPES = ["image/jpeg", "image/png"];
 export const MAX_FILE_SIZE_IN_MEGABYTES = 2000;

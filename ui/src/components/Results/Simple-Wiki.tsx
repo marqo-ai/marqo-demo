@@ -10,7 +10,7 @@ import { PlaceholderComponent } from "../Loaders/Spinner";
 import RawLogo from "../../assets/simplewiki.png"
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { SIMPLEWIKI } from "../../commons/constants";
-
+import { CoreResponse, WikiImageItem } from "../../api/types";
 
 const SimpleWikiResults: React.FC = () => {
     const { dataset, results, isSearchingCoreAPI, theme, wikiImages } = useSelector(({ app }) => app);
@@ -19,7 +19,7 @@ const SimpleWikiResults: React.FC = () => {
 
     useEffect(() => {
         if (results && results?.results?.hits && results?.results?.hits.length < 11) {
-            let _titles = results?.results.hits.map(({ title }) => title).join(",").trim()
+            let _titles = results?.results.hits.map(({ title }: any) => title).join(",").trim()
 
             if (_titles !== cachedJoinedTitles && dataset === SIMPLEWIKI) {
                 setCachedJoinedTitles(_titles);
@@ -40,7 +40,7 @@ const SimpleWikiResults: React.FC = () => {
         let _src = ""
 
         if (wikiImages.length > 0) {
-            let _match = wikiImages.find((item) => {
+            let _match = wikiImages.find((item: WikiImageItem) => {
                 return item.title === title.trim()
             })
 
@@ -57,7 +57,7 @@ const SimpleWikiResults: React.FC = () => {
 
         {!isSearchingCoreAPI && (
             <div className="flex flex-wrap lg:justify-center animate-smoothSlideUp">
-                {results && results?.results?.hits.map(({ title, url, _highlights }, key) => {
+                {results && results?.results?.hits.map(({ title, url, _highlights }: any, key: number) => {
                     const _src = getWikiSrc(title);
                     const highlightText = Object.values(_highlights).flat().join("") || title;
 
