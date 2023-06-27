@@ -28,7 +28,8 @@ export default function Header() {
         {theme === "dark" && <MoonIcon className="h-6 w-6 fill-secondary stroke-secondary" />}
     </Button>
 
-    return <header className={`navbar bg-primary container-fluid w-screen px-4 lg:pl-12 lg:pr-16 drop-shadow-3xl fixed z-20`}>
+    return (<header className={`navbar bg-primary container-fluid w-screen px-4 lg:pl-12 lg:pr-16 drop-shadow-3xl fixed z-20`}>
+        
         {/* <Button onClick={() => { setIsBurgerMenuClicked(!isBurgerMenuClicked) }} className="lg:hidden mr-6 px-0 bg-transparent hover:bg-transparent hover:border-none">
             <Bars3Icon className={`h-6 w-6 stroke-[3px] stroke-secondary`} />
         </Button> */}
@@ -60,6 +61,6 @@ export default function Header() {
                     </li>
                 })}
             </ul>
-        </nav> */}
-    </header>
+            </nav> */}
+    </header>)
 }

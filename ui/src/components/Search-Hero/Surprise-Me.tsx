@@ -4,7 +4,7 @@ import { FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton } 
 // store
 import { useDispatch, useSelector } from "../../store";
 import { postSearchDataset } from "../../store/thunks";
-import { DatasetTypes, setQ } from "../../store/slices/app-slice";
+import { DatasetTypes, setQ, setPosQ, setNegQ } from "../../store/slices/app-slice";
 // data
 import surpriseMe from "../../data/surpriseMe.json";
 import { UploadImg } from "./Upload-Img";
@@ -30,7 +30,7 @@ export const SurpriseMe = () => {
     const [, setSearchParams] = useSearchParams();
     const { theme } = useTheme();
     const dispatch = useDispatch();
-    const { dataset, q } = useSelector(({ app }) => app);
+    const { dataset, q, posQ, negQ } = useSelector(({ app }) => app);
 
     const handleOnSurprise = () => {
         let randomQ = getRandomQ(dataset)
@@ -42,12 +42,22 @@ export const SurpriseMe = () => {
         dispatch(setQ(randomQ))
         setSearchParams({
             q: randomQ,
+            posQ: posQ != null ? posQ : "", 
+            negQ: negQ != null ? negQ : "",
             index: dataset
         })
         dispatch(postSearchDataset({
             q: randomQ,
+            posQ: posQ,
+            negQ: negQ,
             index: dataset
         }))
+    }
+
+    const handleOnReset = () => {
+        dispatch(setPosQ(null))
+        dispatch(setNegQ(null))
+        handleOnSurprise()
     }
 
     return <div className={`relative w-full`}>
@@ -57,6 +67,12 @@ export const SurpriseMe = () => {
                 <Button
                     onClick={handleOnSurprise}
                     className={`${theme === "dark" ? "bg-slate-700 text-slate-100 hover:bg-slate-600" : "bg-slate-100 text-slate-700 hover:bg-slate-200"} w-[fit-content] md:w-auto font-medium border-none border-2 border-slate-700 px-2 btn-sm text-xs capitalize`}>Surprise me</Button>
+                <Button
+                    onClick={handleOnReset}
+                    className={`${theme === "dark" ? "bg-slate-700 text-slate-100 hover:bg-slate-600" : "bg-slate-100 text-slate-700 hover:bg-slate-200"} w-[fit-content] md:w-auto font-medium border-none border-2 border-slate-700 px-2 btn-sm text-xs capitalize`}
+                >
+                    Reset
+                </Button>
                 <div className={`${theme === "dark" ? "text-slate-100" : "text-slate-700"} flex items-center gap-[10px] border-none bg-transparent font-medium p-0 btn-sm justify-end h-[fit-content]`}>
                     {/* <span className={`flex self-center hidden md:block`}>Share this awesomeness!</span> */}
                     <Tooltip message={"Share this awesomeness!"} color="primary" className={`flex self-center`}>

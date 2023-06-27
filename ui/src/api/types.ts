@@ -1,6 +1,8 @@
 
 export type CoreRequest = {
     q: string;
+    posQ?: string | null;
+    negQ?: string | null;
     index: string;
     img?: File;
 };

@@ -4,7 +4,7 @@ import { Input } from "react-daisyui";
 import { setImgFile } from "../../store/slices/app-slice";
 import { useDispatch, useSelector } from "../../store";
 import { postSearchDataset } from "../../store/thunks";
-import { ACCEPTED_FILE_TYPES, BOREDAPES, MAX_FILE_SIZE_IN_MEGABYTES } from "../../commons/constants";
+import { ACCEPTED_FILE_TYPES, MAX_FILE_SIZE_IN_MEGABYTES } from "../../commons/constants";
 
 function getSizeInMegabytes(raw: number) {
     return raw / 1024;
