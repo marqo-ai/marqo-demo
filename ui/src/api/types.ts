@@ -1,17 +1,16 @@
-
 export type CoreRequest = {
-    q: string;
-    posQ?: string | null;
-    negQ?: string | null;
-    index: string;
-    img?: File;
+  q: string;
+  posQ?: string | null;
+  negQ?: string | null;
+  index: string;
+  img?: File;
 };
 
 export type CoreResponse = {
-    message: string;
-    results: {
-        hits: any[];
-    };
+  message: string;
+  results: {
+    hits: any[];
+  };
 };
 // export type GetWikiImgThunkRequest = {
 //     title: string;
@@ -22,10 +21,10 @@ export type CoreResponse = {
 //     img: string;
 // }
 export type WikiImageItem = {
-    url: string;
-    title: string;
-}
+  url: string;
+  title: string;
+};
 export type GetWikiImagesResponse = {
-    message: string;
-    imgs: WikiImageItem[];
-}
+  message: string;
+  imgs: WikiImageItem[];
+};

@@ -1,37 +1,37 @@
 {
-	"randomBoredApesQs": [
-		"singing ape",
-		"an ape with a halo on an orange background eating pizza",
-		"a white ape wearing a hawaiian shirt smoking a joint with an eye patch",
-		"a cool ape in a biker gang",
-		"a blue ape with a cowboy hat wearing a skeleton t-shirt",
-		"a ship captain that's about to sneeze",
-		"hipster ape that just told the corniest joke",
-		"no one showed up to his birthday party",
-		"a pizza-eating angel ape",
-		"won the lottery",
-		"ape with superpowers"
-	],
-	"randomSimpleWikiQs": [
-		"what do people eat for breakfast",
-		"what defines a planet",
-		"what is the density of arsenic",
-		"what is isaac newton known for",
-		"who invented the light bulb",
-		"do pumas purr like cats"
-	],
-	"randomECommerceQs": [
-		"orange cocktail dress",
-		"I am looking for a backpack to take on a hike",
-		"Give me a coat that looks like it is from The Matrix",
-		"Looking for something to tell the time",
-		"blue bag with gold clasp",
-		"I have a gala coming up soon",
-		"I love bold colors and I am looking for a handbag",
-		"Women's jacket to wear to my office job",
-		"Some shoes that I can skateboard in",
-		"90s vaporwave sunglasses",
-		"leather wallet",
-		"gold cuff links with a blue gem stone"
-	]
+    "randomBoredApesQs": [
+        "singing ape",
+        "an ape with a halo on an orange background eating pizza",
+        "a white ape wearing a hawaiian shirt smoking a joint with an eye patch",
+        "a cool ape in a biker gang",
+        "a blue ape with a cowboy hat wearing a skeleton t-shirt",
+        "a ship captain that's about to sneeze",
+        "hipster ape that just told the corniest joke",
+        "no one showed up to his birthday party",
+        "a pizza-eating angel ape",
+        "won the lottery",
+        "ape with superpowers"
+    ],
+    "randomSimpleWikiQs": [
+        "what do people eat for breakfast",
+        "what defines a planet",
+        "what is the density of arsenic",
+        "what is isaac newton known for",
+        "who invented the light bulb",
+        "do pumas purr like cats"
+    ],
+    "randomECommerceQs": [
+        "orange cocktail dress",
+        "I am looking for a backpack to take on a hike",
+        "Give me a coat that looks like it is from The Matrix",
+        "Looking for something to tell the time",
+        "blue bag with gold clasp",
+        "I have a gala coming up soon",
+        "I love bold colors and I am looking for a handbag",
+        "Women's jacket to wear to my office job",
+        "Some shoes that I can skateboard in",
+        "90s vaporwave sunglasses",
+        "leather wallet",
+        "gold cuff links with a blue gem stone"
+    ]
 }
