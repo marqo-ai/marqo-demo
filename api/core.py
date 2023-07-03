@@ -7,7 +7,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 # local
 from api.constants import HTTP_500_MISSING_Q
-from api.helpers import BotoCoreBase, generate_key_prefix
+from api.helpers import BotoCoreBase, generate_key_prefix, construct_query
 from config.settings import (
     IPFS_BASE,
     MARQO_API_ENDPOINT,
@@ -68,6 +68,8 @@ class MarqoBase:
     def search_image(
         self,
         search_str="",
+        pos_q=None,
+        neg_q=None,
         img=None,
         index_name: str = "",
         searchable_attrs: List[str] = None,
@@ -83,7 +85,9 @@ class MarqoBase:
                 img_url = f"{S3_LOCATION}{key}"
 
         hits = mq.index(index_name).search(
-            q=search_str.strip() if img is None or img_url == "" else img_url,
+            q=construct_query(search_str, pos_q, neg_q)
+            if img is None or img_url == ""
+            else img_url,
             searchable_attributes=searchable_attrs,
             show_highlights=False,
             limit=30,
@@ -134,14 +138,22 @@ class CoreAPIResource(Resource, MarqoBase):
             data = request.get_json()
 
         q = data.get("q", "")
+        pos_q = data.get("posQ")
+        neg_q = data.get("negQ")
         index = data.get("index", "")
-        
+
         if index in self.core_index_configurations:
             search_settings = self.core_index_configurations[index]
             if search_settings["type"] == "text":
                 results = self.search_text(search_str=q, **search_settings["settings"])
             else:
-                results = self.search_image(search_str=q, img=img, **search_settings["settings"])
+                results = self.search_image(
+                    search_str=q,
+                    pos_q=pos_q,
+                    neg_q=neg_q,
+                    img=img,
+                    **search_settings["settings"],
+                )
             return {"message": "success", "results": results}
         else:
             return HTTP_500_MISSING_Q

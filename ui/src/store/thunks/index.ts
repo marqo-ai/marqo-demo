@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { setCoreAPIResults, setIsSearchingCoreAPI, setWikiImages, } from "../slices/app-slice";
 import { getWikiImages, searchAPI } from "../../api"
-import { CoreRequest, } from "../../api/types";
+import { CoreRequest } from "../../api/types";
 
 export const postSearchDataset = createAsyncThunk("postSearchDataset", async (params: CoreRequest, { dispatch }) => {
     try {

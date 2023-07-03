@@ -10,7 +10,7 @@ import { PlaceholderComponent } from "../Loaders/Spinner";
 import RawLogo from "../../assets/simplewiki.png"
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { SIMPLEWIKI } from "../../commons/constants";
-import { CoreResponse, WikiImageItem } from "../../api/types";
+import { WikiImageItem } from "../../api/types";
 
 const SimpleWikiResults: React.FC = () => {
     const { dataset, results, isSearchingCoreAPI, theme, wikiImages } = useSelector(({ app }) => app);

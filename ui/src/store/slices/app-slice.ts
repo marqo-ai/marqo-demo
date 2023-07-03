@@ -11,6 +11,8 @@ type Props = {
     dataset: DatasetTypes;
     results: CoreResponse | null;
     q: string;
+    posQ: string | null;
+    negQ: string | null;
     isSearchingCoreAPI: boolean;
     wikiImgs: string[];
     imgFile: null | boolean;
@@ -23,6 +25,8 @@ const initialState: Props = {
     dataset: ECOMMERCE,
     results: null,
     q: DEFAULT_Q,
+    posQ: null,
+    negQ: null,
     isSearchingCoreAPI: false,
     wikiImgs: [],
     imgFile: null,
@@ -42,6 +46,12 @@ const slice = createSlice({
         },
         setQ: (state, { payload }) => {
             state.q = payload;
+        },
+        setPosQ: (state, { payload }) => {
+            state.posQ = payload;
+        },
+        setNegQ: (state, { payload }) => {
+            state.negQ = payload;
         },
         setCoreAPIResults: (state, { payload }) => {
             state.results = payload;
@@ -74,6 +84,8 @@ const slice = createSlice({
 
 export const {
     setQ,
+    setPosQ,
+    setNegQ,
     setTheme,
     setImgFile,
     setDataset,

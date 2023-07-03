@@ -1,23 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Modal } from "react-daisyui";
-import { useSearchParams } from "react-router-dom";
 import { LazyLoadImage, trackWindowScroll } from "react-lazy-load-image-component";
 // store, thunks, slices, hook
-import { useDispatch, useSelector } from "../../store";
-import { postSearchDataset } from "../../store/thunks";
-import { setDataset, setQ } from "../../store/slices/app-slice";
+import { useSelector } from "../../store";
 import { useScreen } from "../../hooks/useScreen";
 // components
 import { ResultsLoader } from "../Loaders";
 import { PlaceholderComponent } from "../Loaders/Spinner";
 import { SearchTheWayYouThink } from "../Fillers/Search-The-Way-You-Think";
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import { ECOMMERCE } from "../../commons/constants";
 
 const ECommerceResults: React.FC = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const dispatch = useDispatch();
-    const { q, results, isSearchingCoreAPI } = useSelector(({ app }) => app);
+    const { results, isSearchingCoreAPI } = useSelector(({ app }) => app);
     const { screen } = useScreen();
     const [openImgModal, setOpenImgModal] = useState(false);
     const [modalImg, setModalImg] = useState("");
@@ -25,7 +19,7 @@ const ECommerceResults: React.FC = () => {
     
     const getTileStyles = (key: number, hitsArrayLength: number) => {
         if (["2xl", "xl", "lg", "md"].includes(screen)) {
-            return `${((key % 7 == 0 && key % 2 == 0) || (key % 7 == 3 && key % 2 == 0)) && key <= hitsArrayLength - 3 ? "large-tile" : "tile"}`
+            return `${((key % 7 === 0 && key % 2 === 0) || (key % 7 === 3 && key % 2 === 0)) && key <= hitsArrayLength - 3 ? "large-tile" : "tile"}`
         } else {
             return `col-span-1`
         }
@@ -60,7 +54,7 @@ const ECommerceResults: React.FC = () => {
             <div className={`animate-smoothSlideUp imgResultsWrapper grid gap-[4px] ${["2xl", "xl", "lg", "md"].includes(screen) ? "grid-cols-5" : "grid-cols-2"}`}>
                 {results?.results?.hits.map(({ image }: any, key: number, hitsArray: any[]) => {
                     return (
-                        <div key={`ecommerce-${key}`} onClick={() => handleOnClickImg(image)} className={`cursor-pointer relative flex min-w-full min-h-full hover:scale-[.95] transition ease-in-out ${getTileStyles(key, hitsArray.length)}`}>
+                        <div key={`ecommerce-${key}`} onClick={() => handleOnClickImg(image)} className={`cursor-pointer relative flex min-w-full min-h-full hover:scale-[.98] transition ease-in-out ${getTileStyles(key, hitsArray.length)}`}>
                             <LazyLoadImage
                                 effect="blur"
                                 src={image}
