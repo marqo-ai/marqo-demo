@@ -3,7 +3,6 @@ import json
 
 from flask import request
 from flask_restful import Resource
-from werkzeug.datastructures import ImmutableMultiDict
 
 # local
 from api.constants import HTTP_500_MISSING_Q
@@ -12,7 +11,6 @@ from config.settings import (
     IPFS_BASE,
     MARQO_API_ENDPOINT,
     MARQO_API_KEY,
-    S3_BUCKET,
     SIMPLE_WIKI_INDEX_NAME,
     BORED_APES_INDEX_NAME,
     E_COMMERCE_INDEX_NAME,
@@ -20,8 +18,6 @@ from config.settings import (
     BORED_APES_SEARCHABLE_ATTRS,
     E_COMMERCE_SEARCHABLE_ATTRS,
     SIMPLE_WIKI_TENSOR_FIELDS,
-    # s3
-    s3,
     S3_LOCATION,
 )
 
@@ -50,7 +46,7 @@ class MarqoBase:
             q=search_str.strip(),
             searchable_attributes=_search_attrs,
             attributes_to_retrieve=attributes_to_retrieve,
-            limit=10,
+            limit=20,
             search_method=_method,
         )
 
@@ -60,7 +56,7 @@ class MarqoBase:
                 q=search_str.strip(),
                 searchable_attributes=_search_attrs,
                 attributes_to_retrieve=attributes_to_retrieve,
-                limit=10,
+                limit=20,
             )
 
         return response
