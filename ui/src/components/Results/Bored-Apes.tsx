@@ -86,7 +86,6 @@ const BoredApesResults: React.FC = () => {
               </div>
             );
           })}
-
           {isLoaded && <SearchTheWayYouThink />}
         </div>
       )}
