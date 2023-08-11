@@ -1,59 +1,15 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-daisyui';
 import { LazyLoadImage, trackWindowScroll } from 'react-lazy-load-image-component';
 // store, thunks, slices, hook
-import { useDispatch, useSelector } from '../../store';
-import { getWikiImagesThunk } from '../../store/thunks';
+import { useSelector } from '../../store';
 // components
 import { ResultsLoader } from '../Loaders';
 import { PlaceholderComponent } from '../Loaders/Spinner';
 import RawLogo from '../../assets/simplewiki.png';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import { SIMPLEWIKI } from '../../commons/constants';
-import { WikiImageItem } from '../../api/types';
 
 const SimpleWikiResults: React.FC = () => {
-  const { dataset, results, isSearchingCoreAPI, theme, wikiImages } = useSelector(({ app }) => app);
-  const [cachedJoinedTitles, setCachedJoinedTitles] = useState('');
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (results && results?.results?.hits && results?.results?.hits.length < 11) {
-      let _titles = results?.results.hits
-        .map(({ title }: any) => title)
-        .join(',')
-        .trim();
-
-      if (_titles !== cachedJoinedTitles && dataset === SIMPLEWIKI) {
-        setCachedJoinedTitles(_titles);
-        dispatch(getWikiImagesThunk(_titles));
-      }
-    }
-  }, [results]);
-
-  const cleanWikiSrc = (src: string) => {
-    if (src) {
-      return src.replace('http://s.wikipedia.org/wiki', 'https://wikipedia.org/wiki');
-    }
-    return src;
-  };
-
-  const getWikiSrc = (title: string) => {
-    let _src = '';
-
-    if (wikiImages.length > 0) {
-      let _match = wikiImages.find((item: WikiImageItem) => {
-        return item.title === title.trim();
-      });
-
-      if (_match) {
-        _src = _match.url;
-      }
-    }
-
-    return _src;
-  };
-
+  const { dataset, results, isSearchingCoreAPI, theme } = useSelector(({ app }) => app);
   return (
     <div className="results px-2">
       {isSearchingCoreAPI && <ResultsLoader />}
@@ -61,8 +17,7 @@ const SimpleWikiResults: React.FC = () => {
       {!isSearchingCoreAPI && (
         <div className="flex flex-wrap lg:justify-center animate-smoothSlideUp">
           {results &&
-            results?.results?.hits.map(({ title, url, _highlights }: any, key: number) => {
-              const _src = getWikiSrc(title);
+            results?.results?.hits.map(({ title, url, image_url, _highlights }: any, key: number) => {
               const highlightText = Object.values(_highlights).flat().join('') || title;
 
               return (
@@ -90,7 +45,7 @@ const SimpleWikiResults: React.FC = () => {
                           {highlightText}
                         </p>
                         <div className={`flex space-x-6 pt-2 text-sm`}>
-                          <Link className={`underline`} target="_blank" href={cleanWikiSrc(url)}>
+                          <Link className={`underline`} target="_blank" href={url}>
                             Read article
                           </Link>
                         </div>
@@ -106,7 +61,7 @@ const SimpleWikiResults: React.FC = () => {
                           height={'100%'}
                           effect="blur"
                           placeholder={<PlaceholderComponent />}
-                          src={`${typeof _src === 'string' ? _src : RawLogo} `}
+                          src={image_url || RawLogo}
                           alt={title}
                           className={`h-auto w-full`}
                         />

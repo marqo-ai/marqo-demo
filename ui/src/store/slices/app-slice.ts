@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CoreResponse, WikiImageItem } from '../../api/types';
+import { CoreResponse } from '../../api/types';
 import { BOREDAPES, SIMPLEWIKI, ECOMMERCE } from '../../commons/constants';
 
 export const DEFAULT_Q = 'Some shoes that I can run in';
@@ -14,10 +14,8 @@ type Props = {
   posQ: string | null;
   negQ: string | null;
   isSearchingCoreAPI: boolean;
-  wikiImgs: string[];
   imgFile: null | boolean;
   apiCallCount: number;
-  wikiImages: WikiImageItem[];
 };
 
 const initialState: Props = {
@@ -28,10 +26,8 @@ const initialState: Props = {
   posQ: null,
   negQ: null,
   isSearchingCoreAPI: false,
-  wikiImgs: [],
   imgFile: null,
   apiCallCount: 0,
-  wikiImages: [],
 };
 
 const slice = createSlice({
@@ -64,14 +60,6 @@ const slice = createSlice({
       state.dataset = payload;
       state.apiCallCount += 1;
     },
-    setWikiImages: (state, { payload }) => {
-      state.wikiImages = payload;
-    },
-    updateWikiImg: (state, { payload }) => {
-      let _wikiImgs = [...state.wikiImgs];
-      _wikiImgs[payload.hitIndex] = payload.img;
-      state.wikiImgs = _wikiImgs;
-    },
     setImgFile: (state, { payload }) => {
       state.imgFile = payload;
       state.q = '';
@@ -89,8 +77,6 @@ export const {
   setTheme,
   setImgFile,
   setDataset,
-  setWikiImages,
-  updateWikiImg,
   setCoreAPIResults,
   setIsSearchingCoreAPI,
   resetAPICallCount,

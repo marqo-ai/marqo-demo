@@ -117,7 +117,7 @@ class CoreAPIResource(Resource, MarqoBase):
                 "searchable_attrs": SIMPLE_WIKI_SEARCHABLE_ATTRS,
                 "tensor_fields": SIMPLE_WIKI_TENSOR_FIELDS,
                 "index_name": SIMPLE_WIKI_INDEX_NAME,
-                "attributes_to_retrieve": ["title", "url"],
+                "attributes_to_retrieve": ["title", "url", "image_url"],
             },
         },
     }
