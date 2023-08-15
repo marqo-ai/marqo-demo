@@ -80,7 +80,7 @@ export const SearchBar = () => {
               theme === 'dark' ? '' : 'text-primary'
             }`}
           />
-          {dataset !== SIMPLEWIKI && !mobile ? (
+          {!mobile ? (
             <>
               <div className={'border-2 bg-gray-400 h-3/4 m-auto rounded-lg'} />
               <input

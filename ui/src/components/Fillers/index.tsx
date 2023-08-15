@@ -1,6 +1,6 @@
 import { Link, useTheme } from 'react-daisyui';
 import { MarqoWLink } from '../Logo/MarqoWLink';
-import { JOIN_CLOUD_BETA_TYPEFORM } from '../../commons/constants';
+import { JOIN_THE_CLOUD } from '../../commons/constants';
 
 export const TryMarqo = () => {
   const { theme } = useTheme();
@@ -26,7 +26,7 @@ export const TryMarqo = () => {
               ? 'text-primary bg-secondary hover:bg-primary hover:text-white'
               : 'text-slate-100 bg-primary'
           } flex rounded-full py-1 px-4 font-medium hover:no-underline text-center text-lg`}
-          href={JOIN_CLOUD_BETA_TYPEFORM}
+          href={JOIN_THE_CLOUD}
         >
           Join{' '}
           <span className="ml-1">

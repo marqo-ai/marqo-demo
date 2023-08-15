@@ -12,7 +12,6 @@ MARQO_API_KEY = os.environ.get("MARQO_API_KEY", "")
 SIMPLE_WIKI_INDEX_NAME = os.environ.get("SIMPLE_WIKI_INDEX_NAME", "")
 BORED_APES_INDEX_NAME = os.environ.get("BORED_APES_INDEX_NAME", "")
 E_COMMERCE_INDEX_NAME = os.environ.get("E_COMMERCE_INDEX_NAME", "")
-SIMPLE_WIKI_SEARCHABLE_ATTRS = ["content"]
 SIMPLE_WIKI_NON_TENSOR_FIELDS = ["url", "domain", "docDate"]
 E_COMMERCE_SEARCHABLE_ATTRS = ["image"]
 SIMPLE_WIKI_TENSOR_FIELDS = ["title", "content"]

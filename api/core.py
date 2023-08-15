@@ -14,7 +14,6 @@ from config.settings import (
     SIMPLE_WIKI_INDEX_NAME,
     BORED_APES_INDEX_NAME,
     E_COMMERCE_INDEX_NAME,
-    SIMPLE_WIKI_SEARCHABLE_ATTRS,
     BORED_APES_SEARCHABLE_ATTRS,
     E_COMMERCE_SEARCHABLE_ATTRS,
     SIMPLE_WIKI_TENSOR_FIELDS,
@@ -33,31 +32,23 @@ class MarqoBase:
     def search_text(
         self,
         search_str="",
+        pos_q=None,
+        neg_q=None,
         index_name: str = "",
-        searchable_attrs: List[str] = None,
         tensor_fields: List[str] = None,
         attributes_to_retrieve: List[str] = None,
     ):
-        _split_len = len(search_str.split(" "))
-        _method = "TENSOR" if _split_len > 1 else "LEXICAL"
-        _search_attrs = searchable_attrs if _split_len > 1 else tensor_fields
-
+        search_str = "query: " + search_str.strip()
+        if pos_q is not None:
+            pos_q = "query: " + pos_q.strip()
+        if neg_q is not None:
+            neg_q = "query: " + neg_q.strip()
         response = mq.index(index_name).search(
-            q=search_str.strip(),
-            searchable_attributes=_search_attrs,
+            q=construct_query(search_str, pos_q, neg_q),
+            searchable_attributes=tensor_fields,
             attributes_to_retrieve=attributes_to_retrieve,
             limit=20,
-            search_method=_method,
         )
-
-        if len(response["hits"]) == 0:
-            # defaults to TENSOR
-            response = mq.index(index_name).search(
-                q=search_str.strip(),
-                searchable_attributes=_search_attrs,
-                attributes_to_retrieve=attributes_to_retrieve,
-                limit=20,
-            )
 
         return response
 
@@ -114,7 +105,6 @@ class CoreAPIResource(Resource, MarqoBase):
         "simplewiki": {
             "type": "text",
             "settings": {
-                "searchable_attrs": SIMPLE_WIKI_SEARCHABLE_ATTRS,
                 "tensor_fields": SIMPLE_WIKI_TENSOR_FIELDS,
                 "index_name": SIMPLE_WIKI_INDEX_NAME,
                 "attributes_to_retrieve": ["title", "url", "image_url"],
@@ -141,7 +131,12 @@ class CoreAPIResource(Resource, MarqoBase):
         if index in self.core_index_configurations:
             search_settings = self.core_index_configurations[index]
             if search_settings["type"] == "text":
-                results = self.search_text(search_str=q, **search_settings["settings"])
+                results = self.search_text(
+                    search_str=q,
+                    pos_q=pos_q,
+                    neg_q=neg_q,
+                    **search_settings["settings"],
+                )
             else:
                 results = self.search_image(
                     search_str=q,
