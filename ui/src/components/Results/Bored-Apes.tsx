@@ -1,77 +1,96 @@
-import { useState } from "react";
-import { Modal } from "react-daisyui";
-import { LazyLoadImage, trackWindowScroll } from "react-lazy-load-image-component";
+import { useState } from 'react';
+import { Modal } from 'react-daisyui';
+import { LazyLoadImage, trackWindowScroll } from 'react-lazy-load-image-component';
 // store, thunks, slices, hook
-import { useSelector } from "../../store";
-import { useScreen } from "../../hooks/useScreen";
+import { useSelector } from '../../store';
+import { useScreen } from '../../hooks/useScreen';
 // components
-import { ResultsLoader } from "../Loaders";
-import { PlaceholderComponent } from "../Loaders/Spinner";
-import { SearchTheWayYouThink } from "../Fillers/Search-The-Way-You-Think";
+import { ResultsLoader } from '../Loaders';
+import { PlaceholderComponent } from '../Loaders/Spinner';
+import { SearchTheWayYouThink } from '../Fillers/Search-The-Way-You-Think';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const BoredApesResults: React.FC = () => {
-    const { results, isSearchingCoreAPI } = useSelector(({ app }) => app);
-    const { screen } = useScreen();
-    const [openImgModal, setOpenImgModal] = useState(false);
-    const [modalImg, setModalImg] = useState("");
-    const [isLoaded, setIsLoaded] = useState(false);
+  const { results, isSearchingCoreAPI } = useSelector(({ app }) => app);
+  const { screen } = useScreen();
+  const [openImgModal, setOpenImgModal] = useState(false);
+  const [modalImg, setModalImg] = useState('');
+  const [isLoaded, setIsLoaded] = useState(false);
 
-    const getTileStyles = (key: number, hitsArrayLength: number) => {
-        if (["2xl", "xl", "lg", "md"].includes(screen)) {
-            return `${((key % 7 === 0 && key % 2 === 0) || (key % 7 === 3 && key % 2 === 0)) && key <= hitsArrayLength - 3 ? "large-tile" : "tile"}`
-        } else {
-            return `col-span-1`
-        }
+  const getTileStyles = (key: number, hitsArrayLength: number) => {
+    if (['2xl', 'xl', 'lg', 'md'].includes(screen)) {
+      return `${
+        ((key % 7 === 0 && key % 2 === 0) || (key % 7 === 3 && key % 2 === 0)) &&
+        key <= hitsArrayLength - 3
+          ? 'large-tile'
+          : 'tile'
+      }`;
+    } else {
+      return `col-span-1`;
     }
+  };
 
-    const handleOnClickImg = (image: string) => {
-        setModalImg(image);
-        setOpenImgModal(!openImgModal)
+  const handleOnClickImg = (image: string) => {
+    setModalImg(image);
+    setOpenImgModal(!openImgModal);
+  };
+
+  const handleOnLoad = (key: number) => {
+    if (key === 29) {
+      setIsLoaded(true);
     }
+  };
 
-    const handleOnLoad = (key: number) => {
-        if (key === 29) {
-            setIsLoaded(true)
-        }
-    }
+  return (
+    <div className="results">
+      {isSearchingCoreAPI && <ResultsLoader />}
 
-    return <div className="results">
-        {isSearchingCoreAPI && <ResultsLoader />}
+      <Modal open={openImgModal} onClickBackdrop={() => setOpenImgModal(false)}>
+        <LazyLoadImage
+          effect="blur"
+          src={modalImg}
+          width={'100%'}
+          height={'100%'}
+          className={`min-h-full min-w-full`}
+          placeholder={<PlaceholderComponent />}
+          alt={`ape-modal`}
+        />
+      </Modal>
 
-        <Modal open={openImgModal} onClickBackdrop={() => setOpenImgModal(false)}>
-            <LazyLoadImage
-                effect="blur"
-                src={modalImg}
-                width={"100%"}
-                height={"100%"}
-                className={`min-h-full min-w-full`}
-                placeholder={<PlaceholderComponent />}
-                alt={`ape-modal`} />
-        </Modal>
-
-        {!isSearchingCoreAPI && results?.results && results?.results?.hits && (
-            <div className={`animate-smoothSlideUp imgResultsWrapper grid gap-[4px] ${["2xl", "xl", "lg", "md"].includes(screen) ? "grid-cols-5" : "grid-cols-2"}`}>
-
-                {results?.results?.hits.map(({ image }: any, key: number, hitsArray: any[]) => {
-                    return <div key={`ape-${key}`} onClick={() => handleOnClickImg(image)} className={`cursor-pointer relative flex min-w-full min-h-full hover:scale-[.98] transition ease-in-out ${getTileStyles(key, hitsArray.length)}`}>
-                        <LazyLoadImage
-                            effect="blur"
-                            src={image}
-                            width={"100%"}
-                            height={"100%"}
-                            afterLoad={() => handleOnLoad(key)}
-                            placeholder={<PlaceholderComponent />}
-                            className={`min-h-[8em] min-w-[8em] lg:min-h-[10em] lg:min-w-[10em]`}
-                            alt={`ape-${key}`}
-                        />
-                    </div>
-                })}
-
-                {isLoaded && <SearchTheWayYouThink />}
-            </div>
-        )}
+      {!isSearchingCoreAPI && results?.results && results?.results?.hits && (
+        <div
+          className={`animate-smoothSlideUp imgResultsWrapper grid gap-[4px] ${
+            ['2xl', 'xl', 'lg', 'md'].includes(screen) ? 'grid-cols-5' : 'grid-cols-2'
+          }`}
+        >
+          {results?.results?.hits.map(({ image }: any, key: number, hitsArray: any[]) => {
+            return (
+              <div
+                key={`ape-${key}`}
+                onClick={() => handleOnClickImg(image)}
+                className={`cursor-pointer relative flex min-w-full min-h-full hover:scale-[.98] transition ease-in-out ${getTileStyles(
+                  key,
+                  hitsArray.length,
+                )}`}
+              >
+                <LazyLoadImage
+                  effect="blur"
+                  src={image}
+                  width={'100%'}
+                  height={'100%'}
+                  afterLoad={() => handleOnLoad(key)}
+                  placeholder={<PlaceholderComponent />}
+                  className={`min-h-[8em] min-w-[8em] lg:min-h-[10em] lg:min-w-[10em]`}
+                  alt={`ape-${key}`}
+                />
+              </div>
+            );
+          })}
+          {isLoaded && <SearchTheWayYouThink />}
+        </div>
+      )}
     </div>
-}
+  );
+};
 
 export default trackWindowScroll(BoredApesResults);

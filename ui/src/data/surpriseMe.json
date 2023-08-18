@@ -1,37 +1,39 @@
 {
-	"randomBoredApesQs": [
-		"singing ape",
-		"an ape with a halo on an orange background eating pizza",
-		"a white ape wearing a hawaiian shirt smoking a joint with an eye patch",
-		"a cool ape in a biker gang",
-		"a blue ape with a cowboy hat wearing a skeleton t-shirt",
-		"a ship captain that's about to sneeze",
-		"hipster ape that just told the corniest joke",
-		"no one showed up to his birthday party",
-		"a pizza-eating angel ape",
-		"won the lottery",
-		"ape with superpowers"
-	],
-	"randomSimpleWikiQs": [
-		"what do people eat for breakfast",
-		"what defines a planet",
-		"what is the density of arsenic",
-		"what is isaac newton known for",
-		"who invented the light bulb",
-		"do pumas purr like cats"
-	],
-	"randomECommerceQs": [
-		"orange cocktail dress",
-		"I am looking for a backpack to take on a hike",
-		"Give me a coat that looks like it is from The Matrix",
-		"Looking for something to tell the time",
-		"blue bag with gold clasp",
-		"I have a gala coming up soon",
-		"I love bold colors and I am looking for a handbag",
-		"Women's jacket to wear to my office job",
-		"Some shoes that I can skateboard in",
-		"90s vaporwave sunglasses",
-		"leather wallet",
-		"gold cuff links with a blue gem stone"
-	]
+    "randomBoredApesQs": [
+        "captain of a ship",
+        "an ape with a halo on an orange background eating pizza",
+        "holidaying in Hawaii",
+        "a cool ape in a biker gang",
+        "a blue ape with a cowboy hat wearing a skeleton t-shirt",
+        "a cyborg ape",
+        "a pizza-eating angel ape",
+        "won the lottery",
+        "ape with superpowers",
+        "ape with colourful teeth"
+    ],
+    "randomSimpleWikiQs": [
+        "what do people eat for breakfast",
+        "what defines a planet",
+        "how many planets are there in the solar system",
+        "what is the density of arsenic",
+        "what is isaac newton known for",
+        "what was the name of Oppenheimer's first successful test",
+        "do pumas purr like cats"
+    ],
+    "randomECommerceQs": [
+        "orange cocktail dress",
+        "I am looking for a backpack to take on a hike",
+        "a chronograph with a blue face and gold trim",
+        "give me a coat that looks like it is from The Matrix",
+        "looking for something to tell the time",
+        "blue bag with gold clasp",
+        "a scarf with an eye in it",
+        "short sleeve black tie attire",
+        "I love bold colors and I am looking for a handbag",
+        "women's jacket to wear to my office job",
+        "some shoes that I can skateboard in",
+        "90s vaporwave sunglasses",
+        "leather wallet",
+        "gold cuff links with a blue gem stone"
+    ]
 }

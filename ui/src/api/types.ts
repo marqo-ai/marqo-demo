@@ -1,31 +1,38 @@
-
 export type CoreRequest = {
-    q: string;
-    posQ?: string | null;
-    negQ?: string | null;
-    index: string;
-    img?: File;
+  q: string;
+  posQ?: string | null;
+  negQ?: string | null;
+  index: string;
+  img?: File;
 };
+
+export interface ImageSearchHit {
+  _id: string;
+  _score: number;
+  image: string;
+  title: string;
+}
+
+export interface TextSearchHit {
+  _id: string;
+  _score: number;
+  title: string;
+  url: string;
+  content: string;
+  image_url: string;
+  _highlights: {
+    content: string[];
+  };
+}
 
 export type CoreResponse = {
-    message: string;
-    results: {
-        hits: any[];
-    };
+  message: string;
+  results: {
+    hits: ImageSearchHit[] | TextSearchHit[];
+  };
 };
-// export type GetWikiImgThunkRequest = {
-//     title: string;
-//     hitIndex: number;
-// }
-// export type GetWikiImgResponse = {
-//     message: string;
-//     img: string;
-// }
+
 export type WikiImageItem = {
-    url: string;
-    title: string;
-}
-export type GetWikiImagesResponse = {
-    message: string;
-    imgs: WikiImageItem[];
-}
+  url: string;
+  title: string;
+};
