@@ -11,7 +11,7 @@ export interface ImageSearchHit {
   _score: number;
   image: string;
   title: string;
-};
+}
 
 export interface TextSearchHit {
   _id: string;
@@ -22,8 +22,8 @@ export interface TextSearchHit {
   image_url: string;
   _highlights: {
     content: string[];
-  }
-};
+  };
+}
 
 export type CoreResponse = {
   message: string;
@@ -31,8 +31,6 @@ export type CoreResponse = {
     hits: ImageSearchHit[] | TextSearchHit[];
   };
 };
-
-
 
 export type WikiImageItem = {
   url: string;

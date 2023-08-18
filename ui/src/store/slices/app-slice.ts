@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { CoreResponse } from '../../api/types';
 import { BOREDAPES, SIMPLEWIKI, ECOMMERCE } from '../../commons/constants';
 
-export const DEFAULT_Q = 'a chronograph with a blue face and gold trim';
+export const DEFAULT_Q = 'minimalistic gold watch with and a metal band';
 
 export type DatasetTypes = typeof BOREDAPES | typeof SIMPLEWIKI | typeof ECOMMERCE;
 
