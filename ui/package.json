@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@ant-design/icons": "^5.2.6",
 		"@heroicons/react": "^2.0.13",
 		"@reduxjs/toolkit": "^1.9.1",
 		"@tailwindcss/line-clamp": "^0.4.2",
@@ -10,9 +11,8 @@
 		"@testing-library/react": "^13.4.0",
 		"@testing-library/user-event": "^13.5.0",
 		"@types/node": "^16.18.8",
-		"@types/react": "^18.0.26",
-		"@types/react-dom": "^18.0.9",
 		"@types/react-redux": "^7.1.24",
+		"antd": "^5.13.2",
 		"axios": "^1.2.1",
 		"cross-env": "^7.0.3",
 		"helmet": "^6.0.1",
@@ -43,7 +43,7 @@
 		"eject": "react-scripts eject",
 		"replace": "rm -rf ../app/ && mv ./build/ ../build",
 		"move:favicon": "mv ./build/favicon.ico ./build/static/favicon.ico",
-		"format": "npx prettier  --ignore-path ./.prettierignore --write ./**/*.{ts,tsx}"
+		"format": "npx prettier --ignore-path ./.prettierignore --write \"./src/**/*.{ts,tsx}\""
 	},
 	"eslintConfig": {
 		"extends": [
@@ -66,6 +66,8 @@
 	"devDependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
 		"@types/jest": "^29.2.5",
+		"@types/react": "^18.2.48",
+		"@types/react-dom": "^18.2.18",
 		"@types/react-lazy-load-image-component": "^1.5.2",
 		"jest": "^29.3.1",
 		"ts-jest": "^29.0.3"

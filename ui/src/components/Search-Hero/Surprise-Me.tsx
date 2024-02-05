@@ -8,19 +8,20 @@ import { DatasetTypes, setQ, setPosQ, setNegQ } from '../../store/slices/app-sli
 // data
 import surpriseMe from '../../data/surpriseMe.json';
 import { UploadImg } from './Upload-Img';
-import { BOREDAPES, SIMPLEWIKI, ECOMMERCE } from '../../commons/constants';
+import { SIMPLEWIKI, ECOMMERCE, DIVERSEIMAGES } from '../../commons/constants';
+import Favourites from '../Favourites';
 
 export const getRandomQ = (dataset: DatasetTypes) => {
   let randomSet: string[] = [];
   switch (dataset) {
-    case BOREDAPES:
-      randomSet = surpriseMe['randomBoredApesQs'];
-      break;
     case SIMPLEWIKI:
       randomSet = surpriseMe['randomSimpleWikiQs'];
       break;
     case ECOMMERCE:
       randomSet = surpriseMe['randomECommerceQs'];
+      break;
+    case DIVERSEIMAGES:
+      randomSet = surpriseMe['randomDiverseImageQs'];
       break;
   }
   return randomSet[Math.floor(Math.random() * randomSet.length)];
@@ -30,7 +31,9 @@ export const SurpriseMe = () => {
   const [, setSearchParams] = useSearchParams();
   const { theme } = useTheme();
   const dispatch = useDispatch();
-  const { dataset, q, posQ, negQ } = useSelector(({ app }) => app);
+  const { dataset, q, posQ, negQ, favourites, searchSettings, advancedSettings } = useSelector(
+    ({ app }) => app,
+  );
 
   const handleOnSurprise = () => {
     let randomQ = getRandomQ(dataset);
@@ -52,6 +55,9 @@ export const SurpriseMe = () => {
         posQ: posQ,
         negQ: negQ,
         index: dataset,
+        favourites: favourites,
+        searchSettings: searchSettings,
+        advancedSettings: advancedSettings,
       }),
     );
   };
@@ -100,8 +106,8 @@ export const SurpriseMe = () => {
               theme === 'dark' ? 'text-slate-100' : 'text-slate-700'
             } flex items-center gap-[10px] border-none bg-transparent font-medium p-0 btn-sm justify-end h-[fit-content]`}
           >
-            {/* <span className={`flex self-center hidden md:block`}>Share this awesomeness!</span> */}
-            <Tooltip
+            <Favourites />
+            {/* <Tooltip
               message={'Share this awesomeness!'}
               color="primary"
               className={`flex self-center`}
@@ -118,7 +124,7 @@ export const SurpriseMe = () => {
               <FacebookShareButton url={window.location.href}>
                 <FacebookIcon className={`w-8 md:w-6 h-8 md:h-6 rounded-sm`} />
               </FacebookShareButton>
-            </Tooltip>
+            </Tooltip> */}
           </div>
         </div>
       </div>

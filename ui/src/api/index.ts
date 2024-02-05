@@ -1,7 +1,7 @@
 import axios, { AxiosPromise } from 'axios';
-import { CoreRequest, CoreResponse } from './types';
+import { RecommendationRequest, SearchRequest, SearchResponse } from './types';
 
-export const searchAPI = (reqData: CoreRequest): AxiosPromise<CoreResponse> => {
+export const searchAPI = (reqData: SearchRequest): AxiosPromise<SearchResponse> => {
   if (reqData?.img) {
     const formData = new FormData();
     formData.append('img', reqData.img);
@@ -28,4 +28,16 @@ export const searchAPI = (reqData: CoreRequest): AxiosPromise<CoreResponse> => {
       },
     });
   }
+};
+
+export const recommendationAPI = (reqData: RecommendationRequest): AxiosPromise<SearchResponse> => {
+  return axios({
+    method: 'POST',
+    baseURL: process.env.REACT_APP_BASE_URL,
+    url: '/api/recommend',
+    data: reqData,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+  });
 };

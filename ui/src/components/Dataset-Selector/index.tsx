@@ -8,18 +8,18 @@ import { postSearchDataset } from '../../store/thunks';
 // components
 import { CaretDown } from '../Shapes';
 import { getRandomQ } from '../Search-Hero/Surprise-Me';
-import { BOREDAPES, SIMPLEWIKI, ECOMMERCE } from '../../commons/constants';
+import { SIMPLEWIKI, ECOMMERCE, DIVERSEIMAGES } from '../../commons/constants';
 
 const datasetOptions = [
-  { index: 0, value: ECOMMERCE, title: 'AI E-Commerce' },
-  { index: 1, value: BOREDAPES, title: 'Bored Apes' },
+  { index: 0, value: DIVERSEIMAGES, title: 'Diverse Images' },
+  { index: 1, value: ECOMMERCE, title: 'AI E-Commerce' },
   { index: 2, value: SIMPLEWIKI, title: 'Simple Wiki' },
 ];
 
 export const DatasetSelector = () => {
   const [, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
-  const { dataset, q, theme } = useSelector(({ app }) => app);
+  const { dataset, q, theme, favourites } = useSelector(({ app }) => app);
   // useState
   const [openDropdown, setOpenDropdown] = useState(false);
 
@@ -32,6 +32,7 @@ export const DatasetSelector = () => {
     const params = {
       q: _defaultQ,
       index: value,
+      favourites: favourites,
     };
     setSearchParams(params);
     dispatch(setQ(_defaultQ));
@@ -51,8 +52,8 @@ export const DatasetSelector = () => {
         }`}
       >
         <span className={`${theme === 'dark' ? 'text-white' : 'text-primary'} mr-4`}>
+          {dataset === DIVERSEIMAGES && 'Diverse Images'}
           {dataset === ECOMMERCE && 'AI E-Commerce'}
-          {dataset === BOREDAPES && 'Bored Apes'}
           {dataset === SIMPLEWIKI && 'Simple Wiki'}
         </span>
         <CaretDown fill={`${theme === 'dark' ? 'white' : 'primary'}`} />

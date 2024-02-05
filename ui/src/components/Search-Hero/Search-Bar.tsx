@@ -7,14 +7,15 @@ import { setQ, setPosQ, setNegQ } from '../../store/slices/app-slice';
 // components
 import { DatasetSelector } from '../Dataset-Selector';
 import { useSearchParams } from 'react-router-dom';
-import { SIMPLEWIKI } from '../../commons/constants';
 
 const MOBILE_WINDOW_THRESOLD = 500;
 
 export const SearchBar = () => {
   const [mobile, setMobile] = useState(window.innerWidth <= MOBILE_WINDOW_THRESOLD);
+  const [enablePrefixControls, setEnablePrefixControls] = useState(false);
   const [, setSearchParams] = useSearchParams();
-  const { dataset, theme, q, posQ, negQ } = useSelector(({ app }) => app);
+  const { dataset, theme, q, posQ, negQ, favourites, searchSettings, advancedSettings } =
+    useSelector(({ app }) => app);
   const dispatch = useDispatch();
   const disableClasses =
     'disabled:border-2 disabled:border-slate-100 md:disabled:border-none disabled:bg-transparent disabled:text-slate-400';
@@ -43,6 +44,9 @@ export const SearchBar = () => {
         posQ: posQ,
         negQ: negQ,
         index: dataset,
+        favourites: favourites,
+        searchSettings: searchSettings,
+        advancedSettings: advancedSettings,
       }),
     );
   };

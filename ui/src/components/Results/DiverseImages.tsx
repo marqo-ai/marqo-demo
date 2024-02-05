@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-daisyui';
 import { LazyLoadImage, trackWindowScroll } from 'react-lazy-load-image-component';
 import { CompassFilled, HeartFilled, HeartTwoTone } from '@ant-design/icons';
@@ -19,7 +19,7 @@ import {
 } from '../../store/slices/app-slice';
 import { Tooltip } from 'antd';
 
-type ECommerceImageProps = {
+type DiverseImagesImageProps = {
   searchHit: SearchHit;
   elementKey: number;
   handleAddFavourite: (item: string) => void;
@@ -27,7 +27,7 @@ type ECommerceImageProps = {
   handleOnLoad: (key: number) => void;
 };
 
-const ECommerceImage: React.FC<ECommerceImageProps> = ({
+const DiverseImagesImage: React.FC<DiverseImagesImageProps> = ({
   searchHit,
   elementKey,
   handleAddFavourite,
@@ -78,13 +78,13 @@ const ECommerceImage: React.FC<ECommerceImageProps> = ({
         }}
         placeholder={<PlaceholderComponent />}
         className={`rounded-lg min-h-[8em] min-w-[8em] lg:min-h-[10em] lg:min-w-[10em]`}
-        alt={`ecommerce-${elementKey}`}
+        alt={`diverseimage-${elementKey}`}
       />
     </>
   );
 };
 
-const ECommerceResults: React.FC = () => {
+const DiverseImagesResults: React.FC = () => {
   const { results, isSearchLoading, favourites } = useSelector(({ app }) => app);
   const { screen } = useScreen();
   const [openImgModal, setOpenImgModal] = useState(false);
@@ -162,7 +162,7 @@ const ECommerceResults: React.FC = () => {
                     hitsArray.length,
                   )}`}
                 >
-                  <ECommerceImage
+                  <DiverseImagesImage
                     searchHit={hit}
                     elementKey={key}
                     handleAddFavourite={handleAddFavourite}
@@ -181,4 +181,4 @@ const ECommerceResults: React.FC = () => {
   );
 };
 
-export default trackWindowScroll(ECommerceResults);
+export default trackWindowScroll(DiverseImagesResults);
