@@ -1,21 +1,57 @@
 import uuid
+from api.constants import DEFAULT_SEARCH_SETTINGS, DEFAULT_ADVANCED_SETTINGS
 from config.settings import S3_BUCKET, s3
+from api.models import AdvancedSettings, SearchSettings
+from typing import Dict, Union, List
 
-from typing import Dict, Union
 
-
-def construct_query(
-    q: str, pos_q: Union[str, None], neg_q: Union[str, None]
+def compose_query(
+    query: str,
+    more_of: str,
+    less_of: str,
+    favourites: List[str],
+    search_settings: SearchSettings = None,
+    advanced_settings: AdvancedSettings = None,
 ) -> Dict[str, float]:
-    query = {q.strip(): 1.0}
+    if not search_settings:
+        search_settings = DEFAULT_SEARCH_SETTINGS
 
-    if pos_q is not None:
-        query[pos_q.strip()] = 0.75
+    if not advanced_settings:
+        advanced_settings = DEFAULT_ADVANCED_SETTINGS
 
-    if neg_q is not None:
-        query[neg_q.strip()] = -1.1
+    prefix = search_settings.prefix
+    style_modifier = search_settings.style_modifier
 
-    return query
+    composed_query = {}
+
+    if more_of:
+        if advanced_settings and advanced_settings.implicit_more_expansion:
+            more_term = query + ", " + more_of
+        else:
+            more_term = more_of
+        composed_query[more_term] = search_settings.pos_query_weight
+
+    if less_of:
+        composed_query[less_of] = search_settings.neg_query_weight
+
+    total_fav_weight = search_settings.total_favourite_weight
+
+    for favourite in favourites:
+        composed_query[favourite] = total_fav_weight / len(favourites)
+
+    if query:
+        main_term = query
+
+        if not style_modifier and prefix:
+            main_term = prefix + " " + query
+        elif style_modifier:
+            main_term = style_modifier.replace("<QUERY>", query)
+        composed_query[main_term] = search_settings.query_weight
+
+    if not composed_query:
+        return {"": 1}
+
+    return composed_query
 
 
 def generate_key_prefix():

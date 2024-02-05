@@ -11,7 +11,9 @@ function getSizeInMegabytes(raw: number) {
 }
 
 export const UploadImg = () => {
-  const { theme, dataset } = useSelector(({ app }) => app);
+  const { theme, dataset, favourites, searchSettings, advancedSettings } = useSelector(
+    ({ app }) => app,
+  );
   const dispatch = useDispatch();
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,6 +30,9 @@ export const UploadImg = () => {
             q: '',
             index: dataset,
             img: e.target.files[0],
+            favourites: favourites,
+            searchSettings: searchSettings,
+            advancedSettings: advancedSettings,
           }),
         );
       } else if (!ACCEPTED_FILE_TYPES.includes(e?.target?.files[0].type)) {

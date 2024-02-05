@@ -1,23 +1,11 @@
 {
-    "randomBoredApesQs": [
-        "captain of a ship",
-        "an ape with a halo on an orange background eating pizza",
-        "holidaying in Hawaii",
-        "a cool ape in a biker gang",
-        "a blue ape with a cowboy hat wearing a skeleton t-shirt",
-        "a cyborg ape",
-        "a pizza-eating angel ape",
-        "won the lottery",
-        "ape with superpowers",
-        "ape with colourful teeth"
-    ],
     "randomSimpleWikiQs": [
         "what do people eat for breakfast",
         "what defines a planet",
         "how many planets are there in the solar system",
         "what is the density of arsenic",
         "what is isaac newton known for",
-        "what was the name of Oppenheimer's first successful test",
+        "what is Oppenheimer known for",
         "do pumas purr like cats"
     ],
     "randomECommerceQs": [
@@ -35,5 +23,18 @@
         "90s vaporwave sunglasses",
         "leather wallet",
         "gold cuff links with a blue gem stone"
+    ],
+    "randomDiverseImageQs": [
+        "snow capped mountains with a high altitude lake",
+        "an alleyway in a futuristic cyberpunk city",
+        "bear walking along the beach in the sunset",
+        "a liminal space with an unsettling emptiness",
+        "a wondrous fantasy world with a castle",
+        "a dark magical forest with bioluminescence",
+        "scandinavian style furniture with light wood",
+        "steampunk city with victorian era elements",
+        "a cosy winter cabin in the woods with the lights on",
+        "a city that looks like it is from The Last of Us",
+        "a vineyard in the setting sun"
     ]
 }

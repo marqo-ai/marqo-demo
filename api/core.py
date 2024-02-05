@@ -5,22 +5,25 @@ from flask import request
 from flask_restful import Resource
 
 # local
-from api.constants import HTTP_500_MISSING_Q
-from api.helpers import BotoCoreBase, generate_key_prefix, construct_query
+from api.models import AdvancedSettings, SearchSettings, ImageSearchHit, TextSearchHit
+from api.constants import (
+    CORE_INDEX_CONFIGURATIONS,
+    HTTP_500_MISSING_Q,
+    DEFAULT_ADVANCED_SETTINGS,
+    DEFAULT_SEARCH_SETTINGS,
+    PREFIX_MODIFIER_MAP,
+)
+from api.helpers import BotoCoreBase, generate_key_prefix, compose_query
 from config.settings import (
     IPFS_BASE,
     MARQO_API_ENDPOINT,
     MARQO_API_KEY,
     SIMPLE_WIKI_INDEX_NAME,
-    BORED_APES_INDEX_NAME,
     E_COMMERCE_INDEX_NAME,
-    BORED_APES_SEARCHABLE_ATTRS,
-    E_COMMERCE_SEARCHABLE_ATTRS,
-    SIMPLE_WIKI_TENSOR_FIELDS,
     S3_LOCATION,
 )
 
-from typing import List
+from typing import List, Union
 
 mq = marqo.Client(api_key=MARQO_API_KEY, url=MARQO_API_ENDPOINT)
 
@@ -31,91 +34,49 @@ class MarqoBase:
 
     def search_text(
         self,
-        search_str="",
-        pos_q=None,
-        neg_q=None,
-        index_name: str = "",
-        tensor_fields: List[str] = None,
+        q: str = None,
+        advanced_settings: AdvancedSettings = None,
         attributes_to_retrieve: List[str] = None,
-    ):
-        search_str = "query: " + search_str.strip()
-        if pos_q is not None:
-            pos_q = "query: " + pos_q.strip()
-        if neg_q is not None:
-            neg_q = "query: " + neg_q.strip()
-        response = mq.index(index_name).search(
-            q=construct_query(search_str, pos_q, neg_q),
-            searchable_attributes=tensor_fields,
+        index_name: str = "",
+    ) -> List[dict]:
+        result = mq.index(index_name).search(
+            q=q,
+            limit=advanced_settings.limit,
             attributes_to_retrieve=attributes_to_retrieve,
-            limit=20,
         )
 
+        response = {
+            "hits": [
+                TextSearchHit.from_dict(hit).as_camel_dict() for hit in result["hits"]
+            ]
+        }
         return response
 
     def search_image(
         self,
-        search_str="",
-        pos_q=None,
-        neg_q=None,
-        img=None,
+        q: str = None,
+        advanced_settings: AdvancedSettings = None,
         index_name: str = "",
-        searchable_attrs: List[str] = None,
-    ):
-        img_url = ""
-
-        if img is not None:
-            boto_conn = BotoCoreBase()
-            key = f"{generate_key_prefix()}-{img.filename.replace(' ', '')}"
-            is_uploaded = boto_conn.upload_to_bucket(key, img)
-
-            if is_uploaded is None:
-                img_url = f"{S3_LOCATION}{key}"
-
-        hits = mq.index(index_name).search(
-            q=construct_query(search_str, pos_q, neg_q)
-            if img is None or img_url == ""
-            else img_url,
-            searchable_attributes=searchable_attrs,
+    ) -> List[dict]:
+        result = mq.index(index_name).search(
+            q=q,
             show_highlights=False,
-            limit=30,
+            limit=advanced_settings.limit,
         )
 
-        if img is not None and is_uploaded is None and hits:
-            boto_conn.delete_from_bucket(key=key)
-
-        return hits
+        response = {
+            "hits": [
+                ImageSearchHit.from_dict(hit).as_camel_dict() for hit in result["hits"]
+            ]
+        }
+        return response
 
 
 class CoreAPIResource(Resource, MarqoBase):
-    core_index_configurations = {
-        "ecommerce": {
-            "type": "image",
-            "settings": {
-                "searchable_attrs": E_COMMERCE_SEARCHABLE_ATTRS,
-                "index_name": E_COMMERCE_INDEX_NAME,
-            },
-        },
-        "boredapes": {
-            "type": "image",
-            "settings": {
-                "searchable_attrs": BORED_APES_SEARCHABLE_ATTRS,
-                "index_name": BORED_APES_INDEX_NAME,
-            },
-        },
-        "simplewiki": {
-            "type": "text",
-            "settings": {
-                "tensor_fields": SIMPLE_WIKI_TENSOR_FIELDS,
-                "index_name": SIMPLE_WIKI_INDEX_NAME,
-                "attributes_to_retrieve": ["title", "url", "image_url"],
-            },
-        },
-    }
-
     def get(self):
         return {"message": "success"}
 
-    def post(self):
+    def post(self) -> dict:
         files = request.files
         img = files.get("img", None)
         data = dict(request.form)
@@ -127,24 +88,60 @@ class CoreAPIResource(Resource, MarqoBase):
         pos_q = data.get("posQ")
         neg_q = data.get("negQ")
         index = data.get("index", "")
+        favourites = data.get("favourites", [])
 
-        if index in self.core_index_configurations:
-            search_settings = self.core_index_configurations[index]
+        advanced_settings = data.get("advancedSettings", DEFAULT_ADVANCED_SETTINGS)
+        if isinstance(advanced_settings, dict):
+            advanced_settings = AdvancedSettings.from_dict(advanced_settings)
+
+        query_settings = data.get("searchSettings", DEFAULT_SEARCH_SETTINGS)
+        if isinstance(query_settings, dict):
+            query_settings = SearchSettings.from_dict(query_settings)
+
+        # currently not configurable via the UI
+        query_settings.prefix = PREFIX_MODIFIER_MAP.get(index, "")
+
+        if index in CORE_INDEX_CONFIGURATIONS:
+            search_settings = CORE_INDEX_CONFIGURATIONS[index]
+
+            img_url = None
+            if img is not None:
+                boto_conn = BotoCoreBase()
+                key = f"{generate_key_prefix()}-{img.filename.replace(' ', '')}"
+                is_uploaded = boto_conn.upload_to_bucket(key, img)
+
+                if is_uploaded is None:
+                    img_url = f"{S3_LOCATION}{key}"
+
+            if img_url:
+                marqo_query = img_url
+            else:
+                marqo_query = compose_query(
+                    query=q,
+                    more_of=pos_q,
+                    less_of=neg_q,
+                    favourites=favourites,
+                    search_settings=query_settings,
+                    advanced_settings=advanced_settings,
+                )
+                print(marqo_query)
+
             if search_settings["type"] == "text":
                 results = self.search_text(
-                    search_str=q,
-                    pos_q=pos_q,
-                    neg_q=neg_q,
+                    q=marqo_query,
+                    advanced_settings=advanced_settings,
                     **search_settings["settings"],
                 )
             else:
                 results = self.search_image(
-                    search_str=q,
-                    pos_q=pos_q,
-                    neg_q=neg_q,
-                    img=img,
+                    q=marqo_query,
+                    advanced_settings=advanced_settings,
                     **search_settings["settings"],
                 )
+
+            if img is not None and is_uploaded is None and results:
+                boto_conn.delete_from_bucket(key=key)
+
             return {"message": "success", "results": results}
-        else:
-            return HTTP_500_MISSING_Q
+
+        return HTTP_500_MISSING_Q

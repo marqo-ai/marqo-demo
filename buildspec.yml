@@ -8,15 +8,13 @@ phases:
     commands:
       - echo Installing dependencies
       - yum update -y
+      - yum install -y git
       - pip3 install --upgrade pip && pip3 install -r requirements.txt
-      # - echo $REACT_APP_API_BASE_URL
-      # - mkdir app && mkdir app/static
 
   build:
     commands:
       - echo Build started on `date`
       - cd ./ui && CI=false && npm ci
-      # - npx cross-env REACT_APP_API_BASE_URL=$REACT_APP_API_BASE_URL npm run build:prod && cd ../ && ls
       - npm run build:prod && cd ../ && ls
 
 artifacts:

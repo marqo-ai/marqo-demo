@@ -3,45 +3,68 @@ import { Helmet } from 'react-helmet-async';
 // store
 import { useDispatch, useSelector } from '../store';
 // components
-import BoredApesResults from '../components/Results/Bored-Apes';
 import SimplewikiResults from '../components/Results/Simple-Wiki';
 import ECommerceResults from '../components/Results/ECommerce';
 import { SearchHero } from '../components/Search-Hero';
-import { AVAILABLE_INDEXES, ECOMMERCE, BOREDAPES, SIMPLEWIKI } from '../commons/constants';
+import { AVAILABLE_INDEXES, DIVERSEIMAGES, ECOMMERCE, SIMPLEWIKI } from '../commons/constants';
 import { useSearchParams } from 'react-router-dom';
 import { postSearchDataset } from '../store/thunks';
-import { setQ, setDataset, DatasetTypes } from '../store/slices/app-slice';
+import { setQ, setDataset, DatasetTypes, setPosQ, setNegQ } from '../store/slices/app-slice';
+import RecommendationModal from '../components/Recommendations';
+import DiverseImages from '../components/Results/DiverseImages';
 
 export const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [helmetTitle, setHelmetTitle] = useState<string>('');
   const dispatch = useDispatch();
-  const { q, dataset, theme } = useSelector(({ app }) => app);
+  const { q, posQ, negQ, dataset, theme } = useSelector(({ app }) => app);
 
   useEffect(() => {
     const qParam = searchParams.get('q');
     const indexParam = searchParams.get('index');
-    let _q = q,
-      _index = dataset;
+    const posQParam = searchParams.get('posQ');
+    const negQParam = searchParams.get('negQ');
+    let _q = q;
+    let _index = dataset;
+    let _posQ = posQ;
+    let _negQ = negQ;
 
     if (qParam) {
       _q = qParam;
       dispatch(setQ(qParam));
     }
 
+    if (posQParam) {
+      _posQ = posQParam;
+      dispatch(setPosQ(posQParam));
+    }
+
+    if (negQParam) {
+      _negQ = negQParam;
+      dispatch(setNegQ(negQParam));
+    }
+
     if (indexParam && AVAILABLE_INDEXES.includes(indexParam)) {
       _index = indexParam as DatasetTypes;
       dispatch(setDataset(indexParam));
     }
-
-    setSearchParams({
+    let params: any = {
       q: _q,
       index: _index,
-    });
+    };
+    if (_posQ) {
+      params = { ...params, posQ: _posQ };
+    }
+    if (_negQ) {
+      params = { ...params, negQ: _negQ };
+    }
+    setSearchParams(params);
     dispatch(
       postSearchDataset({
         q: _q,
         index: _index,
+        posQ: _posQ,
+        negQ: _negQ,
       }),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,9 +75,6 @@ export const Home = () => {
     switch (dataset) {
       case ECOMMERCE:
         title = 'AI E-Commerce';
-        break;
-      case BOREDAPES:
-        title = 'Bored Apes';
         break;
       case SIMPLEWIKI:
         title = 'Simple Wiki';
@@ -77,10 +97,10 @@ export const Home = () => {
         }`}
       >
         <SearchHero />
-
+        <RecommendationModal />
         <div className={`mt-0`}>
+          {dataset === DIVERSEIMAGES && <DiverseImages />}
           {dataset === ECOMMERCE && <ECommerceResults />}
-          {dataset === BOREDAPES && <BoredApesResults />}
           {dataset === SIMPLEWIKI && <SimplewikiResults />}
         </div>
       </div>
