@@ -41,7 +41,7 @@ const Favourites = () => {
 
   return (
     <>
-      <Button onClick={showModel} className="btn btn-sm btn-primary">
+      <Button onClick={showModel} className="btn btn-sm text-white bg-primary">
         {`Edit Favourites (${favourites.length})`}
       </Button>
       <Modal
