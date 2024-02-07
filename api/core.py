@@ -124,7 +124,6 @@ class CoreAPIResource(Resource, MarqoBase):
                     search_settings=query_settings,
                     advanced_settings=advanced_settings,
                 )
-                print(marqo_query)
 
             if search_settings["type"] == "text":
                 results = self.search_text(
