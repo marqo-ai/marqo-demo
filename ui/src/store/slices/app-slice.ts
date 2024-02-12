@@ -130,6 +130,7 @@ const slice = createSlice({
     },
     setRecommendations: (state, { payload }) => {
       state.recommendations = payload;
+      state.isRecommendationLoading = false;
     },
     clearRecommendations: (state) => {
       state.recommendations = null;

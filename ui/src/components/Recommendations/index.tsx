@@ -3,6 +3,8 @@ import { BreadcrumbItemType } from 'antd/es/breadcrumb/Breadcrumb';
 import { Breadcrumb, Modal, Slider } from 'antd';
 import {
   clearRecommendations,
+  setIsRecommendationLoading,
+  setRecommendations,
   setSelectedItem,
   setShowRecommendations,
 } from '../../store/slices/app-slice';
@@ -48,7 +50,7 @@ const RecommendationModal = () => {
   };
 
   const handleClose = () => {
-    dispatch(clearRecommendations());
+    // dispatch(clearRecommendations());
     dispatch(setShowRecommendations(false));
     setDifference(0);
     setHistory([]);
@@ -56,6 +58,7 @@ const RecommendationModal = () => {
 
   const handleRecommend = () => {
     if (selectedItem !== null) {
+      setIsRecommendationLoading(true);
       dispatch(
         postRecommendItem({
           itemID: selectedItem._id,

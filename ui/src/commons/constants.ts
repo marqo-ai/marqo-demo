@@ -9,4 +9,4 @@ export const DIVERSEIMAGES = 'diverseimages';
 export const AVAILABLE_INDEXES = [ECOMMERCE, SIMPLEWIKI, DIVERSEIMAGES];
 
 export const ACCEPTED_FILE_TYPES = ['image/jpeg', 'image/png'];
-export const MAX_FILE_SIZE_IN_MEGABYTES = 2000;
+export const MAX_FILE_SIZE_IN_KILOBYTES = 5000;

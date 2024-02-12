@@ -49,19 +49,20 @@ const ImageGrid = ({
   );
 };
 const RecommendationPanel = () => {
-  const { recommendations, selectedItem } = useSelector(({ app }) => app);
+  const { recommendations, selectedItem, isRecommendationLoading } = useSelector(({ app }) => app);
 
   return (
     <div>
-      {recommendations === null && (
+      {recommendations === null || isRecommendationLoading ? (
         <div className="">
           <ResultsLoader showTryMarqo={false} />
         </div>
+      ) : (
+        <ImageGrid
+          selectedId={selectedItem === null ? '' : selectedItem._id}
+          recommendationResults={recommendations !== null ? recommendations : null}
+        />
       )}
-      <ImageGrid
-        selectedId={selectedItem === null ? '' : selectedItem._id}
-        recommendationResults={recommendations !== null ? recommendations : null}
-      />
     </div>
   );
 };
