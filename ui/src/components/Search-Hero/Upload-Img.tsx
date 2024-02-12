@@ -4,9 +4,9 @@ import { Input } from 'react-daisyui';
 import { setImgFile } from '../../store/slices/app-slice';
 import { useDispatch, useSelector } from '../../store';
 import { postSearchDataset } from '../../store/thunks';
-import { ACCEPTED_FILE_TYPES, MAX_FILE_SIZE_IN_MEGABYTES } from '../../commons/constants';
+import { ACCEPTED_FILE_TYPES, MAX_FILE_SIZE_IN_KILOBYTES } from '../../commons/constants';
 
-function getSizeInMegabytes(raw: number) {
+function getSizeInKilobytes(raw: number) {
   return raw / 1024;
 }
 
@@ -22,7 +22,7 @@ export const UploadImg = () => {
       if (
         ACCEPTED_FILE_TYPES.includes(e?.target?.files[0].type) &&
         e.target.files[0].size > 0 &&
-        getSizeInMegabytes(e.target.files[0].size) <= MAX_FILE_SIZE_IN_MEGABYTES
+        getSizeInKilobytes(e.target.files[0].size) <= MAX_FILE_SIZE_IN_KILOBYTES
       ) {
         dispatch(setImgFile(true));
         dispatch(
@@ -39,9 +39,9 @@ export const UploadImg = () => {
         return alert('Invalid file type');
       } else if (
         e.target.files[0].size < 1 ||
-        getSizeInMegabytes(e.target.files[0].size) > MAX_FILE_SIZE_IN_MEGABYTES
+        getSizeInKilobytes(e.target.files[0].size) > MAX_FILE_SIZE_IN_KILOBYTES
       ) {
-        return alert('Does not meet maximum file size');
+        return alert('Image exceeds maximum size of 5MB');
       } else {
         return alert('Error uploading image');
       }
