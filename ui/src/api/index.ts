@@ -18,6 +18,7 @@ export const searchAPI = (reqData: SearchRequest): AxiosPromise<SearchResponse> 
       },
     });
   } else {
+    console.log(`sending request to ${process.env.REACT_APP_BASE_URL}`)
     return axios({
       method: 'POST',
       baseURL: process.env.REACT_APP_BASE_URL,

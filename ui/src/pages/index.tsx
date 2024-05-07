@@ -99,8 +99,8 @@ export const Home = () => {
         <SearchHero />
         <RecommendationModal />
         <div className={`mt-0`}>
-          {dataset === DIVERSEIMAGES && <DiverseImages />}
           {dataset === ECOMMERCE && <ECommerceResults />}
+          {dataset === DIVERSEIMAGES && <DiverseImages />}
           {dataset === SIMPLEWIKI && <SimplewikiResults />}
         </div>
       </div>

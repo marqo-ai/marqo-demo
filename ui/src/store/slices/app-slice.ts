@@ -28,7 +28,7 @@ type Props = {
 
 const initialState: Props = {
   theme: 'light',
-  dataset: DIVERSEIMAGES,
+  dataset: ECOMMERCE,
   results: null,
   recommendations: null,
   q: DEFAULT_Q,
