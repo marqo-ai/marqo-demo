@@ -12,7 +12,7 @@ import { useSearchParams } from 'react-router-dom';
 const MOBILE_WINDOW_THRESOLD = 500;
 
 export const SearchBar = () => {
-  ReactGA.initialize('G-3BCMDP4CZ1');
+  ReactGA.initialize('G-Q0DJMJ6ZYK');
 
   const [mobile, setMobile] = useState(window.innerWidth <= MOBILE_WINDOW_THRESOLD);
   const [enablePrefixControls, setEnablePrefixControls] = useState(false);

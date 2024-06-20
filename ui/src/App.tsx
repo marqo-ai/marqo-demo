@@ -10,7 +10,8 @@ import Header from './components/Header';
 import { Home } from './pages';
 
 const App = () => {
-  ReactGA.initialize('G-3BCMDP4CZ1');
+  ReactGA.initialize('G-Q0DJMJ6ZYK');
+  
 
   ReactGA.send({ hitType: 'pageview', page: '/', title: 'Home' });
 

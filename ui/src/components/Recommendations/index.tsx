@@ -15,7 +15,7 @@ import { postRecommendItem } from '../../store/thunks';
 import RecommendationPanel from './recommendationPanel';
 
 const RecommendationModal = () => {
-  ReactGA.initialize('G-3BCMDP4CZ1');
+  ReactGA.initialize('G-Q0DJMJ6ZYK');
   const [history, setHistory] = useState<BreadcrumbItemType[]>([]);
   const [difference, setDifference] = useState(0);
 
