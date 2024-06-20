@@ -11,8 +11,8 @@ import { getRandomQ } from '../Search-Hero/Surprise-Me';
 import { SIMPLEWIKI, ECOMMERCE, DIVERSEIMAGES } from '../../commons/constants';
 
 const datasetOptions = [
-  { index: 0, value: DIVERSEIMAGES, title: 'Diverse Images' },
-  { index: 1, value: ECOMMERCE, title: 'AI E-Commerce' },
+  { index: 0, value: ECOMMERCE, title: 'AI E-Commerce' },
+  { index: 1, value: DIVERSEIMAGES, title: 'Diverse Images' },
   { index: 2, value: SIMPLEWIKI, title: 'Simple Wiki' },
 ];
 

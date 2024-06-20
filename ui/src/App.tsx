@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Theme } from 'react-daisyui';
 import { Helmet } from 'react-helmet-async';
+import ReactGA from 'react-ga4';
 // store
 import { useSelector } from './store';
 // components
@@ -9,6 +10,10 @@ import Header from './components/Header';
 import { Home } from './pages';
 
 const App = () => {
+  ReactGA.initialize('G-3BCMDP4CZ1');
+
+  ReactGA.send({ hitType: 'pageview', page: '/', title: 'Home' });
+
   const { theme } = useSelector(({ app }) => app);
   const screenRef = useRef<HTMLDivElement>(null);
 

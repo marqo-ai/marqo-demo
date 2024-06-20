@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BreadcrumbItemType } from 'antd/es/breadcrumb/Breadcrumb';
 import { Breadcrumb, Modal, Slider } from 'antd';
+import ReactGA from 'react-ga4';
 import {
   clearRecommendations,
   setIsRecommendationLoading,
@@ -14,6 +15,7 @@ import { postRecommendItem } from '../../store/thunks';
 import RecommendationPanel from './recommendationPanel';
 
 const RecommendationModal = () => {
+  ReactGA.initialize('G-3BCMDP4CZ1');
   const [history, setHistory] = useState<BreadcrumbItemType[]>([]);
   const [difference, setDifference] = useState(0);
 
@@ -67,6 +69,12 @@ const RecommendationModal = () => {
           offset: difference * 2,
         }),
       );
+      ReactGA.event('recommend', {
+        event_category: 'engagement',
+        event_label: 'Recommendation executed',
+        selected_item: selectedItem,
+        difference: difference,
+      });
     }
   };
 
