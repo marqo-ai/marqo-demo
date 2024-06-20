@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { AdvancedSettings, SearchHit, SearchResponse, SearchSettings } from '../../api/types';
 import { SIMPLEWIKI, ECOMMERCE, DIVERSEIMAGES } from '../../commons/constants';
 
-export const DEFAULT_Q = 'an alleyway in a futuristic cyberpunk city';
+// export const DEFAULT_Q = 'an alleyway in a futuristic cyberpunk city';
+export const DEFAULT_Q = 'a blue handbag with a gold clasp';
 
 export type DatasetTypes = typeof SIMPLEWIKI | typeof ECOMMERCE | typeof DIVERSEIMAGES;
 
@@ -28,7 +29,7 @@ type Props = {
 
 const initialState: Props = {
   theme: 'light',
-  dataset: DIVERSEIMAGES,
+  dataset: ECOMMERCE,
   results: null,
   recommendations: null,
   q: DEFAULT_Q,

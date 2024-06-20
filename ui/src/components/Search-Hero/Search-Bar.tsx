@@ -1,5 +1,6 @@
 import { Fragment, KeyboardEvent, useEffect, useState } from 'react';
 import { Button } from 'react-daisyui';
+import ReactGA from 'react-ga4';
 // store
 import { useDispatch, useSelector } from '../../store';
 import { postSearchDataset } from '../../store/thunks';
@@ -11,6 +12,8 @@ import { useSearchParams } from 'react-router-dom';
 const MOBILE_WINDOW_THRESOLD = 500;
 
 export const SearchBar = () => {
+  ReactGA.initialize('G-3BCMDP4CZ1');
+
   const [mobile, setMobile] = useState(window.innerWidth <= MOBILE_WINDOW_THRESOLD);
   const [enablePrefixControls, setEnablePrefixControls] = useState(false);
   const [, setSearchParams] = useSearchParams();
@@ -49,6 +52,14 @@ export const SearchBar = () => {
         advancedSettings: advancedSettings,
       }),
     );
+    ReactGA.event('search', {
+      event_category: 'engagement',
+      event_label: 'Search executed',
+      search_term: q,
+      positive_q: posQ != null ? posQ : '',
+      negative_q: negQ != null ? negQ : '',
+      dataset_index: dataset,
+    });
   };
 
   const handleOnKeyDown = (e: KeyboardEvent) => {
