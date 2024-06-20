@@ -72,8 +72,10 @@ const RecommendationModal = () => {
       ReactGA.event('recommend', {
         event_category: 'engagement',
         event_label: 'Recommendation executed',
+        item_id: selectedItem._id,
         selected_item: selectedItem,
         difference: difference,
+        dataset: dataset,
       });
     }
   };

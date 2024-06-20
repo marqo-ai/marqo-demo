@@ -52,13 +52,16 @@ export const SearchBar = () => {
         advancedSettings: advancedSettings,
       }),
     );
-    ReactGA.event('search', {
+    ReactGA.event('search_dataset', {
       event_category: 'engagement',
       event_label: 'Search executed',
-      search_term: q,
-      positive_q: posQ != null ? posQ : '',
-      negative_q: negQ != null ? negQ : '',
-      dataset_index: dataset,
+      q: q,
+      posQ: posQ,
+      negQ: negQ,
+      index: dataset,
+      favourites: favourites,
+      searchSettings: searchSettings,
+      advancedSettings: advancedSettings,
     });
   };
 
