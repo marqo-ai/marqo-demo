@@ -43,7 +43,7 @@ const initialState: Props = {
     queryWeight: 1.0,
     posQueryWeight: 0.6,
     negQueryWeight: -1.1,
-    totalFavouriteWeight: 0.3,
+    totalFavouriteWeight: 0.1,
     prefix: '',
     styleModifier: '',
   },
