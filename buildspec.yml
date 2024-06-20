@@ -27,5 +27,5 @@ artifacts:
     - config/*.py
     - build/**/*
     - .ebextensions/*.conf
-    - .platform/nginx/nginx.conf
+    - .platform/**/*
   name: demo-app-artifacts
