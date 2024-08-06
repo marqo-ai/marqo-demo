@@ -42,7 +42,7 @@ class MarqoBase:
         result = mq.index(index_name).search(
             q=q,
             limit=10,
-            attributes_to_retrieve=attributes_to_retrieve,
+            attributes_to_retrieve=["title", "text"],
         )
 
         response = {
