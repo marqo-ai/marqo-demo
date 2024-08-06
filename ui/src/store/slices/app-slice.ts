@@ -29,7 +29,7 @@ type Props = {
 
 const initialState: Props = {
   theme: 'light',
-  dataset: ECOMMERCE,
+  dataset: SIMPLEWIKI,
   results: null,
   recommendations: null,
   q: DEFAULT_Q,
