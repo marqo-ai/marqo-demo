@@ -41,7 +41,7 @@ class MarqoBase:
     ) -> List[dict]:
         result = mq.index(index_name).search(
             q=q,
-            limit=advanced_settings.limit,
+            limit=10,
             attributes_to_retrieve=attributes_to_retrieve,
         )
 
